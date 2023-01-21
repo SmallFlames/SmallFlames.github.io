@@ -37,10 +37,43 @@
 
   
 
+
+
+
+
+
+<!-- Js控制Loding特效-->
+<script>
+  //监听加载状态改变
+  document.onreadystatechange = completeLoading;
+  
+  //加载状态为complete时移除loading效果
+  function completeLoading() {
+      if (document.readyState == "complete") {
+          var loadingMask = document.getElementById('loader-wrapper');
+          loadingMask.parentNode.removeChild(loadingMask);
+      }
+  }  
+</script>
+<!-- loading结束 -->
+
+
+
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body>
-  <div id="container" q-class="show:isCtnShow">
+
+
+ <div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+    <!-- <div class="load_title">Loading. . .<br></div> -->
+ </div>
+
+
+ <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
       
@@ -90,7 +123,7 @@
 		        
 					<a class="qq" target="_blank" href="/img/add_qq.png" title="qq"><i class="icon-qq"></i></a>
 		        
-					<a class="mail" target="_blank" href="/XZ66600520@163.com" title="mail"><i class="icon-mail"></i></a>
+					<a class="mail" target="_blank" href="mailto: XZ66600520@163.com" title="mail"><i class="icon-mail"></i></a>
 		        
 			</div>
 			<!-- 网易云音乐插件 -->
@@ -139,7 +172,7 @@
 			        
 						<a class="qq" target="_blank" href="/img/add_qq.png" title="qq"><i class="icon-qq"></i></a>
 			        
-						<a class="mail" target="_blank" href="/XZ66600520@163.com" title="mail"><i class="icon-mail"></i></a>
+						<a class="mail" target="_blank" href="mailto: XZ66600520@163.com" title="mail"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -253,57 +286,6 @@
       
 
       
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://smallflames.github.io/2023/01/18/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%B5%8B%E8%AF%95/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
       <div class="clearfix"></div>
     </div>
   </div>
@@ -356,6 +338,50 @@
 
 
 
+
+
+
+
+<!--valine-->
+
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "GclNK0L9IYMXHfLUV1HR86wL-gzGzoHsz",
+            app_key: "PrAu44aqW7VCqGD3OLIPulwg",
+            placeholder: "just go go",
+            avatar:"mp"
+        });
+    }
+
+</script>
+
+
+
+
+
+  </section>
+
+
+
+
+
+
+
+
   
   
   
@@ -393,6 +419,11 @@
 
 
 </footer>
+
+
+<!--页面点击小红心-->
+<script type="text/javascript" src="/love.js"></script>
+
 
 
 
@@ -477,15 +508,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">博客测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">日常</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">博客测试</a>
               </li>
             
             <div class="clearfix"></div>

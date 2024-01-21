@@ -67,7 +67,7 @@
     <link href="https://smallflames.github.io/2024/01/21/Ansible%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%AE%9E%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/"/>
     <id>https://smallflames.github.io/2024/01/21/Ansible%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%AE%9E%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/</id>
     <published>2024-01-21T09:25:32.000Z</published>
-    <updated>2024-01-21T11:34:54.565Z</updated>
+    <updated>2024-01-21T15:04:35.484Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1><center>Ansible一键部署实例（一）</center></h1><p>  我们今天要用Ansible实现一键部署的框架大致如下：</p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240121173432410.png" alt="image-20240121173432410"></p><p>  南汐在这里对本次框架做一个简单的介绍，这是一个非常基础的架构，虽然可能不如实际应用中的复杂，但是麻雀虽小，亦五脏俱全。从用户角度来看，当我们的用户访问我们公司的网站时，一般情况下会经由DNS智能调度系统给用户返回距离用户地域距离最近的服务器地址，这就是我们的CDN服务器，它会默认存储我们web服务上基本所有的静态资源（或动态内容、流媒体文件）以提高用户的访问体验，如果CDN上没有用户所请求的资源，此时会出现回源。<span id="more"></span>当我们的用户直接访问源站的时候，会经由我们前端的网络防火墙过滤非法流量，然会到达我们的负载，本次架构中我们使用两台服务器应用NGINX作为负载均衡，并在两台服务器之间通过keepalived实现高可用。请求经由负载均衡的调度算法后转发至我们真实的web服务器，这里web服务器在实际中基本都是多节点的，我们称之集群，南汐这里使用三台服务器来进行模拟。web端的静态文件由后端的两台NFS服务器存储，他们之间的数据实时同步的，并且具备高可用，以避免单点故障，同时前端所产生的业务数据数据库文件都会存放在后端的数据库。最后与业务直接相关的服务器（本此架构中有8台）均会定时将重要文件备份至backup服务器。从运维管理人员的角度来看，我们会经由VPN进入公司的jumpserver服务器（直接越过用户路径的防火墙进入内部），底层通过Ansible自动化管理工具来对公司的服务器进行管理，监控和维护。为了提高脚本安装服务的执行效率，我们额外搭建了一个本地仓库为提供内部局域网安装服务使用。</p><p>  （南汐并没有实现架构内的所有功能，本次展示只为帮助大家提高对Ansible自动化管理工具的应用）详细Playbook角色分布如下：</p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240121182411299.png" alt="image-20240121182411299"></p><p>  接下来南汐会用几篇文章依次开放源码展示，大家仅供参考，可自行实践练习……</p><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
     
@@ -82,7 +82,7 @@
     
     <category term="运维之路" scheme="https://smallflames.github.io/tags/%E8%BF%90%E7%BB%B4%E4%B9%8B%E8%B7%AF/"/>
     
-    <category term="服务框架" scheme="https://smallflames.github.io/tags/%E6%9C%8D%E5%8A%A1%E6%A1%86%E6%9E%B6/"/>
+    <category term="服务架构" scheme="https://smallflames.github.io/tags/%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
     
   </entry>
   

@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://smallflames.github.io/2024/01/21/Ansible%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%AE%9E%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
+    
+    <lastmod>2024-01-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://smallflames.github.io/2024/01/21/Ansible%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%AE%9E%E4%BE%8B%EF%BC%88%E4%B8%89%EF%BC%89/</loc>
     
     <lastmod>2024-01-21</lastmod>
@@ -12,15 +21,6 @@
   
   <url>
     <loc>https://smallflames.github.io/2024/01/21/Ansible%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%AE%9E%E4%BE%8B%EF%BC%88%E4%BA%8C%EF%BC%89/</loc>
-    
-    <lastmod>2024-01-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://smallflames.github.io/2024/01/21/Ansible%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%AE%9E%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
     
     <lastmod>2024-01-21</lastmod>
     
@@ -556,13 +556,6 @@
   
   <url>
     <loc>https://smallflames.github.io/tags/shell%E8%84%9A%E6%9C%AC/</loc>
-    <lastmod>2024-01-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://smallflames.github.io/tags/%E6%9C%8D%E5%8A%A1%E6%A1%86%E6%9E%B6/</loc>
     <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

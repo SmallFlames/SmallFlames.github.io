@@ -161,6 +161,115 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux常用命令补充（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/11/08/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%80%EF%BC%89/">Linux常用命令补充（一）</a>
+    </h1>
+  
+
+        
+        <a href="/2023/11/08/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2023-11-08T06:58:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-08</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Linux常用命令补充</center></h1>
+<h2 id="1-echo-打印">1. echo  (打印)</h2>
+<p>  说到打印，你一定可以想到print、printf、或者println。没错echo也是一样的，它可以打印字符串、序列、也可以与重定向巧妙的结合。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@hostlocal ~]<span class="comment"># echo Hello World</span></span><br><span class="line">Hello World</span><br><span class="line">[root@hostlocal ~]<span class="comment"># echo &#123;1..10&#125;</span></span><br><span class="line">1 2 3 4 5 6 7 8 9 10</span><br><span class="line">[root@hostlocal ~]<span class="comment"># echo Hello World &gt; 1.txt</span></span><br><span class="line">[root@hostlocal ~]<span class="comment"># cat 1.txt</span></span><br><span class="line">Hello World</span><br></pre></td></tr></table></figure>
+<div class="tips">
+<p><strong>关于重定向</strong></p>
+<p>  数据流又可分为 标准输入流 、标准输出流和标准错误流。 这三种流向对应着相关的文件描述符， 默认描述符范围是：0-2。标准输入流为：0，标准输出流：1，标准错误流：2。当指定没有描述符的时候，默认就是标准数据流。</p>
+<p>  <code>&gt;</code>：（输出重定向）把结果或荧幕内容放到一个原本不属于它的地方去；如<code>&gt; 1.txt</code>，它的意思是指把空的内容放到1.txt中（覆盖），如果没有1.txt文件就自动创建1.txt文件。同样的它与echo结合用起来会更方便，如，<code>echo Hello World &gt; 1.txt</code>。<br>
+  当然不仅可以覆盖文件，同样我们也可以追加内容到文件。如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@hostlocal ~]<span class="comment"># echo My name is nanxi &gt;&gt; 1.txt</span></span><br><span class="line">[root@hostlocal ~]<span class="comment"># cat 1.txt</span></span><br><span class="line">Hello World</span><br><span class="line">My name is nanxi</span><br></pre></td></tr></table></figure>
+<p>  如果我们指令错误，或者得到的是错误的结果，还能添加到追加文件中吗？当然可以！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@hostlocal ~]<span class="comment"># ech eror command &gt;&gt; 1.txt  #看到错误数据流，当不指定描述符的时候，还是会输出到屏幕。</span></span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line">[root@hostlocal ~]<span class="comment"># ech eror command 2&gt;&gt; 1.txt #2&gt;&gt;标准错误输出流。</span></span><br><span class="line">[root@hostlocal ~]<span class="comment"># cat 1.txt</span></span><br><span class="line">Hello World</span><br><span class="line">My name is nanxi</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found    <span class="comment">#添加进来了哦~</span></span><br></pre></td></tr></table></figure>
+<p>  那我们怎么把正确和错误的文件同时追加到文件中呢？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@hostlocal ~]<span class="comment"># ech eror command &gt;&gt; 1.txt 2&gt;&gt;1.txt </span></span><br><span class="line">[root@hostlocal ~]<span class="comment"># cat 1.txt</span></span><br><span class="line">Hello World</span><br><span class="line">My name is nanxi</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line"><span class="comment"># 接收正确的结果and接收错误的结果</span></span><br><span class="line"></span><br><span class="line">[root@hostlocal ~]<span class="comment"># ech eror command &gt;&gt; 1.txt 2&gt;&amp;1   </span></span><br><span class="line">[root@hostlocal ~]<span class="comment"># cat 1.txt</span></span><br><span class="line">Hello World</span><br><span class="line">My name is nanxi</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line"><span class="comment"># 2&gt;&amp;1 表示把标准错误重定向到标准输出</span></span><br><span class="line"></span><br><span class="line">[root@hostlocal ~]<span class="comment"># ech eror command &amp;&gt;&gt; 1.txt</span></span><br><span class="line">[root@hostlocal ~]<span class="comment"># cat 1.txt</span></span><br><span class="line">Hello World</span><br><span class="line">My name is nanxi</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line"><span class="comment"># &amp;&gt;&gt; 1.txt 把标准输出和标准错误输出都重定向，追加到1.txt中</span></span><br></pre></td></tr></table></figure>
+<p>So，可以这样记：<br>
+  <code>&gt;</code>标准正确输出重定向，只接收正确的结果；<code>&gt;&gt;</code>标准正确追加输出重定向，追加内容到文件的末尾；<code>2&gt;</code>标准错误输出重定向，只接收错误的命令或执行结果；<code>2&gt;&gt;</code>标准错误输出追加重定向，追加错误的结果到文件的末尾</p>
+<p>【拓展】输入重定向：</p>
+<p><img src="https://img-blog.csdnimg.cn/75b386538d214a6b8baf286db1c442b0.png" alt="输入重定向"></p>
+<p>  输入输出重定向可以先做了解，后面会再做介绍哦~</p>
+</div>
+        
+          <a class="article-more-a" href="/2023/11/08/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%80%EF%BC%89/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/11/08/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%80%EF%BC%89/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-Linux系统优化篇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1140,106 +1249,6 @@
 
 
   
-    <article id="post-远程连接Linux服务器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/10/30/%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8/">远程连接Linux服务器</a>
-    </h1>
-  
-
-        
-        <a href="/2023/10/30/%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2023-10-30T06:53:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-30</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="远程连接Linux服务器"><a href="#远程连接Linux服务器" class="headerlink" title="远程连接Linux服务器"></a><center>远程连接Linux服务器</center></h1><h2 id="一、什么是服务器"><a href="#一、什么是服务器" class="headerlink" title="一、什么是服务器"></a>一、什么是服务器</h2><h3 id="1-服务器的定义"><a href="#1-服务器的定义" class="headerlink" title="1.服务器的定义"></a>1.服务器的定义</h3><blockquote>
-<p>服务器：通俗易懂的说就是稳定运行网站、app、为用户提供各种服务的一个设备。 Linux系统也是运行在服务器上。</p>
-</blockquote>
-<blockquote>
-<p>服务器英文名称为“Server”，指的是网络环境下为客户机(Client)提供某种服务的专用计算机，服务器安装有网络操作系统(如Windows 2019 Server、Linux、Unix等)和各种服务器应用系统软件(如Web服务、电子邮件服务)，通常分为文件服务器（能使用户在其它计算机访问文件），数据库服务器和应用程序服务器。运行以上软件的计算机，或称为网络主机（Host）。</p>
-</blockquote>
-<blockquote>
-<p>和普通的个人计算机相比， 服务器需要连续的工作在7X24小时环境。这就意味着服务器需要更多的稳定性技术RAS，比如支持使用ECC内存。并通常会有多部连接在一起运作。</p>
-</blockquote>
-<h3 id="2-服务器的分类"><a href="#2-服务器的分类" class="headerlink" title="2.服务器的分类"></a>2.服务器的分类</h3><p>1.按照外观分类，服务器可分为：机架式、塔式、机柜式、刀片式四种不同类型的服务器。</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231030160948818.png" alt="image-20231030160948818"></p>
-        
-          <a class="article-more-a" href="/2023/10/30/%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/10/30/%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
@@ -1393,6 +1402,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">shell脚本</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Shell编程</a>
               </li>
             
             <div class="clearfix"></div>

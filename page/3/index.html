@@ -161,6 +161,104 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-NFS共享存储" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/12/05/NFS%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8/">NFS共享存储</a>
+    </h1>
+  
+
+        
+        <a href="/2023/12/05/NFS%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8/" class="archive-article-date">
+  	<time datetime="2023-12-05T10:40:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-05</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>NFS共享存储</center></h1>
+<h2 id="一、NFS基本概述">一、NFS基本概述</h2>
+<p>  NFS是Network File System的缩写及网络文件系统。<mark>NFS主要功能是通过局域网络让不同的主机系统之间可以共享文件或目录</mark>。NFS系统和Windows网络共享、网络驱动器类似，只不过windows用于局域网，NFS用于企业集群架构中，如果是大型网站会用到更复杂的分布式文件系统FastDFS、glusterfs、HDFS……</p>
+<p>  🔎    为什么要用共享存储呢？</p>
+<p>  ① 为了实现多台服务器之间数据共享；② 实现多台服务器之间数据一致</p>
+<p>  <strong>实例解释</strong>：A用户上传图片经过负载均衡，负载均衡将上传请求调度至Web1服务器上。B用户访问A用户上传的图片，此时B用户被负载均衡调度至Web2上，因为Web2上没有这张图片，所以B用户无法看到A用户传的图片，试想一下，如果微信的架构是这样的，那我们还会有朋友圈📸这个这样的功能吗？</p>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/5e339ca91352cb3909000000.png" alt="5e339ca91352cb3909000000"></p>
+<p>  <strong>实例解释</strong>：如果使用NFS服务，此时A用户上传图片无论被负载均衡调度至Web1还是Web2, 最终数据都被写入至共享存储，当B用户访问A用户上传图片时，无论负载均衡将其调度至Web1还是Web2，最终都会通过NFS共享存储访问到对应的文件。</p>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/5e339cc11352cb3909000001.png" alt="5e339cc11352cb3909000001"></p>
+        
+          <a class="article-more-a" href="/2023/12/05/NFS%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/12/05/NFS%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-Rsync定时备份+邮件提醒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1015,143 +1113,6 @@
 
 
   
-    <article id="post-Linux定时任务详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/22/Linux%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E8%AF%A6%E8%A7%A3/">Linux定时任务详解</a>
-    </h1>
-  
-
-        
-        <a href="/2023/11/22/Linux%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
-  	<time datetime="2023-11-22T07:09:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-22</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Linux定时任务详解</center></h1>
-<p>  幻想一下💬 ，如果我们今天有这样一个需求：我想让linux程序到一个时间点自动运行执行我想要的命令，嗯~，比如说，我想隔一段时间运行一个程序检测一下未来女朋友👧 相册有没有更新照片🖼️ ，如果有就立马提醒并发给我😺😙…</p>
-<h2 id="一、定时任务介绍">一、定时任务介绍</h2>
-<p>  在Linux系统中，计划任务（Cron）是一种强大的工具，可以自动执行预定的任务。它<mark>非常适合定期运行脚本、备份数据、清理临时文件等一系列重复性任务</mark>。如果想稍后执行特定任务一次，可以使用其他命令。但是，对于重复性任务，cron在Linux系统中绝对是完美的解决方案。Cron是一个守护进程，这意味着它在后台运行以执行非交互式任务。类似Windows后台进程中的服务。</p>
-<h3 id="1、定时任务分类">1、定时任务分类</h3>
-<p>  <mark>crond 是linux用来定期执行程序的命令。当安装完成操作系统之后，默认便会启动此任务调度命令</mark>。定时任务分为系统定时任务和用户定时任务，这两者的工作互不影响。</p>
-<p>  ① 系统执行的工作（系统定时任务）：系统周期性所要执行的工作，如备份系统数据、清理缓存；<br>
-  ② 个人执行的工作（用户定时任务）：某个用户定期要做的工作，例如每隔10分钟检查邮件服务器是否有新信息，这些工作可由每个用户自行设置；</p>
-<h3 id="2、相关配置文件">2、相关配置文件</h3>
-<p>  ① 系统定时任务编辑的配置文件是：<code>/etc/crontab</code>，我们通常使用<code>vim /etc/crontab</code>命令添加定时任务，可以使用cat命令查看一下；</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231122163038325.png" alt="image-20231122163038325"></p>
-<p>  ② 用户定时任务的配置文件是 <code>/var/spool/cron/&#123;user&#125;</code>，我们可以使用快捷键 <code>crontab -e</code>编辑用户定时任务，也可以使用vim直接编辑用户定时任务的配置文件，他们的区别是，使用 <code>crontab -e</code> 有语法纠错的功能，而直接编辑就没有这种功能。</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231122164530526.png" alt="image-20231122164530526"></p>
-<p>  首次使用用户定时任务时是没有用户定时文件的，需要<code>crontab -e</code>保存退出一下，就有了我们的用户定时文件。</p>
-<div class='spoiler collapsed'>
-    <div class='spoiler-title'>
-        其他系统配置文件
-    </div>
-    <div class='spoiler-content'>
-        <table>
-<thead>
-<tr>
-<th>文件路径</th>
-<th>文件功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>/etc/cron.hourly</td>
-<td>系统定时任务每个小时运行这个目录里的内容</td>
-</tr>
-<tr>
-<td>/etc/cron.daily</td>
-<td>系统定时任务每天运行这个目录里的内容</td>
-</tr>
-<tr>
-<td>/etc/cron.weekly</td>
-<td>系统定时任务每周运行这个目录里的内容</td>
-</tr>
-<tr>
-<td>/etc/cron.monthly</td>
-<td>系统定时任务每月运行这个目录里的内容</td>
-</tr>
-</tbody>
-</table>
-
-    </div>
-</div>
-        
-          <a class="article-more-a" href="/2023/11/22/Linux%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E8%AF%A6%E8%A7%A3/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/22/Linux%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E8%AF%A6%E8%A7%A3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
@@ -1305,6 +1266,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">shell脚本</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Shell编程</a>
               </li>
             
             <div class="clearfix"></div>

@@ -161,6 +161,143 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux定时任务详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/11/22/Linux%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E8%AF%A6%E8%A7%A3/">Linux定时任务详解</a>
+    </h1>
+  
+
+        
+        <a href="/2023/11/22/Linux%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2023-11-22T07:09:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-22</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Linux定时任务详解</center></h1>
+<p>  幻想一下💬 ，如果我们今天有这样一个需求：我想让linux程序到一个时间点自动运行执行我想要的命令，嗯~，比如说，我想隔一段时间运行一个程序检测一下未来女朋友👧 相册有没有更新照片🖼️ ，如果有就立马提醒并发给我😺😙…</p>
+<h2 id="一、定时任务介绍">一、定时任务介绍</h2>
+<p>  在Linux系统中，计划任务（Cron）是一种强大的工具，可以自动执行预定的任务。它<mark>非常适合定期运行脚本、备份数据、清理临时文件等一系列重复性任务</mark>。如果想稍后执行特定任务一次，可以使用其他命令。但是，对于重复性任务，cron在Linux系统中绝对是完美的解决方案。Cron是一个守护进程，这意味着它在后台运行以执行非交互式任务。类似Windows后台进程中的服务。</p>
+<h3 id="1、定时任务分类">1、定时任务分类</h3>
+<p>  <mark>crond 是linux用来定期执行程序的命令。当安装完成操作系统之后，默认便会启动此任务调度命令</mark>。定时任务分为系统定时任务和用户定时任务，这两者的工作互不影响。</p>
+<p>  ① 系统执行的工作（系统定时任务）：系统周期性所要执行的工作，如备份系统数据、清理缓存；<br>
+  ② 个人执行的工作（用户定时任务）：某个用户定期要做的工作，例如每隔10分钟检查邮件服务器是否有新信息，这些工作可由每个用户自行设置；</p>
+<h3 id="2、相关配置文件">2、相关配置文件</h3>
+<p>  ① 系统定时任务编辑的配置文件是：<code>/etc/crontab</code>，我们通常使用<code>vim /etc/crontab</code>命令添加定时任务，可以使用cat命令查看一下；</p>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231122163038325.png" alt="image-20231122163038325"></p>
+<p>  ② 用户定时任务的配置文件是 <code>/var/spool/cron/&#123;user&#125;</code>，我们可以使用快捷键 <code>crontab -e</code>编辑用户定时任务，也可以使用vim直接编辑用户定时任务的配置文件，他们的区别是，使用 <code>crontab -e</code> 有语法纠错的功能，而直接编辑就没有这种功能。</p>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231122164530526.png" alt="image-20231122164530526"></p>
+<p>  首次使用用户定时任务时是没有用户定时文件的，需要<code>crontab -e</code>保存退出一下，就有了我们的用户定时文件。</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        其他系统配置文件
+    </div>
+    <div class='spoiler-content'>
+        <table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th>文件功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/etc/cron.hourly</td>
+<td>系统定时任务每个小时运行这个目录里的内容</td>
+</tr>
+<tr>
+<td>/etc/cron.daily</td>
+<td>系统定时任务每天运行这个目录里的内容</td>
+</tr>
+<tr>
+<td>/etc/cron.weekly</td>
+<td>系统定时任务每周运行这个目录里的内容</td>
+</tr>
+<tr>
+<td>/etc/cron.monthly</td>
+<td>系统定时任务每月运行这个目录里的内容</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+</div>
+        
+          <a class="article-more-a" href="/2023/11/22/Linux%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E8%AF%A6%E8%A7%A3/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/11/22/Linux%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E8%AF%A6%E8%A7%A3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-Linux文件权限概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1207,115 +1344,6 @@
 
 
   
-    <article id="post-Linux常用命令补充（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/08/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%80%EF%BC%89/">Linux常用命令补充（一）</a>
-    </h1>
-  
-
-        
-        <a href="/2023/11/08/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2023-11-08T06:58:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-08</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Linux常用命令补充</center></h1>
-<h2 id="1-echo-打印">1. echo  (打印)</h2>
-<p>  说到打印，你一定可以想到print、printf、或者println。没错echo也是一样的，它可以打印字符串、序列、也可以与重定向巧妙的结合。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@hostlocal ~]<span class="comment"># echo Hello World</span></span><br><span class="line">Hello World</span><br><span class="line">[root@hostlocal ~]<span class="comment"># echo &#123;1..10&#125;</span></span><br><span class="line">1 2 3 4 5 6 7 8 9 10</span><br><span class="line">[root@hostlocal ~]<span class="comment"># echo Hello World &gt; 1.txt</span></span><br><span class="line">[root@hostlocal ~]<span class="comment"># cat 1.txt</span></span><br><span class="line">Hello World</span><br></pre></td></tr></table></figure>
-<div class="tips">
-<p><strong>关于重定向</strong></p>
-<p>  数据流又可分为 标准输入流 、标准输出流和标准错误流。 这三种流向对应着相关的文件描述符， 默认描述符范围是：0-2。标准输入流为：0，标准输出流：1，标准错误流：2。当指定没有描述符的时候，默认就是标准数据流。</p>
-<p>  <code>&gt;</code>：（输出重定向）把结果或荧幕内容放到一个原本不属于它的地方去；如<code>&gt; 1.txt</code>，它的意思是指把空的内容放到1.txt中（覆盖），如果没有1.txt文件就自动创建1.txt文件。同样的它与echo结合用起来会更方便，如，<code>echo Hello World &gt; 1.txt</code>。<br>
-  当然不仅可以覆盖文件，同样我们也可以追加内容到文件。如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@hostlocal ~]<span class="comment"># echo My name is nanxi &gt;&gt; 1.txt</span></span><br><span class="line">[root@hostlocal ~]<span class="comment"># cat 1.txt</span></span><br><span class="line">Hello World</span><br><span class="line">My name is nanxi</span><br></pre></td></tr></table></figure>
-<p>  如果我们指令错误，或者得到的是错误的结果，还能添加到追加文件中吗？当然可以！</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@hostlocal ~]<span class="comment"># ech eror command &gt;&gt; 1.txt  #看到错误数据流，当不指定描述符的时候，还是会输出到屏幕。</span></span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line">[root@hostlocal ~]<span class="comment"># ech eror command 2&gt;&gt; 1.txt #2&gt;&gt;标准错误输出流。</span></span><br><span class="line">[root@hostlocal ~]<span class="comment"># cat 1.txt</span></span><br><span class="line">Hello World</span><br><span class="line">My name is nanxi</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found    <span class="comment">#添加进来了哦~</span></span><br></pre></td></tr></table></figure>
-<p>  那我们怎么把正确和错误的文件同时追加到文件中呢？</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@hostlocal ~]<span class="comment"># ech eror command &gt;&gt; 1.txt 2&gt;&gt;1.txt </span></span><br><span class="line">[root@hostlocal ~]<span class="comment"># cat 1.txt</span></span><br><span class="line">Hello World</span><br><span class="line">My name is nanxi</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line"><span class="comment"># 接收正确的结果and接收错误的结果</span></span><br><span class="line"></span><br><span class="line">[root@hostlocal ~]<span class="comment"># ech eror command &gt;&gt; 1.txt 2&gt;&amp;1   </span></span><br><span class="line">[root@hostlocal ~]<span class="comment"># cat 1.txt</span></span><br><span class="line">Hello World</span><br><span class="line">My name is nanxi</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line"><span class="comment"># 2&gt;&amp;1 表示把标准错误重定向到标准输出</span></span><br><span class="line"></span><br><span class="line">[root@hostlocal ~]<span class="comment"># ech eror command &amp;&gt;&gt; 1.txt</span></span><br><span class="line">[root@hostlocal ~]<span class="comment"># cat 1.txt</span></span><br><span class="line">Hello World</span><br><span class="line">My name is nanxi</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line">-bash: ech: <span class="built_in">command</span> not found</span><br><span class="line"><span class="comment"># &amp;&gt;&gt; 1.txt 把标准输出和标准错误输出都重定向，追加到1.txt中</span></span><br></pre></td></tr></table></figure>
-<p>So，可以这样记：<br>
-  <code>&gt;</code>标准正确输出重定向，只接收正确的结果；<code>&gt;&gt;</code>标准正确追加输出重定向，追加内容到文件的末尾；<code>2&gt;</code>标准错误输出重定向，只接收错误的命令或执行结果；<code>2&gt;&gt;</code>标准错误输出追加重定向，追加错误的结果到文件的末尾</p>
-<p>【拓展】输入重定向：</p>
-<p><img src="https://img-blog.csdnimg.cn/75b386538d214a6b8baf286db1c442b0.png" alt="输入重定向"></p>
-<p>  输入输出重定向可以先做了解，后面会再做介绍哦~</p>
-</div>
-        
-          <a class="article-more-a" href="/2023/11/08/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%80%EF%BC%89/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/08/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%80%EF%BC%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
@@ -1469,6 +1497,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">shell脚本</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Shell编程</a>
               </li>
             
             <div class="clearfix"></div>

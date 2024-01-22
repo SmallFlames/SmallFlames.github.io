@@ -9,35 +9,27 @@
     <link rel="dns-prefetch" href="https://SmallFlames.github.io">
     <title>
       
-        nginx实现动静分离 | 
+        Shell编程知识补充（一） | 
             南汐
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="Nginx实现动静分离  环境准备    角色 IP地址     负载均衡（lb） 192.168.10.3   web1（静态资源） 192.168.10.200   web2（动态资源） 192.168.10.201    实现过程 1️⃣ web1配置静态资源； 123456789101112[root@web1 &#x2F;etc&#x2F;nginx&#x2F;conf.d]#vim nanxi.confserver">
+    <meta name="description" content="Shell编程基础知识补充 一、执行脚本的方式 1️⃣  指定解释器执行 --------&gt;  &#x2F;bin&#x2F;bash nanxi.sh  &amp;  sh nanxi.sh  默认解释器即为&#x2F;bin&#x2F;bash 2️⃣  使用路径执行（需要执行权限+x）----&gt; .&#x2F;nanxi.sh  &amp;   &#x2F;scripts&#x2F;nanxi.sh  两种方式均可 3️⃣  命令调用执行   --">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nginx实现动静分离">
-<meta property="og:url" content="https://smallflames.github.io/2023/12/18/nginx%E5%AE%9E%E7%8E%B0%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB/index.html">
+<meta property="og:title" content="Shell编程知识补充（一）">
+<meta property="og:url" content="https://smallflames.github.io/2024/01/22/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
 <meta property="og:site_name" content="南汐">
-<meta property="og:description" content="Nginx实现动静分离  环境准备    角色 IP地址     负载均衡（lb） 192.168.10.3   web1（静态资源） 192.168.10.200   web2（动态资源） 192.168.10.201    实现过程 1️⃣ web1配置静态资源； 123456789101112[root@web1 &#x2F;etc&#x2F;nginx&#x2F;conf.d]#vim nanxi.confserver">
+<meta property="og:description" content="Shell编程基础知识补充 一、执行脚本的方式 1️⃣  指定解释器执行 --------&gt;  &#x2F;bin&#x2F;bash nanxi.sh  &amp;  sh nanxi.sh  默认解释器即为&#x2F;bin&#x2F;bash 2️⃣  使用路径执行（需要执行权限+x）----&gt; .&#x2F;nanxi.sh  &amp;   &#x2F;scripts&#x2F;nanxi.sh  两种方式均可 3️⃣  命令调用执行   --">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218180340246.png">
-<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218182450047.png">
-<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218183337107.png">
-<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218184749984.png">
-<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218185513220.png">
-<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218192640980.png">
-<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218192730094.png">
-<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218194228518.png">
-<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218195944060.png">
-<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218200416983.png">
-<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218200957554.png">
-<meta property="article:published_time" content="2023-12-18T09:43:50.000Z">
-<meta property="article:modified_time" content="2023-12-18T12:19:49.556Z">
+<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240122182252168.png">
+<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240122185148924.png">
+<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/nanxiblogfoota.png">
+<meta property="article:published_time" content="2024-01-22T08:46:42.000Z">
+<meta property="article:modified_time" content="2024-01-22T12:38:32.871Z">
 <meta property="article:author" content="Xia Zheng">
 <meta property="article:tag" content="运维之路">
-<meta property="article:tag" content="服务架构">
+<meta property="article:tag" content="Shell编程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218180340246.png">
+<meta name="twitter:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240122182252168.png">
       
         <link rel="alternative" href="/atom.xml" title="南汐" type="application/atom+xml">
         
@@ -178,20 +170,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-nginx实现动静分离" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Shell编程知识补充（一）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      nginx实现动静分离
+      Shell编程知识补充（一）
     </h1>
   
 
         
-        <a href="/2023/12/18/nginx%E5%AE%9E%E7%8E%B0%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB/" class="archive-article-date">
-  	<time datetime="2023-12-18T09:43:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-18</time>
+        <a href="/2024/01/22/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2024-01-22T08:46:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-22</time>
 </a>
         
 
@@ -207,55 +199,201 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><center>Nginx实现动静分离</center></h1>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218180340246.png" alt="image-20231218180340246"></p>
-<table><tr><td bgcolor=#000000><font color="white">环境准备</font></td></tr></table>
+        <h1><center>Shell编程基础知识补充</center></h1>
+<h1>一、执行脚本的方式</h1>
+<p>1️⃣  指定解释器执行 --------&gt;  <code>/bin/bash nanxi.sh</code>  &amp;  <code>sh nanxi.sh</code>  默认解释器即为/bin/bash</p>
+<p>2️⃣  使用路径执行（需要执行权限+x）----&gt; <code>./nanxi.sh</code>  &amp;   <code>/scripts/nanxi.sh</code>  两种方式均可</p>
+<p>3️⃣  命令调用执行   -------------------------&gt;  <code>source /scripts/nanxi.sh</code>   &amp;  <code>.  nanxi.sh</code></p>
+<div class="warning">
+<p><font color=red><strong>区别：方式1️⃣和方式2️⃣执行脚本调用的是子shell，而方式3️⃣执行脚本调用的是当前shell</strong></font></p>
+</div>
+<h1>二、环境变量的执行顺序</h1>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240122182252168.png" alt="image-20240122182252168"></p>
+<span id="more"></span>
+<h1>三、定义变量（特例）</h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 时间是固定的</span></span><br><span class="line">root@nanxi:~<span class="comment"># time=$(date +%F-%H-%M-%S)</span></span><br><span class="line">root@nanxi:~<span class="comment"># echo $time</span></span><br><span class="line">2024-01-22-10-10-14</span><br><span class="line">root@nanxi:~<span class="comment"># echo $time</span></span><br><span class="line">2024-01-22-10-10-14</span><br><span class="line"><span class="comment"># 时间是不固定</span></span><br><span class="line">root@nanxi:~<span class="comment"># time=&quot;date +%F-%H-%M-%S&quot;</span></span><br><span class="line">root@nanxi:~<span class="comment"># echo $time</span></span><br><span class="line"><span class="built_in">date</span> +%F-%H-%M-%S</span><br><span class="line">root@nanxi:~<span class="comment"># $time</span></span><br><span class="line">2024-01-22-10-10-39</span><br><span class="line">root@nanxi:~<span class="comment"># $time</span></span><br><span class="line">2024-01-22-10-10-40</span><br><span class="line">root@nanxi:~<span class="comment"># $time</span></span><br><span class="line">2024-01-22-10-10-41</span><br></pre></td></tr></table></figure>
+<h1>四、Shell核心位置变量</h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$0</span>      <span class="comment"># 表示Shell脚本的名称</span></span><br><span class="line"><span class="variable">$n</span>      <span class="comment"># 表示Shell脚本引用的第n个参数 从$1开始表示脚本的第1个参数 $&#123;10&#125; $&#123;11&#125;</span></span><br><span class="line"><span class="variable">$#</span>      <span class="comment"># 表示Shell脚本传参的个数</span></span><br><span class="line">$?      <span class="comment"># 表示上一个命令执行的结果，0表示成功，非0表示失败</span></span><br><span class="line"></span><br><span class="line">$$      <span class="comment"># 表示本次执行脚本的进程PID号，脚本内使用</span></span><br><span class="line">$!      <span class="comment"># 表示上一次执行脚本的进程PID号，一般调试脚本时使用</span></span><br><span class="line">$*      <span class="comment"># 表示所有参数，在循环体中加双引号表示将原参数作为一个参数输出</span></span><br><span class="line"><span class="variable">$@</span>      <span class="comment"># 表示所有参数，在循环体中加双引号表示以原参数个数依次输出</span></span><br><span class="line"><span class="variable">$_</span>      <span class="comment"># 表示上一条命令的最后一个参数</span></span><br></pre></td></tr></table></figure>
+<h1>五、脚本传参方式</h1>
+<h2 id="1、直接传参">1、直接传参</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@nanxi:~<span class="comment"># cat nanxi.sh</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$1</span></span><br><span class="line">root@nanxi:~<span class="comment"># source nanxi.sh nanxi</span></span><br><span class="line">nanxi</span><br></pre></td></tr></table></figure>
+<h2 id="2、赋值传参">2、赋值传参</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@nanxi:~<span class="comment"># cat nanxi.sh</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">name=<span class="variable">$1</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;I love <span class="variable">$name</span>&quot;</span></span><br><span class="line">root@nanxi:~<span class="comment"># source nanxi.sh nanxi</span></span><br><span class="line">I love nanxi</span><br></pre></td></tr></table></figure>
+<h2 id="3、read读入">3、read读入</h2>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240122185148924.png" alt="image-20240122185148924"></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        read命令简述
+    </div>
+    <div class='spoiler-content'>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  使用方式：</span></span><br><span class="line"><span class="built_in">read</span> 【选项】 【变量名】(非固定可选)</span><br><span class="line"><span class="comment">#  参数选项</span></span><br><span class="line">-p 提示信息  <span class="comment">#等待read输入时，输出提示信息;</span></span><br><span class="line">-t 秒 数     <span class="comment">#read命令会一直等待用户输入，使用此选项可以指定等待时间;</span></span><br><span class="line">-n 字符数    <span class="comment">#read命令只接受指定的字符数量，然后就会执行;</span></span><br><span class="line">-s 隐藏输入  <span class="comment">#隐藏输入内容，适用于机密信息的输入;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  read使用案例 </span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">read</span> -t 5 -p <span class="string">&quot;Enter your name : &quot;</span></span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;hello <span class="variable">$name</span>, welcome to BeiJing&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;sorry, Output timeout, please execute the command again !&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;------------------&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">read</span> -s -t 5 -p <span class="string">&quot;please enter your password : &quot;</span></span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">&quot;status : $? , Ok&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;sorry, Output timeout, please execute the command again !&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<div class="warning">
+<p><font color=red><strong>注意：read读取的参数，不能再用$n的方式进行调用！！！</strong></font></p>
+</div>
+
+    </div>
+</div>
+<h1>六、变量的字串</h1>
+<h2 id="1、字符串切片">1、字符串切片</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">root@nanxi:~<span class="comment"># name=&quot;nanxi i love you&quot;</span></span><br><span class="line">root@nanxi:~<span class="comment"># echo $name</span></span><br><span class="line">nanxi i love you</span><br><span class="line">root@nanxi:~<span class="comment"># echo $&#123;name:0:5&#125;</span></span><br><span class="line">nanxi</span><br><span class="line">root@nanxi:~<span class="comment"># echo $&#123;name:8:-4&#125;</span></span><br><span class="line">love</span><br><span class="line">root@nanxi:~<span class="comment"># echo $&#123;name:12:15&#125;</span></span><br><span class="line">you</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@nanxi:~<span class="comment"># name=&quot;nanxi i love you&quot;</span></span><br><span class="line">root@nanxi:~<span class="comment"># echo $&#123;name&#125; | cut -c 1-5,8-16</span></span><br><span class="line">nanxi love you</span><br></pre></td></tr></table></figure>
+<div class="tips">
+<p><strong>cut命令的简单介绍</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">基本语法： cut [选项参数]  filename</span><br><span class="line"></span><br><span class="line">选项与参数：</span><br><span class="line">-d：分隔符，按照指定分隔符分割列。与 -f 一起使用</span><br><span class="line">-f：依据 -d 的分隔字符将一段信息分割成为数段，用 -f 取出第几段的意思（列号，提取第几列）</span><br><span class="line">-c：以字符 (characters) 的单位取出固定字符区间</span><br><span class="line">-b：以字节为单位进行分割</span><br></pre></td></tr></table></figure>
+<p><em>注意⚠️： 如果文件里面的某些域是由<strong>若干个空格来间隔的</strong>，那么用cut就有点麻烦了，因为<strong>cut只擅长处理“以一个字符间隔”的文本内容</strong>。</em></p>
+</div>
+<h2 id="2、变量长度统计">2、变量长度统计</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">root@nanxi:~<span class="comment"># echo nanxi | wc -L</span></span><br><span class="line">5</span><br><span class="line">root@nanxi:~<span class="comment"># expr length &quot;nanxi&quot;</span></span><br><span class="line">5</span><br><span class="line">root@nanxi:~<span class="comment"># echo nanxi | awk &#x27;&#123;print length&#125;&#x27;</span></span><br><span class="line">5</span><br><span class="line">root@nanxi:~<span class="comment"># name=nanxi</span></span><br><span class="line">root@nanxi:~<span class="comment"># echo $&#123;#name&#125;</span></span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        wc命令回顾
+    </div>
+    <div class='spoiler-content'>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  命令使用</span></span><br><span class="line"><span class="built_in">wc</span> [OPTION]... [FILE]...</span><br><span class="line"><span class="comment">#  常用参数</span></span><br><span class="line">-l , --lines : 显示行数；</span><br><span class="line">-w , --words : 显示字数；</span><br><span class="line">-m , --chars : 显示字符数；</span><br><span class="line">-c , --bytes : 显示字节数；</span><br><span class="line">-L , --max-line-length : 显示最长行的长度；</span><br></pre></td></tr></table></figure>
+
+    </div>
+</div>
+<h2 id="3、统计字符串长度小于3的并输出到屏幕">3、统计字符串长度小于3的并输出到屏幕</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">root@nanxi:~<span class="comment"># vim select.sh</span></span><br><span class="line">root@nanxi:~<span class="comment"># cat select.sh</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> I am nanxi and i love you</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    [ <span class="variable">$&#123;#i&#125;</span> -lt 3 ] &amp;&amp; <span class="built_in">echo</span> <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">root@nanxi:~<span class="comment"># source select.sh</span></span><br><span class="line">I</span><br><span class="line">am</span><br><span class="line">i</span><br><span class="line"></span><br><span class="line">root@nanxi:~<span class="comment"># echo I am nanxi I am 18 |xargs -n1|awk &#x27;&#123;if(length&lt;3)print&#125;&#x27;I</span></span><br><span class="line">am</span><br><span class="line">I</span><br><span class="line">am</span><br><span class="line">18</span><br><span class="line"></span><br><span class="line">root@nanxi:~<span class="comment"># echo I am nanxi I am 18 |xargs -n1|awk &#x27;&#123;for(i=1;i&lt;=NF;i++)if(length($i)&lt;3)print $i&#125;&#x27;</span></span><br><span class="line">I</span><br><span class="line">am</span><br><span class="line">I</span><br><span class="line">am</span><br><span class="line">18</span><br></pre></td></tr></table></figure>
+<h1>七、判断表达式</h1>
+<h2 id="1、文件比较运算符">1、文件比较运算符</h2>
 <table>
 <thead>
 <tr>
-<th>角色</th>
-<th>IP地址</th>
+<th style="text-align:left">表达式</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">案例</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>负载均衡（lb）</td>
-<td>192.168.10.3</td>
+<td style="text-align:left">-e filename</td>
+<td style="text-align:left">如果filename存在，则为真</td>
+<td style="text-align:left">[ –e /etc/hosts ]</td>
 </tr>
 <tr>
-<td>web1（静态资源）</td>
-<td>192.168.10.200</td>
+<td style="text-align:left">-d filename</td>
+<td style="text-align:left">如果filename为目录，则为真</td>
+<td style="text-align:left">[ –e /etc ]</td>
 </tr>
 <tr>
-<td>web2（动态资源）</td>
-<td>192.168.10.201</td>
+<td style="text-align:left">-f filename</td>
+<td style="text-align:left">如果filename为常规文件，则为真</td>
+<td style="text-align:left">[ –f /usr/bin/grep]</td>
+</tr>
+<tr>
+<td style="text-align:left">-L filename</td>
+<td style="text-align:left">如果filename为符号链接，则为真</td>
+<td style="text-align:left">[ –L /usr/bin/grep]</td>
+</tr>
+<tr>
+<td style="text-align:left">-r filename</td>
+<td style="text-align:left">如果filename可读，则为真</td>
+<td style="text-align:left">[ –r /etc/hosts ]</td>
+</tr>
+<tr>
+<td style="text-align:left">-w filename</td>
+<td style="text-align:left">如果filename可写，则为真</td>
+<td style="text-align:left">[ –w /etc/hosts ]</td>
+</tr>
+<tr>
+<td style="text-align:left">-x filename</td>
+<td style="text-align:left">如果filename可执行，则为真</td>
+<td style="text-align:left">[ –x /etc/hosts ]</td>
+</tr>
+<tr>
+<td style="text-align:left">filename1 –nt filename2</td>
+<td style="text-align:left">如果filename1比filename2新，则为真</td>
+<td style="text-align:left">[/usr/test/file1.txt –nt /usr/test/file2.txt]</td>
+</tr>
+<tr>
+<td style="text-align:left">filename1 –ot filename2</td>
+<td style="text-align:left">如果filename1比filename2旧，则为真</td>
+<td style="text-align:left">[/usr/test/file1.txt –ot /usr/test/file2.txt]</td>
 </tr>
 </tbody>
 </table>
-<table><tr><td bgcolor=#000000><font color="white">实现过程</font></td></tr></table>
-<p>1️⃣ web1配置静态资源；</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@web1 /etc/nginx/conf.d]<span class="comment">#vim nanxi.conf</span></span><br><span class="line">server &#123;</span><br><span class="line">        listen 80;</span><br><span class="line">        root /code;</span><br><span class="line">		charset utf-8,gbk;</span><br><span class="line">		</span><br><span class="line">        location / &#123;</span><br><span class="line">        index index.html;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">[root@web1 /code]<span class="comment">#echo &#x27;&lt;h1&gt;&lt;center&gt;南汐666520&lt;/center&gt;&lt;/h1&gt;&#x27; &gt;index.html</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218182450047.png" alt="image-20231218182450047"></p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218183337107.png" alt="image-20231218183337107"></p>
-<p>2️⃣ web2配置一个动态资源；</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@web2 ~]<span class="comment">#yum -y install tomcat</span></span><br><span class="line">...</span><br><span class="line">[root@web2 ~]<span class="comment">#yum -y install java</span></span><br><span class="line">...</span><br><span class="line">[root@web2 ~]<span class="comment">#mkdir /usr/share/tomcat/webapps/ROOT</span></span><br><span class="line">[root@web2 /usr/share/tomcat/webapps/ROOT]<span class="comment">#cat java_test.jsp</span></span><br><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> import=<span class="string">&quot;java.util.*&quot;</span> pageEncoding=<span class="string">&quot;utf-8&quot;</span>%&gt;</span><br><span class="line">&lt;HTML&gt;</span><br><span class="line">    &lt;HEAD&gt;</span><br><span class="line">        &lt;TITLE&gt;nanxi JSP Page&lt;/TITLE&gt;</span><br><span class="line">    &lt;/HEAD&gt;</span><br><span class="line">    &lt;BODY&gt;</span><br><span class="line">        &lt;%</span><br><span class="line">            Random rand = new Random();</span><br><span class="line">            out.println(<span class="string">&quot;&lt;h1&gt;显示随机数:&lt;h1&gt;&quot;</span>);</span><br><span class="line">            out.println(rand.nextInt(99)+100);</span><br><span class="line">        %&gt;</span><br><span class="line">    &lt;/BODY&gt;</span><br><span class="line">&lt;/HTML&gt;</span><br><span class="line">测试访问如下，8080为tomcat的默认端口</span><br></pre></td></tr></table></figure>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218184749984.png" alt="image-20231218184749984"></p>
-<p>3️⃣ 集成至负载均衡；（测试时记得修改hosts文件）</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218185513220.png" alt="image-20231218185513220"></p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218192640980.png" alt="image-20231218192640980"></p>
-<p>最后集成显示的效果如下：</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218192730094.png" alt="image-20231218192730094"></p>
-<div class="tips">
-<p><strong>Nginx资源分离知识补充</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@lb /code]#mkdir android</span><br><span class="line">[root@lb /code]#mkdir iphone</span><br><span class="line">[root@lb /code]#mkdir pc</span><br><span class="line">[root@lb /code]#echo &quot;我是安卓页面&quot; &gt; /code/android/index.html</span><br><span class="line">[root@lb /code]#echo &quot;我是iphone页面&quot; &gt; /code/iphone/index.html</span><br><span class="line">[root@lb /code]#echo &quot;我是电脑页面&quot; &gt; /code/pc/index.html</span><br></pre></td></tr></table></figure>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218194228518.png" alt="image-20231218194228518"></p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218195944060.png" alt="image-20231218195944060"></p>
-<p>实现效果如下：</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218200416983.png" alt="image-20231218200416983"></p>
-<p>实际企业中不会分的那么清楚，代码资源一般只分移动端和PC端；</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218200957554.png" alt="image-20231218200957554"></p>
-</div>
+<h2 id="2、字符串比较运算符">2、字符串比较运算符</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">表达式</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">案例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-z string</td>
+<td style="text-align:left">如果string长度为0,则为真</td>
+<td style="text-align:left">[ –z “$var”]</td>
+</tr>
+<tr>
+<td style="text-align:left">-n string</td>
+<td style="text-align:left">如果string长度非0,则为真</td>
+<td style="text-align:left">[ –n “$var”]</td>
+</tr>
+<tr>
+<td style="text-align:left">str1=str2</td>
+<td style="text-align:left">如果str1与str2相同，则为真</td>
+<td style="text-align:left">[ “$var” = ”hello world”]</td>
+</tr>
+<tr>
+<td style="text-align:left">str1!=str2</td>
+<td style="text-align:left">如果str1与str2不相同，则为真</td>
+<td style="text-align:left">[ ”$var“ != ”hello world“]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3、算术比较运算符">3、算术比较运算符</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">表达式</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">案例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">num1-eq num2</td>
+<td style="text-align:left">等于</td>
+<td style="text-align:left">[ 6 -eq $num ]</td>
+</tr>
+<tr>
+<td style="text-align:left">num1-ne num2</td>
+<td style="text-align:left">不等于</td>
+<td style="text-align:left">[ 6 -ne $num ]</td>
+</tr>
+<tr>
+<td style="text-align:left">num1-lt num2</td>
+<td style="text-align:left">小于</td>
+<td style="text-align:left">[ 6 -lt $num ]</td>
+</tr>
+<tr>
+<td style="text-align:left">num1-le num2</td>
+<td style="text-align:left">小于等于</td>
+<td style="text-align:left">[ 6 -le $num ]</td>
+</tr>
+<tr>
+<td style="text-align:left">num1-gt num2</td>
+<td style="text-align:left">大于</td>
+<td style="text-align:left">[ 6 -gt $num ]</td>
+</tr>
+<tr>
+<td style="text-align:left">num1-ge num2</td>
+<td style="text-align:left">大于等于</td>
+<td style="text-align:left">[ 6 -ge $num ]</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/nanxiblogfoota.png" alt="nanxiblogfoota"></p>
+<iframe frameborder="no" border="0" marginwidth="0" allow = "autoplay" marginheight="0" width=100% height=86 src="//music.163.com/outchain/player?type=2&id=1488212875&auto=1&height=66"></iframe>
+<blockquote>
+<p><em>自由是上帝赐给人类的最大的幸福之一。</em></p>
+<p align="right">——塞万提斯</p>
+</blockquote>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
 
@@ -305,7 +443,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Shell编程</a>
         		</li>
       		
 		</ul>
@@ -324,18 +462,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2023/12/18/shell%E8%84%9A%E6%9C%AC%E7%AF%87001/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          shell脚本篇001
-        
-      </div>
-    </a>
   
-  
-    <a href="/2023/12/13/LNMP%E6%9E%B6%E6%9E%84%E9%83%A8%E7%BD%B2%E5%8A%A8%E6%80%81%E4%BA%A7%E5%93%81/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">LNMP架构部署动态产品</div>
+    <a href="/2024/01/21/Ansible%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%AE%9E%E4%BE%8B%EF%BC%88%E4%B8%89%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Ansible一键部署实例（三）</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -362,7 +491,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Nginx实现动静分离</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Shell编程基础知识补充</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">一、执行脚本的方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">二、环境变量的执行顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">三、定义变量（特例）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">四、Shell核心位置变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">五、脚本传参方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E7%9B%B4%E6%8E%A5%E4%BC%A0%E5%8F%82"><span class="toc-number">6.1.</span> <span class="toc-text">1、直接传参</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E8%B5%8B%E5%80%BC%E4%BC%A0%E5%8F%82"><span class="toc-number">6.2.</span> <span class="toc-text">2、赋值传参</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81read%E8%AF%BB%E5%85%A5"><span class="toc-number">6.3.</span> <span class="toc-text">3、read读入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">六、变量的字串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%87%E7%89%87"><span class="toc-number">7.1.</span> <span class="toc-text">1、字符串切片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%8F%98%E9%87%8F%E9%95%BF%E5%BA%A6%E7%BB%9F%E8%AE%A1"><span class="toc-number">7.2.</span> <span class="toc-text">2、变量长度统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E7%BB%9F%E8%AE%A1%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E5%B0%8F%E4%BA%8E3%E7%9A%84%E5%B9%B6%E8%BE%93%E5%87%BA%E5%88%B0%E5%B1%8F%E5%B9%95"><span class="toc-number">7.3.</span> <span class="toc-text">3、统计字符串长度小于3的并输出到屏幕</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">七、判断表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E6%96%87%E4%BB%B6%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">8.1.</span> <span class="toc-text">1、文件比较运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">8.2.</span> <span class="toc-text">2、字符串比较运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E7%AE%97%E6%9C%AF%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">8.3.</span> <span class="toc-text">3、算术比较运算符</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

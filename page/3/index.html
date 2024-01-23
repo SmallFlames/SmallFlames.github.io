@@ -161,6 +161,201 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Nginx服务简述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/12/07/Nginx%E6%9C%8D%E5%8A%A1%E7%AE%80%E8%BF%B0/">Nginx服务简述</a>
+    </h1>
+  
+
+        
+        <a href="/2023/12/07/Nginx%E6%9C%8D%E5%8A%A1%E7%AE%80%E8%BF%B0/" class="archive-article-date">
+  	<time datetime="2023-12-07T12:05:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-07</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Nginx服务简述</center></h1>
+<h2 id="一、了解Nginx">一、了解Nginx</h2>
+<p>  Nginx (engine x) 是一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。Nginx支持热部署，启动简单，可以做到7×24小时不间断运行，其特点是占有内存少，并发能力强，能经受高负载的考验，有报告表明能支持高达 50,000 个并发连接数。中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。</p>
+<p>  我们为什么选择Nginx服务?<br>
+  ①  开源：直接获取源代码；②  高性能: 支持海量并发；③  可靠: 服务稳定；④  Nginx非常轻量，功能模块少(源代码仅保留http与核心模块代码,其余不够核心代码会作为插件来安装)；⑤  代码模块化 (易读，便于二次开发，对于开发人员非常友好)；⑥  Nginx适合当前主流架构趋势，微服务、云架构、中间层等，且技术成熟；⑦  统一技术栈，降低维护成本，降低技术更新成本；</p>
+<blockquote>
+<p>Nginx采用Epool网络模型，Apache采用Select模型</p>
+<p>  Select: 当用户发起一次请求，select模型就会进行一次遍历扫描，从而导致性能低下。Epool: 当用户发起请求，epool模型会直接进行处理，效率高效，并无连接限制。处理大量的连接的读写，Apache所采用的select网络I/O模型非常低效。</p>
+<p>  用一个比喻来解释Apache采用的select模型和Nginx采用的epoll模型进行之间的区别：假设你在大学读书，住的宿舍楼有很多间房间，你的朋友要来找你。select版宿管大妈就会带着你的朋友挨个房间去找，直到找到你为止。而epoll版宿管大妈会先记下每位同学的房间号，你的朋友来时，只需告诉你的朋友你住在哪个房间即可，不用亲自带着你的朋友满大楼找人。如果来了10000个人，都要找自己住这栋楼的同学时，select版和epoll版宿管大妈，谁的效率更高，不言自明。同理，在高并发服务器中，轮询I/O是最耗时间的操作之 一，select和epoll的性能谁的性能更高，同样十分明了。</p>
+</blockquote>
+<h2 id="二、Nginx应用场景">二、Nginx应用场景</h2>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/5e3ba1cc0392485e0c000002.png" alt="5e3ba1cc0392485e0c000002"></p>
+        
+          <a class="article-more-a" href="/2023/12/07/Nginx%E6%9C%8D%E5%8A%A1%E7%AE%80%E8%BF%B0/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/12/07/Nginx%E6%9C%8D%E5%8A%A1%E7%AE%80%E8%BF%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
+    <article id="post-sersync文件实时同步" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/12/06/sersync%E6%96%87%E4%BB%B6%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/">sersync文件实时同步</a>
+    </h1>
+  
+
+        
+        <a href="/2023/12/06/sersync%E6%96%87%E4%BB%B6%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/" class="archive-article-date">
+  	<time datetime="2023-12-06T12:19:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-06</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>sersync文件实时同步</center></h1>
+<h2 id="一、sersync应用场景">一、sersync应用场景</h2>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231206214137354.png" alt="image-20231206214137354"></p>
+<p>  如上图所示，如果我们只有一台NFS服务器，当它发生故障时，对我们的web服务端会产生非常大的业务影响，这就时单台设备的瓶颈，我们称这一现象为单点故障，试想如果我们此时还有一台服务器专门为NFS服务器做数据备份，当我们的NFS服务器出现故障，我们可以及时的把NFS服务器的备份服务器迅速挂载至web端，快速恢复业务。但这有一个非常重要的要求，我们的备份服务器和备份源数据必须实时同步（实时同步是一种只要当前目录发生变化则会触发一个事件，事件触发后会将变化的目录同步至远程服务器。），否则就会造成用户访问的数据不连续，影响业务正常运行。此时我们就可以用到sersync的功能了。</p>
+<p>  sersync是国人基于<code>rsync+inotify-tools</code>开发的工具，不仅保留了优点同时还强化了实时监控，文件过滤，简化配置等功能，帮助用户提高运行效率，节省时间和网络资源。👉<a target="_blank" rel="noopener" href="https://github.com/wsgzao/sersync">sersync项目地址</a></p>
+        
+          <a class="article-more-a" href="/2023/12/06/sersync%E6%96%87%E4%BB%B6%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/12/06/sersync%E6%96%87%E4%BB%B6%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-NFS共享存储" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -925,194 +1120,6 @@
 
 
   
-    <article id="post-男生女生大脑的不同" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/24/%E7%94%B7%E7%94%9F%E5%A5%B3%E7%94%9F%E5%A4%A7%E8%84%91%E7%9A%84%E4%B8%8D%E5%90%8C/">男生和女生大脑的不同</a>
-    </h1>
-  
-
-        
-        <a href="/2023/11/24/%E7%94%B7%E7%94%9F%E5%A5%B3%E7%94%9F%E5%A4%A7%E8%84%91%E7%9A%84%E4%B8%8D%E5%90%8C/" class="archive-article-date">
-  	<time datetime="2023-11-24T12:19:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-24</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>男生和女生大脑的不同</center></h1>
-<p> </p>
-<div style="display=inline"><p align="justify" ><font size="5">「男人没有女人就没有乐趣，有了女人就没有生趣。」</font></p><p align="right"><font size="5">—朱德庸</font></p></div>
-<div style="position:relative; padding-bottom:55%; width:100%; height:0"><iframe src="//player.bilibili.com/player.html?aid=4445834&bvid=BV1As41167Ef&cid=7203752&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=100% height=355  style="position:absolute; height: 100%; width: 100%;"> </iframe></div>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/24/%E7%94%B7%E7%94%9F%E5%A5%B3%E7%94%9F%E5%A4%A7%E8%84%91%E7%9A%84%E4%B8%8D%E5%90%8C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Linux磁盘管理篇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/24/Linux%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%AF%87/">Linux磁盘管理篇</a>
-    </h1>
-  
-
-        
-        <a href="/2023/11/24/Linux%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%AF%87/" class="archive-article-date">
-  	<time datetime="2023-11-24T08:58:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-24</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Linux磁盘管理</center></h1>
-<h2 id="一、磁盘基础知识">一、磁盘基础知识</h2>
-<p>  “磁盘”和“硬盘”是两个常用的存储设备名词，容易混淆。磁盘是一个广泛的概念，用来描述一种存储数据的物理媒介。事实上，“硬盘”通常指的就是“磁盘硬盘”。磁盘是一个广泛的概念，用来描述一种存储数据的物理媒介。磁盘和硬盘并不是一个概念，但是两者又是相互交叉的。</p>
-<p>  磁盘，是计算机的外部存储器中类似磁带的装置，将圆形的磁性盘片装在一个方的密封盒子里，这样做的目的是为了防止磁盘表面划伤，导致数据丢失。磁盘有软磁盘，硬磁盘。硬磁盘就是机械硬盘。<br>
-  硬盘是电脑主要的存储媒介之一，由一个或者多个铝制或者玻璃制的碟片组成。碟片外覆盖有铁磁性材料。硬盘有固态硬盘（SSD 盘，新式硬盘）、机械硬盘（HDD 传统硬盘）、混合硬盘（HHD 一块基于传统机械硬盘诞生出来的新硬盘）。SSD采用闪存颗粒来存储，HDD采用磁性碟片来存储，混合硬盘(HHD: Hybrid Hard Disk)是把磁性硬盘和闪存集成到一起的一种硬盘。绝大多数硬盘都是固定硬盘，被永久性地密封固定在硬盘驱动器中。</p>
-<p>  一般的电脑有一个硬盘，正常情况下，一台电脑只有一块硬盘，用于存储数据安装操作系统和应用软件，但是目前有一种趋势采用的是固态硬盘加机械硬盘的结构，将操作系统和应用程序安装与固态硬盘内，将数据存储于机械硬盘，这样既能体现固态硬盘的速度，又能体现机械硬盘的容量。<em>（1块固态+1块机械  120G→C盘系统盘 机械1T→ 存储数据）</em></p>
-<h3 id="1、磁盘分类">1、磁盘分类</h3>
-<p>  ① 机械硬盘：机械硬盘是一种传统的存储设备，它的核心部分是一个不断旋转的磁盘，数据则以磁性方式记录在磁盘表面上。机械硬盘内部有盘片，读写机械运动，速度相对较慢，但价格较为便宜没有寿命限制。</p>
-<p>  ② 固态硬盘：固态硬盘(SSD)内部是板卡使用闪存芯片作为数据存储介质，相比机械硬盘具有更快的读写速度，更稳定的性能和更低的能耗。但是价格相对较高，有寿命限制。（笔记本通常用nvme，服务器一般nvme、pci-e都有）</p>
-<p>  ③ 光盘：光盘是一种通过激光读取数据的存储介质，可以分为CD、DVD、蓝光光盘等不同类型。光盘主要用于存储音视频、软件等数据，但容量相对较小。</p>
-<p>  ④ U盘：U盘是一种便携式存储设备，通过USB接口与电脑连接。U盘具有体积小、便携、数据传输速度快等优点，适合移动办公和数据传输。</p>
-<p>  ⑤ 外接硬盘：外接硬盘可以通过USB等接口与电脑连接，是一种可移动存储设备。它的容量相对较大，价格也比较实惠，适合备份重要数据和大文件的存储。</p>
-        
-          <a class="article-more-a" href="/2023/11/24/Linux%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%AF%87/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/24/Linux%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%AF%87/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
@@ -1265,11 +1272,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">shell脚本</a>
+                <a href="javascript:void(0)" class="js-tag color3">Shell编程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Shell编程</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件应用</a>
               </li>
             
             <div class="clearfix"></div>

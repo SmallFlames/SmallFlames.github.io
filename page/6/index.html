@@ -161,6 +161,194 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux常用命令及快捷键" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/11/02/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E5%BF%AB%E6%8D%B7%E9%94%AE/">Linux常用命令及快捷键</a>
+    </h1>
+  
+
+        
+        <a href="/2023/11/02/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="archive-article-date">
+  	<time datetime="2023-11-02T08:05:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-02</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Linux常用命令及快捷键</center></h1>
+<p><img src="https://c-ssl.duitang.com/uploads/blog/202101/29/20210129091816_6cca5.jpeg" alt="202xz012"></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>命令释义</th>
+<th>常用选项参数</th>
+<th>使用方法[简]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>显示命令类型</td>
+<td>【别名、关键字、函数、内建命令、文件(外部命令)】</td>
+<td>type [命令]</td>
+</tr>
+<tr>
+<td>man</td>
+<td>帮助说明</td>
+<td>-f：显示命令或函数的简短描述；<br />-h：显示帮助信息；</td>
+<td>man [命令]</td>
+</tr>
+<tr>
+<td>help</td>
+<td>帮助说明</td>
+<td>-d ：输出每个命令的简短描述；<br />  -m ： 以类似于 man 手册的格式描述命令；<br />  -s ： 只显示命令使用格式；</td>
+<td>help [命令]</td>
+</tr>
+<tr>
+<td>cd</td>
+<td>切换当前路径</td>
+<td></td>
+<td>cd [目录]</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td>显示当前路径</td>
+<td></td>
+<td>直接回车</td>
+</tr>
+<tr>
+<td>ls</td>
+<td>显示目录内容</td>
+<td>-l ：显示目录详细信息；<br />-a ：显示目录隐藏文件；</td>
+<td>ls [目录] ……</td>
+</tr>
+<tr>
+<td>touch</td>
+<td>创建空文件<br /><font size="2px">(若文件已存在，则更新文件时间信息；)</font></td>
+<td>-a、-r、-d<br />：无实际意义；</td>
+<td>touch [文件] ……</td>
+</tr>
+<tr>
+<td>mkdir</td>
+<td>创建目录（文件夹）<br /><font size="2px">(若目录已存在，则跳过；)</font></td>
+<td>-m：在创建目录的同时设定权限；<br/>-p：可新建多级文件夹（目录），当路径中的某个目录已经存在时，跳过该目录继续创建下一级目录；<br/>-v：显示创建目录的过程信息；</td>
+<td>mkdir  [目录] ……</td>
+</tr>
+<tr>
+<td>cp</td>
+<td>复制文件或者目录</td>
+<td>-r ：复制目录时使用；<br /> -u：更新文件时，只有源文件比目标文件新时，才会将源文件复制给目标文件；<br />-s：创建文件的软链接；</td>
+<td>cp [源文件] …… [目标文件/目录]</td>
+</tr>
+<tr>
+<td>mv</td>
+<td>移动文件或者目录（重命名）</td>
+<td>-b：当覆盖文件之前先行备份；<br />-f：当覆盖文件时，不询问直接覆盖；<br />-i ：当覆盖文件之前，会询问是否覆盖；<br /> -u：只有当源文件是最新更新时，才可以覆盖目标文件；</td>
+<td>mv [源文件或目录] [目标文件或目录]</td>
+</tr>
+<tr>
+<td>cat</td>
+<td>查看或合并文件内容</td>
+<td>-n：显示文件内容时带行号；<br />   cat file1 file2 &gt; file  如果file以前有内容，则先会清除它们然后再写入合并后的内容；<br />   cat file1 file2 &gt;&gt; file   不清除file内容合并；</td>
+<td>cat [文件] ……</td>
+</tr>
+<tr>
+<td>rm</td>
+<td>删除文件或者目录</td>
+<td>-f ：强制删除不提示；<br />-rf ：删除目录不提示 ；</td>
+<td>rm  [文件/目录] ……</td>
+</tr>
+<tr>
+<td>vi</td>
+<td>编辑文件内容</td>
+<td>【进入vim编辑器】</td>
+<td>vi  [文件]</td>
+</tr>
+<tr>
+<td>tree</td>
+<td>显示目录结构</td>
+<td>【需要才能使用先安装<code>yum -y install tree</code>】</td>
+<td>tree [目录]</td>
+</tr>
+</tbody>
+</table>
+<p>⏬注意：vim编辑器详解</p>
+        
+          <a class="article-more-a" href="/2023/11/02/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E5%BF%AB%E6%8D%B7%E9%94%AE/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/11/02/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E5%BF%AB%E6%8D%B7%E9%94%AE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-Linux目录结构概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

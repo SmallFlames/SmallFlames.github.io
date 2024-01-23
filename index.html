@@ -161,6 +161,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Shell脚本篇002" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/01/23/Shell%E8%84%9A%E6%9C%AC%E7%AF%87002/">Shell脚本篇002</a>
+    </h1>
+  
+
+        
+        <a href="/2024/01/23/Shell%E8%84%9A%E6%9C%AC%E7%AF%87002/" class="archive-article-date">
+  	<time datetime="2024-01-23T12:43:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-23</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Shell脚本篇002</center></h1>
+<table><tr><td bgcolor=#000000><font color="white">脚本需求</font></td></tr></table>
+<font color="#fc5531">▚ 需求 ：写一个巡检脚本，用来监测系统各项服务的状态情况，并以内容的方式输出至屏幕。</font>
+<table><tr><td bgcolor=#000000><font color="white">实现效果</font></td></tr></table>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240123215829275.png" alt="image-20240123215829275"></p>
+        
+          <a class="article-more-a" href="/2024/01/23/Shell%E8%84%9A%E6%9C%AC%E7%AF%87002/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Shell编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/01/23/Shell%E8%84%9A%E6%9C%AC%E7%AF%87002/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-Shell编程知识补充（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -974,98 +1068,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/01/03/Ansible%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Ansible-playbook简述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/03/Ansible-playbook%E7%AE%80%E8%BF%B0/">Ansible-playbook简述</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/03/Ansible-playbook%E7%AE%80%E8%BF%B0/" class="archive-article-date">
-  	<time datetime="2024-01-03T09:45:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-03</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Ansible-playbook简述</center></h1>
-<p>  如果我们ad-hoc看成是单条的shell，那么playbook就是类似shell脚本的存在，虽然它比不上shell脚本的便捷和可用性，但它在自动化运维中绝对是把利器，对于批量化主机管理playbook是我们必须掌握并精通的，因为它可以充分发挥ansible的强大！！！</p>
-<p>  Ansible-playbook的书写遵循yml语言格式，并以ansible的模块为基础，从而实现对复杂指令的编排应用，如以下的playbook书写，实现了对rsync服务的部署，同样的它可以应用到更多的主机或者集群……</p>
-        
-          <a class="article-more-a" href="/2024/01/03/Ansible-playbook%E7%AE%80%E8%BF%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/03/Ansible-playbook%E7%AE%80%E8%BF%B0/">展开全文 >></a>
         </p>
       
 

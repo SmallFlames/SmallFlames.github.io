@@ -1,7 +1,8 @@
+https://smallflames.github.io/2024/01/23/Shell%E8%84%9A%E6%9C%AC%E7%AF%87002/
+https://smallflames.github.io/2023/12/18/Shell%E8%84%9A%E6%9C%AC%E7%AF%87001/
 https://smallflames.github.io/2024/01/23/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%BA%8C%EF%BC%89/
 https://smallflames.github.io/2023/11/02/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E5%BF%AB%E6%8D%B7%E9%94%AE/
 https://smallflames.github.io/2024/01/22/JumpServer%E7%AE%80%E8%BF%B0/
-https://smallflames.github.io/2023/12/18/shell%E8%84%9A%E6%9C%AC%E7%AF%87001/
 https://smallflames.github.io/2024/01/22/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%80%EF%BC%89/
 https://smallflames.github.io/2023/11/15/sed%E5%91%BD%E4%BB%A4%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/
 https://smallflames.github.io/2024/01/21/Ansible%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%AE%9E%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/

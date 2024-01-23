@@ -161,6 +161,148 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux常用命令补充（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/11/13/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85%EF%BC%88%E4%BA%8C%EF%BC%89/">Linux常用命令补充（二）</a>
+    </h1>
+  
+
+        
+        <a href="/2023/11/13/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85%EF%BC%88%E4%BA%8C%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2023-11-13T07:23:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-13</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Linux常用命令补充</center></h1>
+<h2 id="一、压缩解压—tar-zip">一、压缩解压—tar&amp;zip</h2>
+<p>  tar 命令可用于将多个文件和目录一起打包成一个文件，但不压缩。如果要压缩，可以使用 gzip、bzip2 这样的压缩工具。该命令的语法如下：<code>tar [选项] [文件]</code>。<br>
+  该命令支持的选项有：</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-c</td>
+<td>创建压缩文件【★★★★★】</td>
+</tr>
+<tr>
+<td>-z</td>
+<td>用 gzip 格式压缩或解压【★★★★★】</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示命令的执行过程【★★】</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>解开压缩文件【★★★★★】</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>目标文件名【★★★】</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>解压包中所有文件到指定目录【★★★★★】</td>
+</tr>
+<tr>
+<td>-t, --list</td>
+<td>列出压缩包中的文件列表</td>
+</tr>
+<tr>
+<td>-r, --append</td>
+<td>将文件追加到包中</td>
+</tr>
+</tbody>
+</table>
+<div class="warning">
+<p><strong>注意</strong><br>
+  该命令常用的选项就是打包 <code>-cvf</code> 和解包 <code>-xvf</code>，以及同其他压缩工具进行的压缩与解压缩（如使用 <code>gzip</code> 工具压缩是 <code>-zcvf</code> 与 <code>zxvf</code>）。</p>
+</div>
+<p>  使用 gzip 压缩打包【★★★★★】<br>
+  tar 只具有打包的效果，但并不具有压缩的能力，而如果要压缩可以使用 gzip 工具对其压缩，即使用 -z 选项。这种 tar 文件的扩展名是 .tar.gz 或 .tgz。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 语法: `tar -zcvf 压缩包名 待压缩文件或目录`</span></span><br><span class="line">[root@localhost ~]<span class="comment"># touch &#123;1..3&#125;.txt</span></span><br><span class="line">[root@localhost ~]<span class="comment"># ll</span></span><br><span class="line">total 0</span><br><span class="line">-rw-r--r--. 1 root root 0 Nov 13 20:55 1.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 Nov 13 20:55 2.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 Nov 13 20:55 3.txt</span><br><span class="line">[root@localhost ~]<span class="comment"># tar zcvf test.tar.gz 1.txt 2.txt 3.txt</span></span><br><span class="line">1.txt</span><br><span class="line">2.txt</span><br><span class="line">3.txt</span><br><span class="line">[root@localhost ~]<span class="comment"># ll</span></span><br><span class="line">total 4</span><br><span class="line">-rw-r--r--. 1 root root   0 Nov 13 20:55 1.txt</span><br><span class="line">-rw-r--r--. 1 root root   0 Nov 13 20:55 2.txt</span><br><span class="line">-rw-r--r--. 1 root root   0 Nov 13 20:55 3.txt</span><br><span class="line">-rw-r--r--. 1 root root 123 Nov 13 20:57 test.tar.gz</span><br><span class="line">[root@localhost ~]<span class="comment">#</span></span><br><span class="line"><span class="comment">### 形象一点记忆: tar zcvf 压缩包名.tar.gz（筐子） 需要压缩的文件（水果、蔬菜...）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># tar解压文件：`tar -zxvf 压缩文件.tar.gz -C 解压地址`或者`tar -xf 压缩文件.tar.gz -C 解压地址`</span></span><br><span class="line">[root@localhost ~]<span class="comment"># ll /opt</span></span><br><span class="line">total 0</span><br><span class="line">[root@localhost ~]<span class="comment"># tar -zxvf test.tar.gz -C /opt</span></span><br><span class="line">1.txt</span><br><span class="line">2.txt</span><br><span class="line">3.txt</span><br><span class="line">[root@localhost ~]<span class="comment"># ll /opt</span></span><br><span class="line">total 0</span><br><span class="line">-rw-r--r--. 1 root root 0 Nov 13 20:55 1.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 Nov 13 20:55 2.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 Nov 13 20:55 3.txt</span><br><span class="line">[root@localhost ~]<span class="comment"># rm -rf /opt/*</span></span><br><span class="line">[root@localhost ~]<span class="comment"># tar -xf test.tar.gz -C /opt</span></span><br><span class="line">[root@localhost ~]<span class="comment"># ll /opt</span></span><br><span class="line">total 0</span><br><span class="line">-rw-r--r--. 1 root root 0 Nov 13 20:55 1.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 Nov 13 20:55 2.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 Nov 13 20:55 3.txt</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2023/11/13/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85%EF%BC%88%E4%BA%8C%EF%BC%89/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/11/13/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85%EF%BC%88%E4%BA%8C%EF%BC%89/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-Linux文件详细信息概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1055,194 +1197,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/11/03/Linux%E5%85%B3%E9%94%AE%E6%96%87%E4%BB%B6%E8%A7%A3%E8%AF%BB%EF%BC%88%E4%B8%80%EF%BC%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Linux常用命令及快捷键" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/02/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E5%BF%AB%E6%8D%B7%E9%94%AE/">Linux常用命令及快捷键</a>
-    </h1>
-  
-
-        
-        <a href="/2023/11/02/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="archive-article-date">
-  	<time datetime="2023-11-02T08:05:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-02</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Linux常用命令及快捷键</center></h1>
-<p><img src="https://c-ssl.duitang.com/uploads/blog/202101/29/20210129091816_6cca5.jpeg" alt="202xz012"></p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>命令释义</th>
-<th>常用选项参数</th>
-<th>使用方法[简]</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>type</td>
-<td>显示命令类型</td>
-<td>【别名、关键字、函数、内建命令、文件(外部命令)】</td>
-<td>type [命令]</td>
-</tr>
-<tr>
-<td>man</td>
-<td>帮助说明</td>
-<td>-f：显示命令或函数的简短描述；<br />-h：显示帮助信息；</td>
-<td>man [命令]</td>
-</tr>
-<tr>
-<td>help</td>
-<td>帮助说明</td>
-<td>-d ：输出每个命令的简短描述；<br />  -m ： 以类似于 man 手册的格式描述命令；<br />  -s ： 只显示命令使用格式；</td>
-<td>help [命令]</td>
-</tr>
-<tr>
-<td>cd</td>
-<td>切换当前路径</td>
-<td></td>
-<td>cd [目录]</td>
-</tr>
-<tr>
-<td>pwd</td>
-<td>显示当前路径</td>
-<td></td>
-<td>直接回车</td>
-</tr>
-<tr>
-<td>ls</td>
-<td>显示目录内容</td>
-<td>-l ：显示目录详细信息；<br />-a ：显示目录隐藏文件；</td>
-<td>ls [目录] ……</td>
-</tr>
-<tr>
-<td>touch</td>
-<td>创建空文件<br /><font size="2px">(若文件已存在，则更新文件时间信息；)</font></td>
-<td>-a、-r、-d<br />：无实际意义；</td>
-<td>touch [文件] ……</td>
-</tr>
-<tr>
-<td>mkdir</td>
-<td>创建目录（文件夹）<br /><font size="2px">(若目录已存在，则跳过；)</font></td>
-<td>-m：在创建目录的同时设定权限；<br/>-p：可新建多级文件夹（目录），当路径中的某个目录已经存在时，跳过该目录继续创建下一级目录；<br/>-v：显示创建目录的过程信息；</td>
-<td>mkdir  [目录] ……</td>
-</tr>
-<tr>
-<td>cp</td>
-<td>复制文件或者目录</td>
-<td>-r ：复制目录时使用；<br /> -u：更新文件时，只有源文件比目标文件新时，才会将源文件复制给目标文件；<br />-s：创建文件的软链接；</td>
-<td>cp [源文件] …… [目标文件/目录]</td>
-</tr>
-<tr>
-<td>mv</td>
-<td>移动文件或者目录（重命名）</td>
-<td>-b：当覆盖文件之前先行备份；<br />-f：当覆盖文件时，不询问直接覆盖；<br />-i ：当覆盖文件之前，会询问是否覆盖；<br /> -u：只有当源文件是最新更新时，才可以覆盖目标文件；</td>
-<td>mv [源文件或目录] [目标文件或目录]</td>
-</tr>
-<tr>
-<td>cat</td>
-<td>查看或合并文件内容</td>
-<td>-n：显示文件内容时带行号；<br />   cat file1 file2 &gt; file  如果file以前有内容，则先会清除它们然后再写入合并后的内容；<br />   cat file1 file2 &gt;&gt; file   不清除file内容合并；</td>
-<td>cat [文件] ……</td>
-</tr>
-<tr>
-<td>rm</td>
-<td>删除文件或者目录</td>
-<td>-f ：强制删除不提示；<br />-rf ：删除目录不提示 ；</td>
-<td>rm  [文件/目录] ……</td>
-</tr>
-<tr>
-<td>vi</td>
-<td>编辑文件内容</td>
-<td>【进入vim编辑器】</td>
-<td>vi  [文件]</td>
-</tr>
-<tr>
-<td>tree</td>
-<td>显示目录结构</td>
-<td>【需要才能使用先安装<code>yum -y install tree</code>】</td>
-<td>tree [目录]</td>
-</tr>
-</tbody>
-</table>
-<p>⏬注意：vim编辑器详解</p>
-        
-          <a class="article-more-a" href="/2023/11/02/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E5%BF%AB%E6%8D%B7%E9%94%AE/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/02/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E5%BF%AB%E6%8D%B7%E9%94%AE/">展开全文 >></a>
         </p>
       
 

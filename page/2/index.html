@@ -161,6 +161,195 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Ansible流程控制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/01/04/Ansible%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/">Ansible流程控制</a>
+    </h1>
+  
+
+        
+        <a href="/2024/01/04/Ansible%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" class="archive-article-date">
+  	<time datetime="2024-01-04T10:42:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-04</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Ansible流程控制</center></h1>
+<p>  不管是shell还是各大编程语言中，流程控制、条件判断、循环这些都是必不可少的，在我们使用Ansible的过程中，条件判断的使用频率同样极其的高，是我们必须掌握的技能。</p>
+<h2 id="一、when判断">一、when判断</h2>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">webs</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span>  <span class="string">when</span> <span class="string">ceshi</span></span><br><span class="line">      <span class="attr">yum:</span></span><br><span class="line">        <span class="attr">name:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">htop</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">tree</span></span><br><span class="line">        <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line">      <span class="attr">when:</span> <span class="string">ansible_hostname</span> <span class="string">==</span> <span class="string">&quot;web01&quot;</span>   <span class="comment">### 当主机名为web01时执行本条任务</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240104191250989.png" alt="image-20240104191250989"></p>
+        
+          <a class="article-more-a" href="/2024/01/04/Ansible%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/01/04/Ansible%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Ansible变量定义" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/01/03/Ansible%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89/">Ansible变量定义</a>
+    </h1>
+  
+
+        
+        <a href="/2024/01/03/Ansible%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89/" class="archive-article-date">
+  	<time datetime="2024-01-03T10:29:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-03</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Ansible变量</center></h1>
+<h2 id="一、在命令行中定义变量">一、在命令行中定义变量</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible ~]<span class="comment">#ansible webs -a &#x27;echo &#123;&#123; a &#125;&#125;南汐&#123;&#123; b &#125;&#125;&#x27; -e &#x27;a=欢迎来到&#x27; -e &#x27;b=的个人世界&#x27;</span></span><br><span class="line">192.168.10.8 | CHANGED | rc=0 &gt;&gt;</span><br><span class="line">欢迎来到南汐的个人世界</span><br><span class="line">192.168.10.7 | CHANGED | rc=0 &gt;&gt;</span><br><span class="line">欢迎来到南汐的个人世界</span><br></pre></td></tr></table></figure>
+<h2 id="二、在play中定义变量">二、在play中定义变量</h2>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="number">192.168</span><span class="number">.10</span><span class="number">.7</span></span><br><span class="line">  <span class="attr">vars:</span></span><br><span class="line">    <span class="attr">packages:</span> <span class="string">htop</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">install</span> &#123;&#123; <span class="string">packages</span> &#125;&#125;</span><br><span class="line">      <span class="attr">yum:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123; packages &#125;&#125;</span>&quot;</span></span><br><span class="line">        <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240103190009022.png" alt="image-20240103190009022"></p>
+        
+          <a class="article-more-a" href="/2024/01/03/Ansible%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/01/03/Ansible%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-Ansible-playbook简述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -936,222 +1125,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/12/18/nginx%E5%AE%9E%E7%8E%B0%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-LNMP架构部署动态产品" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/13/LNMP%E6%9E%B6%E6%9E%84%E9%83%A8%E7%BD%B2%E5%8A%A8%E6%80%81%E4%BA%A7%E5%93%81/">LNMP架构部署动态产品</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/13/LNMP%E6%9E%B6%E6%9E%84%E9%83%A8%E7%BD%B2%E5%8A%A8%E6%80%81%E4%BA%A7%E5%93%81/" class="archive-article-date">
-  	<time datetime="2023-12-13T12:13:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-13</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>LNMP架构部署动态产品</center></h1>
-<h2 id="一、LNMP架构概述">一、LNMP架构概述</h2>
-<p>LNMP是一套技术的组合，L = Linux、N = Nginx、M = MySQL、P = PHP，其工作原理如下：</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231213204833175.png" alt="image-20231213204833175"></p>
-<blockquote>
-<p>1.用户通过http协议发起请求，请求会先抵达LNMP架构中的Nginx<br>
-2.Nginx会根据用户的请求进行判断，这个判断是有Location进行完成<br>
-3.判断用户请求的是静态页面，Nginx直接进行处理<br>
-4.判断用户请求的是动态页面，Nginx会将该请求交给fastcgi协议下发<br>
-5.fastgi会将请求交给php-fpm管理进程, php-fpm管理进程接收到后会调用工作进程warrap工作<br>
-6.warrap进程会调用php程序进行解析,如果只是解析代码php直接返回<br>
-7.如果有查询数据库操作，则由php连接数据库(用户 密码 IP)发起查询的操作<br>
-8.最终数据由 mysql-&gt;php-&gt;php-fpm-&gt;fastcgi-&gt;nginx-&gt;http-&gt;user</p>
-</blockquote>
-<h2 id="二、Nginx-PHP演示">二、Nginx+PHP演示</h2>
-<table>
-<thead>
-<tr>
-<th>服务准备</th>
-<th>IP地址</th>
-<th>主机名</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Nginx、PHP</td>
-<td>192.168.10.200</td>
-<td>web1</td>
-</tr>
-</tbody>
-</table>
-<p>nginx前面我们已经讲述过了，三种方式均可，这里不再赘述，我们简要说一下PHP服务和数据库的安装。</p>
-        
-          <a class="article-more-a" href="/2023/12/13/LNMP%E6%9E%B6%E6%9E%84%E9%83%A8%E7%BD%B2%E5%8A%A8%E6%80%81%E4%BA%A7%E5%93%81/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/13/LNMP%E6%9E%B6%E6%9E%84%E9%83%A8%E7%BD%B2%E5%8A%A8%E6%80%81%E4%BA%A7%E5%93%81/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Nginx模块简述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/12/Nginx%E6%A8%A1%E5%9D%97%E7%AE%80%E8%BF%B0/">Nginx模块简述</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/12/Nginx%E6%A8%A1%E5%9D%97%E7%AE%80%E8%BF%B0/" class="archive-article-date">
-  	<time datetime="2023-12-12T12:16:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-12</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Nginx模块简述</center></h1>
-<h2 id="一、Nginx配置文件介绍">一、Nginx配置文件介绍</h2>
-<p>  Nginx服务的默认全局配置文件路径为：<code>/etc/nginx/nginx.conf</code>；路径因人而异，不同的人使用不同的安装方式（编译安装、epel仓库、官方仓库），那么nginx的模块位置信息也会不一样，我们也可以使用命令：<code>nginx -V</code>  查看nginx具体模块信息：</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231212203938019.png" alt="image-20231212203938019"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@nanxi ~]<span class="comment">#egrep -nv &#x27;^$|^#&#x27; /etc/nginx/nginx.conf</span></span><br><span class="line">2:user  www;         <span class="comment">### 用户</span></span><br><span class="line">3:worker_processes  auto;   <span class="comment">### 工作进程（建议与CPU数量一致或auto）</span></span><br><span class="line">5:error_log  /var/log/nginx/error.log notice;  <span class="comment">###错误日志路径</span></span><br><span class="line">6:pid        /var/run/nginx.pid;   <span class="comment">###  pid模块路径</span></span><br><span class="line">9:events &#123;                         <span class="comment">###  事件模块</span></span><br><span class="line">10:    worker_connections  1024;   <span class="comment">###  每个worker进程支持的最大连接数</span></span><br><span class="line">11:&#125;</span><br><span class="line">14:http &#123;                          <span class="comment">###  http网络模块</span></span><br><span class="line">15:    include       /etc/nginx/mime.types;       <span class="comment">###  包含资源类型文件</span></span><br><span class="line">16:    default_type  application/octet-stream;    <span class="comment">###  不在资源类型内的文件类型，会默认以下载方式传输给浏览器</span></span><br><span class="line">18:    log_format  main  <span class="string">&#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot;&#x27;</span></span><br><span class="line">19:    <span class="comment">##日志格式##        &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span></span><br><span class="line">20:                      <span class="string">&#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;</span>;</span><br><span class="line">22:    access_log  /var/log/nginx/access.log  main;    <span class="comment">###  网络访问日志</span></span><br><span class="line">24:    sendfile        on;                  <span class="comment">###  高效文件传输</span></span><br><span class="line">27:    keepalive_timeout  65;               <span class="comment">###  长连接超时时间</span></span><br><span class="line">31:    include /etc/nginx/conf.d/*.conf;    <span class="comment">###  引入所有的配置文件</span></span><br><span class="line">32:&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用Server模块配置网站, 每个Server&#123;&#125;代表一个网站(简称虚拟主机)；</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;            <span class="comment">#监听端口, 默认80</span></span><br><span class="line">    server_name  nanxi.com;     <span class="comment">#提供的域名 _表示以IP地址方式进行访问</span></span><br><span class="line">    <span class="comment">### access_log  access.log;     #该网站的访问日志</span></span><br><span class="line">    <span class="comment">### 自定义将当前的server网站的访问日志记录至对应的目录，使用main格式</span></span><br><span class="line">    access_log /var/log/nginx/nanxi.com.log main;</span><br><span class="line">    <span class="comment">#location模块控制网站访问路径；</span></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;   <span class="comment">#存放网站源代码的位置（nginx的默认欢迎页）</span></span><br><span class="line">        index  index.html index.htm;    <span class="comment">#默认返回网站的文件</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2023/12/12/Nginx%E6%A8%A1%E5%9D%97%E7%AE%80%E8%BF%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/12/Nginx%E6%A8%A1%E5%9D%97%E7%AE%80%E8%BF%B0/">展开全文 >></a>
         </p>
       
 

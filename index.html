@@ -161,6 +161,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Shell编程知识补充（三）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/01/25/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%89%EF%BC%89/">Shell编程知识补充（三）</a>
+    </h1>
+  
+
+        
+        <a href="/2024/01/25/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%89%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2024-01-25T11:24:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-25</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Shell编程知识补充（三）</center></h1>
+<blockquote>
+<p>🍟  sed替换文本中某行的某个字符  <code>sed -i '/^admin/s/100/22/' nanxi.txt</code> 把nanxi.txt中以admin开头的行里面的100替换成22。</p>
+</blockquote>
+<h2 id="一、while读取文本">一、while读取文本</h2>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240125205335929.png" alt="image-20240125205335929"></p>
+        
+          <a class="article-more-a" href="/2024/01/25/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%89%EF%BC%89/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Shell编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/01/25/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%89%EF%BC%89/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-南汐的云端小铺" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -481,7 +576,7 @@
 🎉 Shell 是一个程序，提供一个与用户对话的环境。这个环境只有一个命令提示符，让用户从键盘输入命令，所以又称为命令行环境（command line interface，简写为 CLI）。<br>
 🎁 Shell 是一个命令解释器，解释用户输入的命令。其次，Shell 是一个工具箱，提供了各种小工具，供用户方便地使用操作系统的功能。</p>
 </blockquote>
-<h1><font color=red>▚ <u>01</u> 拓展：echo趣味玩法</font></h1>
+<h2 id="font-color-red-▚-u-01-u-拓展：echo趣味玩法-font"><font color=red>▚ <u>01</u> 拓展：echo趣味玩法</font></h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#   echo  命令概述</span></span><br><span class="line">默认将输入的字符串送往标准输出，输出的字符串间以空白字符隔开, 并在最后加上换行符；</span><br><span class="line"><span class="comment">#   echo  命令语法</span></span><br><span class="line"><span class="built_in">echo</span> 【选项参数】 【字符串】</span><br><span class="line">-n    <span class="comment">#  取消自动换行</span></span><br><span class="line">-e    <span class="comment">#  打开反斜杠ESC转义</span></span><br><span class="line">-E    <span class="comment">#  取消转义 (默认)</span></span><br><span class="line"></span><br><span class="line">关于反斜杠的转义，详细参数如下：</span><br></pre></td></tr></table></figure>
         
           <a class="article-more-a" href="/2024/01/23/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%BA%8C%EF%BC%89/#more">more >></a>
@@ -1016,100 +1111,9 @@
 
 
   
-    <article id="post-Jinja2模板" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/04/Jinja2%E6%A8%A1%E6%9D%BF/">Ansible Jinja2模板</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/04/Jinja2%E6%A8%A1%E6%9D%BF/" class="archive-article-date">
-  	<time datetime="2024-01-04T12:49:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-04</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Ansible Jinja2模板</center></h1>
-<p>  如果我们的需求是在100台主机上安装nginx，每台nginx的端口都不一样，我们如何解决呢？很棘手的问题，但是jinja2可以，Ansible通常会使用jinja2模板来修改被管理主机的配置文件，尤其在批量修改多台主机的配置文件时，很便捷。Jinja2文件后缀通常为.j2，是一个里面包含变量的模板文件，使用template模块调用。<font color="gray"><em>（template模块和copy模块一样，都是将文件复制到远端主机上去，区别在于template模块可以获取到文件中的变量，而copy则是原封不动的把文件内容复制过去）</em></font></p>
-        
-          <a class="article-more-a" href="/2024/01/04/Jinja2%E6%A8%A1%E6%9D%BF/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/04/Jinja2%E6%A8%A1%E6%9D%BF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
     </nav>
   
 

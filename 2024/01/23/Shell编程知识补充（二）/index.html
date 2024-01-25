@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240123171538833.png">
 <meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/nanxiblogfoot.png">
 <meta property="article:published_time" content="2024-01-23T06:38:57.000Z">
-<meta property="article:modified_time" content="2024-01-23T12:07:11.891Z">
+<meta property="article:modified_time" content="2024-01-25T14:02:49.254Z">
 <meta property="article:author" content="Xia Zheng">
 <meta property="article:tag" content="运维之路">
 <meta property="article:tag" content="Shell编程">
@@ -208,7 +208,7 @@
 🎉 Shell 是一个程序，提供一个与用户对话的环境。这个环境只有一个命令提示符，让用户从键盘输入命令，所以又称为命令行环境（command line interface，简写为 CLI）。<br>
 🎁 Shell 是一个命令解释器，解释用户输入的命令。其次，Shell 是一个工具箱，提供了各种小工具，供用户方便地使用操作系统的功能。</p>
 </blockquote>
-<h1><font color=red>▚ <u>01</u> 拓展：echo趣味玩法</font></h1>
+<h2 id="font-color-red-▚-u-01-u-拓展：echo趣味玩法-font"><font color=red>▚ <u>01</u> 拓展：echo趣味玩法</font></h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#   echo  命令概述</span></span><br><span class="line">默认将输入的字符串送往标准输出，输出的字符串间以空白字符隔开, 并在最后加上换行符；</span><br><span class="line"><span class="comment">#   echo  命令语法</span></span><br><span class="line"><span class="built_in">echo</span> 【选项参数】 【字符串】</span><br><span class="line">-n    <span class="comment">#  取消自动换行</span></span><br><span class="line">-e    <span class="comment">#  打开反斜杠ESC转义</span></span><br><span class="line">-E    <span class="comment">#  取消转义 (默认)</span></span><br><span class="line"></span><br><span class="line">关于反斜杠的转义，详细参数如下：</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
 <p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240123163236254.png" alt="image-20240123163236254"></p>
@@ -248,13 +248,13 @@
 [root@localhost ~]# echo -e “\e[1;37m白色字体 \e[0m”<br>
 <font color="white">白色字体</font></p>
 </blockquote>
-<h1><font color=red>▚ <u>02</u> 拓展：action系统显示</font></h1>
+<h2 id="font-color-red-▚-u-02-u-拓展：action系统显示-font"><font color=red>▚ <u>02</u> 拓展：action系统显示</font></h2>
 <p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240123170224054.png" alt="image-20240123170224054"></p>
 <div class="warning">
 <p><font color=blue><strong>注意：本次演示使用的是CentOS 7.9 ，Ubantu版本里面并没有/etc/init.d/functions这个相关文件</strong></font></p>
 </div>
 <p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240123171538833.png" alt="image-20240123171538833"></p>
-<h1><font color=red>▚ <u>03</u> 拓展：变量子串妙用</font></h1>
+<h2 id="font-color-red-▚-u-03-u-拓展：变量子串妙用-font"><font color=red>▚ <u>03</u> 拓展：变量子串妙用</font></h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">root@nanxi:~<span class="comment"># url=www.baidu.com</span></span><br><span class="line">root@nanxi:~<span class="comment"># echo $url</span></span><br><span class="line">www.baidu.com</span><br><span class="line"></span><br><span class="line"><span class="comment">#    &quot;#&quot;  表示从前向后匹配</span></span><br><span class="line">-------------------------------</span><br><span class="line">root@nanxi:~<span class="comment"># echo $&#123;url#www.&#125;</span></span><br><span class="line">baidu.com</span><br><span class="line">root@nanxi:~<span class="comment"># echo $&#123;url#*.&#125;</span></span><br><span class="line">baidu.com</span><br><span class="line"><span class="comment">#  两个#表示贪婪匹配，一直匹配到最后一个(点).</span></span><br><span class="line">root@nanxi:~<span class="comment"># echo $&#123;url##*.&#125;</span></span><br><span class="line">com</span><br><span class="line">root@nanxi:~<span class="comment"># echo $&#123;url#*.*.&#125;</span></span><br><span class="line">com</span><br><span class="line"></span><br><span class="line"><span class="comment">#    &quot;%&quot;  表示从前向后匹配</span></span><br><span class="line">-------------------------------</span><br><span class="line">root@nanxi:~<span class="comment"># echo $&#123;url%.*&#125;</span></span><br><span class="line">www.baidu</span><br><span class="line"><span class="comment">#  两个%表示贪婪匹配，一直匹配到第一个(点).</span></span><br><span class="line">root@nanxi:~<span class="comment"># echo $&#123;url%%.*&#125;</span></span><br><span class="line">www</span><br></pre></td></tr></table></figure>
 <div class="tips">
 <p><strong>取值小技巧</strong></p>
@@ -273,17 +273,17 @@ tmpfs           185M     0  185M   0% /run/user/1000<br>
 [nanxi@web1 ~]#echo ${used_disk%%}<br>
 18</p>
 </div>
-<h1><font color=red>▚ <u>04</u> 补充：匹配正则判断</font></h1>
+<h2 id="font-color-red-▚-u-04-u-补充：匹配正则判断-font"><font color=red>▚ <u>04</u> 补充：匹配正则判断</font></h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[nanxi@web1 ~]<span class="comment">#[[ user =~ ^u ]] &amp;&amp; echo 成立 || echo 不成立</span></span><br><span class="line">成立</span><br><span class="line">[nanxi@web1 ~]<span class="comment"># [[ user =~ r$ ]] &amp;&amp; echo 成立 || echo 不成立</span></span><br><span class="line">成立</span><br><span class="line">[nanxi@web1 ~]<span class="comment"># [[ user =~ o$ ]] &amp;&amp; echo 成立 || echo 不成立</span></span><br><span class="line">不成立</span><br><span class="line">[nanxi@web1 ~]<span class="comment"># [[ 100 =~ ^1 ]] &amp;&amp; echo 成立 || echo 不成立</span></span><br><span class="line">成立</span><br><span class="line">[nanxi@web1 ~]<span class="comment">#[[ 100 =~ ^[0-9] ]] &amp;&amp; echo 成立 || echo 不成立</span></span><br><span class="line">成立</span><br><span class="line">[nanxi@web1 ~]<span class="comment"># [[ 12343242 =~ ^[0-9]+$ ]] &amp;&amp; echo 成立 || echo 不成立</span></span><br><span class="line">成立</span><br><span class="line"><span class="comment">#  多个正则比对使用 &amp;&amp; (与)    || (或)</span></span><br><span class="line">[nanxi@web1 ~]<span class="comment">#[[ 10 -eq 20 &amp;&amp; 200 -gt 100 ]] &amp;&amp; echo 成立 || echo 不成立</span></span><br><span class="line">不成立</span><br><span class="line">[nanxi@web1 ~]<span class="comment"># [[ 10 -eq 20 || 200 -gt 100 ]] &amp;&amp; echo 成立 || echo 不成立</span></span><br><span class="line">成立</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#   多个整数比较使用 -a (and)   -o (or)</span></span><br><span class="line">[nanxi@web1 ~]<span class="comment"># [ 10 -eq 10 -a 100 -gt 20 ] &amp;&amp; echo 成立 || echo 不成立</span></span><br><span class="line">成立</span><br><span class="line">[nanxi@web1 ~]<span class="comment">#[ 10 -eq 11 -o 100 -gt 20 ] &amp;&amp; echo 成立 || echo 不成立</span></span><br><span class="line">成立</span><br></pre></td></tr></table></figure>
 <p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/nanxiblogfoot.png" alt="nanxiblogfoot"></p>
 
-        <div id="aplayer-YXxqfxoa" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-CnFlTxac" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-YXxqfxoa"),
+            element: document.getElementById("aplayer-CnFlTxac"),
             narrow: false,
             autoplay: true,
             showlrc: false,
@@ -408,7 +408,7 @@ tmpfs           185M     0  185M   0% /run/user/1000<br>
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Shell编程基础知识补充</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">▚ 01 拓展：echo趣味玩法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">▚ 02 拓展：action系统显示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">▚ 03 拓展：变量子串妙用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">▚ 04 补充：匹配正则判断</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Shell编程基础知识补充</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#font-color-red-%E2%96%9A-u-01-u-%E6%8B%93%E5%B1%95%EF%BC%9Aecho%E8%B6%A3%E5%91%B3%E7%8E%A9%E6%B3%95-font"><span class="toc-number">1.1.</span> <span class="toc-text">▚ 01 拓展：echo趣味玩法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#font-color-red-%E2%96%9A-u-02-u-%E6%8B%93%E5%B1%95%EF%BC%9Aaction%E7%B3%BB%E7%BB%9F%E6%98%BE%E7%A4%BA-font"><span class="toc-number">1.2.</span> <span class="toc-text">▚ 02 拓展：action系统显示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#font-color-red-%E2%96%9A-u-03-u-%E6%8B%93%E5%B1%95%EF%BC%9A%E5%8F%98%E9%87%8F%E5%AD%90%E4%B8%B2%E5%A6%99%E7%94%A8-font"><span class="toc-number">1.3.</span> <span class="toc-text">▚ 03 拓展：变量子串妙用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#font-color-red-%E2%96%9A-u-04-u-%E8%A1%A5%E5%85%85%EF%BC%9A%E5%8C%B9%E9%85%8D%E6%AD%A3%E5%88%99%E5%88%A4%E6%96%AD-font"><span class="toc-number">1.4.</span> <span class="toc-text">▚ 04 补充：匹配正则判断</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

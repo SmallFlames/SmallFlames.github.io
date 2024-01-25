@@ -161,6 +161,123 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-nginx实现动静分离" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/12/18/nginx%E5%AE%9E%E7%8E%B0%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB/">nginx实现动静分离</a>
+    </h1>
+  
+
+        
+        <a href="/2023/12/18/nginx%E5%AE%9E%E7%8E%B0%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB/" class="archive-article-date">
+  	<time datetime="2023-12-18T09:43:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-18</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Nginx实现动静分离</center></h1>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218180340246.png" alt="image-20231218180340246"></p>
+<table><tr><td bgcolor=#000000><font color="white">环境准备</font></td></tr></table>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>IP地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>负载均衡（lb）</td>
+<td>192.168.10.3</td>
+</tr>
+<tr>
+<td>web1（静态资源）</td>
+<td>192.168.10.200</td>
+</tr>
+<tr>
+<td>web2（动态资源）</td>
+<td>192.168.10.201</td>
+</tr>
+</tbody>
+</table>
+<table><tr><td bgcolor=#000000><font color="white">实现过程</font></td></tr></table>
+<p>1️⃣ web1配置静态资源；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@web1 /etc/nginx/conf.d]<span class="comment">#vim nanxi.conf</span></span><br><span class="line">server &#123;</span><br><span class="line">        listen 80;</span><br><span class="line">        root /code;</span><br><span class="line">		charset utf-8,gbk;</span><br><span class="line">		</span><br><span class="line">        location / &#123;</span><br><span class="line">        index index.html;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">[root@web1 /code]<span class="comment">#echo &#x27;&lt;h1&gt;&lt;center&gt;南汐666520&lt;/center&gt;&lt;/h1&gt;&#x27; &gt;index.html</span></span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2023/12/18/nginx%E5%AE%9E%E7%8E%B0%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/12/18/nginx%E5%AE%9E%E7%8E%B0%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-LNMP架构部署动态产品" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1055,110 +1172,9 @@
 
 
   
-    <article id="post-网络入门篇一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/01/%E7%BD%91%E7%BB%9C%E5%85%A5%E9%97%A8%E7%AF%87%E4%B8%80/">网络入门篇</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/01/%E7%BD%91%E7%BB%9C%E5%85%A5%E9%97%A8%E7%AF%87%E4%B8%80/" class="archive-article-date">
-  	<time datetime="2023-12-01T08:02:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-01</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>网络基础</center></h1>
-<p> <br>
-<img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231201164351596.png" alt="image-20231201164351596"></p>
-<h2 id="一、恭喜你走进网络世界">一、恭喜你走进网络世界</h2>
-<p>  当我们打开电脑、智能手机或其他数字设备时，我们似乎是在进入一个全新的世界——这就是网络世界，一个由无数的电子信号和信息包围的虚拟领域。😊 这个数字化的领域不仅是我们日常生活中的一部分，更是连接着全球各地的人们，企业和组织的纽带。</p>
-<p>  在网络世界中，信息以电子的形式在光纤和电缆中穿梭，瞬间飞越千里。无论是通过电子邮件、社交媒体还是即时通讯工具，我们可以在眨眼间与世界各地的朋友、家人和同事保持联系。🌐 这个数字交流的网络使得沟通的界限变得模糊，使得信息传递的速度和效率前所未有。</p>
-<p>  那么什么是网络呢？在计算机科学和信息技术领域，网络是指通过通信链路连接在一起的多个计算机系统之间共享数据和资源的集合体系。网络可以基于不同的技术和协议，但其基本目标是实现信息的传输和共享。</p>
-<h3 id="1、网络类型">1、网络类型</h3>
-<p>  网络可以按照规模和范围划分为不同类型：</p>
-<p>  1️⃣ 局域网（LAN）： 局域网是一组位于相对较小地理范围内的计算机和网络设备的集合，通常在同一建筑物或校园内。LAN通过高速连接实现快速数据传输，常用于共享文件、打印机和其他资源。</p>
-<p>  2️⃣ 广域网（WAN）： 广域网跨越较大的地理范围，连接不同地点的局域网。互联网就是一个全球性的广域网，通过光缆、卫星和其他通信设备实现全球范围内的数据传输。</p>
-<p>  3️⃣ 互联网： 互联网是全球最大的网络，将数十亿台设备连接在一起，为人们提供了广泛的信息和服务。它是一个开放的网络，通过一系列的协议和标准来实现不同系统之间的通信。</p>
-<p>  4️⃣ 无线局域网（WLAN）： WLAN是一种使用无线通信技术连接设备的网络，允许移动设备在无需物理连接的情况下访问网络。Wi-Fi技术是 WLAN 中最常见的实现方式。</p>
-<h3 id="2、网络带给我们的便利">2、网络带给我们的便利</h3>
-<p>  比如现在，你正在看着<a href="zzxe.eu.org">南汐</a>的博客获取你想知道的知识一样，这就是而网络带给我们的便利，当然，不止于此，我们其实时时刻刻都处在网络的便利之中，我们甚至已经习惯性的认为网络就是我们的生活，这就是网络的重要性所在，一种极其便利的生活方式。</p>
-<p>  可以简单的说一下网络带给我们的便利，<strong>①全球信息获取</strong>、<strong>②即时沟通</strong>、<strong>③在线购物和电子支付</strong>、<strong>④远程办公和学习</strong>、<strong>⑤娱乐媒体和虚拟社交</strong>、<strong>⑥智能家居和物联网</strong>……</p>
-        
-          <a class="article-more-a" href="/2023/12/01/%E7%BD%91%E7%BB%9C%E5%85%A5%E9%97%A8%E7%AF%87%E4%B8%80/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络入门</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/01/%E7%BD%91%E7%BB%9C%E5%85%A5%E9%97%A8%E7%AF%87%E4%B8%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
     </nav>
   
 

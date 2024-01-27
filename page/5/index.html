@@ -161,6 +161,120 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-awk命令的基本使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/11/16/awk%E5%91%BD%E4%BB%A4%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">awk命令的基本使用</a>
+    </h1>
+  
+
+        
+        <a href="/2023/11/16/awk%E5%91%BD%E4%BB%A4%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2023-11-16T09:02:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-16</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>awk命令的基本使用</center></h1>
+<h2 id="一、awk命令概述">一、awk命令概述</h2>
+<p>  awk 是一种编程语言，用于在linux/unix下对文本和数据进行处理。数据可以来自标准输入(stdin)、一个或多个文件，或其它命令的输出。它支持用户自定义函数和动态正则表达式等先进功能，是linux/unix下的一个强大编程工具。它在命令行中使用，具备强大的文本格式化能力，比如对一堆看起来没有什么规律的日志文件，文本文件等，通过awk命令之后，格式化输出为专业的可以做为应用级数据分析的样式，但更多是作为脚本来使用。awk有很多内建的功能，比如数组、函数等，这是它和C语言的相同之处，灵活性是awk最大的优势。</p>
+<div class="tips">
+<p><strong>知识补充</strong><br>
+  grep，擅长单纯的查找或匹配文本内容；<br>
+  sed，擅长文本编辑，处理匹配到的文本内容；<br>
+  awk，适合格式化文本文件，对文本文件进行更复杂的加工处理、分析；</p>
+</div>
+<blockquote>
+<p>awk工作原理：<br>
+  与sed一样，逐行读取文本，默认以空格或tab键为分隔符进行分隔，将分隔所得的各个字段保存到内建变量中，并按模式或者条件执行编辑命令。sed作用于一整行的处理，而awk将一行分成数个字段来处理。</p>
+<p>  <mark>当读到第一行时，匹配条件，然后执行指定动作，再接着读取第二行数据处理，不会默认输出；如果没有定义匹配条件默认是匹配所有数据行，awk隐含循环，条件匹配多少次动作就会执行多少次。</mark></p>
+<p>  sed命令常用于一整行的处理，而awk比较、倾向于将一行分成多个&quot;“字段&quot;然后再进行处理。awk信息的读入也是逐行读取的，执行结果可以通过print的功能将字段数据打印显示。在使用awk命令的过程中,可以使用逻辑操作符” &amp;&amp;“表示&quot;与”、“||表示&quot;或”、&quot;!“表示非”;还可以进行简单的数学运算，如+、一、*、/、%、^分别表示加、减、乘、除、取余和乘方。</p>
+</blockquote>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231116172313186.png" alt="image-20231116172313186"></p>
+<div class="success">
+<p><strong>awk完整语法</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;BEGIN &#123;commands&#125; pattern &#123;commands&#125;END&#123;commands&#125;&#x27;</span> file1</span><br></pre></td></tr></table></figure>
+<p>  BEGIN:处理数据前执行的命令；<br>
+  END：处理数据后执行的命令；<br>
+  pattern：模式，每一行都执行的命令；<br>
+  BEGIN和END里的命令只是执行一次；<br>
+  pattern里的命令会匹配每一行去处理；</p>
+</div>
+        
+          <a class="article-more-a" href="/2023/11/16/awk%E5%91%BD%E4%BB%A4%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/11/16/awk%E5%91%BD%E4%BB%A4%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-sed命令的基本使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1155,107 +1269,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/11/06/Linux%E5%85%B3%E9%94%AE%E6%96%87%E4%BB%B6%E8%A7%A3%E8%AF%BB%EF%BC%88%E4%BA%8C%EF%BC%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Test2023110401" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/04/Test2023110401/">Test-2023110406</a>
-    </h1>
-  
-
-        
-        <a href="/2023/11/04/Test2023110401/" class="archive-article-date">
-  	<time datetime="2023-11-04T10:32:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-04</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <center>你好，这是一个测试界面哦~ </center>
-<p><mark>让我们一起测试一下新渲染器的效果吧，般若波罗密，佛祖保佑🙏🙏🙏</mark></p>
-<div class="tips">
-<p><strong>提示</strong><br>
-这是一个提示</p>
-</div>
-<div class="warning">
-<p><strong>注意</strong><br>
-这是一个警告</p>
-</div>
-<div class="danger">
-<p><strong>警告</strong><br>
-这是一个危险信号</p>
-</div>
-<div class="success">
-<p><strong>成功</strong><br>
-这是一个成功信号</p>
-</div>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">博客测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/04/Test2023110401/">展开全文 >></a>
         </p>
       
 

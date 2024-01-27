@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://smallflames.github.io/2024/01/23/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%BA%8C%EF%BC%89/</loc>
+    <loc>https://smallflames.github.io/2024/01/26/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E5%9B%9B%EF%BC%89/</loc>
     
-    <lastmod>2024-01-25</lastmod>
+    <lastmod>2024-01-27</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -12,6 +12,15 @@
   
   <url>
     <loc>https://smallflames.github.io/2024/01/25/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%89%EF%BC%89/</loc>
+    
+    <lastmod>2024-01-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://smallflames.github.io/2024/01/23/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%BA%8C%EF%BC%89/</loc>
     
     <lastmod>2024-01-25</lastmod>
     
@@ -562,7 +571,7 @@
 
   <url>
     <loc>https://smallflames.github.io/</loc>
-    <lastmod>2024-01-25</lastmod>
+    <lastmod>2024-01-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -570,63 +579,63 @@
   
   <url>
     <loc>https://smallflames.github.io/tags/%E6%97%A5%E5%B8%B8/</loc>
-    <lastmod>2024-01-25</lastmod>
+    <lastmod>2024-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/%E5%8D%9A%E5%AE%A2%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2024-01-25</lastmod>
+    <lastmod>2024-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/%E8%BF%90%E7%BB%B4%E4%B9%8B%E8%B7%AF/</loc>
-    <lastmod>2024-01-25</lastmod>
+    <lastmod>2024-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/Linux%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2024-01-25</lastmod>
+    <lastmod>2024-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/%E7%BD%91%E7%BB%9C%E5%85%A5%E9%97%A8/</loc>
-    <lastmod>2024-01-25</lastmod>
+    <lastmod>2024-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6/</loc>
-    <lastmod>2024-01-25</lastmod>
+    <lastmod>2024-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</loc>
-    <lastmod>2024-01-25</lastmod>
+    <lastmod>2024-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/Shell%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2024-01-25</lastmod>
+    <lastmod>2024-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%BA%94%E7%94%A8/</loc>
-    <lastmod>2024-01-25</lastmod>
+    <lastmod>2024-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

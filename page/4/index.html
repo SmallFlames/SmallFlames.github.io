@@ -161,6 +161,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Rsync备份服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/12/04/Rsync%E5%A4%87%E4%BB%BD%E6%9C%8D%E5%8A%A1/">Rsync备份服务</a>
+    </h1>
+  
+
+        
+        <a href="/2023/12/04/Rsync%E5%A4%87%E4%BB%BD%E6%9C%8D%E5%8A%A1/" class="archive-article-date">
+  	<time datetime="2023-12-04T07:14:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-04</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Rsync备份服务</center></h1>
+<h2 id="一、企业备份方式">一、企业备份方式</h2>
+<h3 id="1、全量备份">1、全量备份</h3>
+<p>  全量备份（full backup）也称为完全备份，指对某个指定时间点的所有数据和对应的结构进行一个完全的备份。<mark>非常重要，是差异备份和增量备份的基础；</mark></p>
+<p>  特点：1.数据最完备；2.安全性最高；3.备份和恢复时间随着数据的体量而明显增加；4.备份期间会对系统性能产生一定影响。</p>
+<h3 id="2、增量备份">2、增量备份</h3>
+<p>  增量备份（incremental backup）是备份的一个类型，是指在一次全备份或上一次增量备份后，以后每次的备份只需备份与前一次相比增加或者被修改的文件。</p>
+<p>  特点：1.备份速度快；2.节省存储空间；3.数据还原的时间较长，效率相对较低。</p>
+<p>  增量备份回复数据是非常麻烦的，<mark>我们需要具有上一次全备份和所有增量备份磁带，并且它们必须沿着从全备份到依次增量备份的时间顺序逐个反推恢复。</mark></p>
+<h3 id="3、差异备份">3、差异备份</h3>
+<p>  差异备份（differential Backup）是指在一次全备份后到进行差异备份的这段时间内，对那些增加或者修改文件的备份。在进行恢复时，我们只需对第一次全备份和最后一次差异备份进行恢复。差异备份在<font color="#9d1a28">避免了另外两种备份策略缺陷的同时，又具备了它们各自的优点</font>。<mark>系统管理员只需要两盘磁带，即全备份磁带与灾难发生前一天的差异备份磁带，就可以将系统恢复。</mark></p>
+<h2 id="二、Rsync服务介绍">二、Rsync服务介绍</h2>
+<p>  rsync（remote synchronize）是Liunx/Unix下的一个远程数据同步工具。它可通过LAN/WAN快速同步多台主机间的文件和目录，并适当利用rsync算法（差分编码）以减少数据的传输。除此之外，rsync可拷贝、显示目录属性，以及拷贝文件，并可选择性的压缩以及递归拷贝。</p>
+<p>  在同步数据的时候，默认情况下，rsync通过其独特的“quick check”算法，它仅同步大小或者最后修改时间发生变化的文件或目录，当然也可根据权限、属主等属性的变化同步，但是需要制定相应的参数，甚至可以实现只同步一个文件里有变化的内容部分，所以，可是实现快速的同步备份数据。</p>
+        
+          <a class="article-more-a" href="/2023/12/04/Rsync%E5%A4%87%E4%BB%BD%E6%9C%8D%E5%8A%A1/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/12/04/Rsync%E5%A4%87%E4%BB%BD%E6%9C%8D%E5%8A%A1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-连电脑都不会装，你凭什么有女朋友？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1019,119 +1122,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/11/21/Linux%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E6%A6%82%E8%BF%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Linux用户管理概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/17/Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E6%A6%82%E8%BF%B0/">Linux用户管理概述</a>
-    </h1>
-  
-
-        
-        <a href="/2023/11/17/Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E6%A6%82%E8%BF%B0/" class="archive-article-date">
-  	<time datetime="2023-11-17T11:28:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-17</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Linux用户管理概述</center></h1>
-<h2 id="一、用户分类与相关配置文件">一、用户分类与相关配置文件</h2>
-<h3 id="1、用户分类概述">1、用户分类概述</h3>
-<p>  Linux系统是一个多用户多任务的操作系统，每个用户都有一个独立的身份号码，这个就是用户ID（UID）。在Linux中计算机并不会去认识用户的用户名，它认识的其实是用户ID—UID。</p>
-<p>  <mark>Linux下用户分为3类：超级用户（root）、系统用户（虚拟用户、傀儡用户）、普通用户。</mark></p>
-<p>  超级用户的用户名为root，它具有操纵一切的权力，在计算机文件管理系统中犹如“皇帝”。在Linux操作系统的字符界面，root账户的提示符为#，且默认情况下，root用户的UID为0。</p>
-<p>  系统用户是Linux系统正常工作所必需的内建用户，一般是用于管理服务所用。系统用户不能用来登陆，如bin、daemon、lp等用户。系统用户的UID一般为1~999（在centos5、6中系统用户默认的UID范围是1-499），它们的命令解释器为/sbin/nologin。诸如QQ、微信等应用程序在运行是都会有相应的系统用户在后台作为支撑。</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231117201711043.png" alt="image-20231117201711043"></p>
-<p>  普通用户是为了让使用者能够使用Linux系统资源而建立的，用户新建的账号一般均为普通账号。在Linux操作系统的字符界面，普通用户的提示符为$，且普通用户的UID默认1000~60000。</p>
-<h3 id="2、用户相关配置文件">2、用户相关配置文件</h3>
-<p>2.1、个人用户相关<br>
-  ①/etc/passwd（用户账户文件，所有账户都可以访问)<br>
-  总计7段，格式为如：用户名：密码：UID：GID：账户信息：账户目录：Shell版本<br>
-  ②/etc/shadow（用户密码文件，root才可以访问）<br>
-  总计9段，格式如：用户名：密码：最后一次修改时间的天数：两次修改密码最小间隔天数：多少天后需要再次修改密码：从发出警告到密码正式失效的天数：禁止登陆前用户名还有效的天数：用户被禁止登陆的时间：标志字段，无意义</p>
-<div class="warning">
-<p><strong>注意</strong><br>
-  shadow中，密码字段为*表示用户被禁止登陆，为&quot;!!“表示用户未设置密码，为”!&quot;表示用户被锁定。passwd的密码为影子密码用X表示，而shadow中为加密后保存的密文。</p>
-</div>
-<p>2.2、与用户组有关的文件<br>
-  ①/etc/group（用户组文件，所有账户都可以访问）<br>
-  总计4段，格式如：用户组名称：组密码：GID：组成员<br>
-  ②/etc/gshadow（用户组密码文件，root权限才可以访问）<br>
-  总计4段，格式如：用户组名称：组密码：组管理者：组成员</p>
-        
-          <a class="article-more-a" href="/2023/11/17/Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E6%A6%82%E8%BF%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/17/Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E6%A6%82%E8%BF%B0/">展开全文 >></a>
         </p>
       
 

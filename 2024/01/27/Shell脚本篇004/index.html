@@ -9,16 +9,26 @@
     <link rel="dns-prefetch" href="https://SmallFlames.github.io">
     <title>
       
+        Shell脚本篇004 | 
             南汐
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="南汐">
-<meta property="og:url" content="https://smallflames.github.io/page/3/index.html">
+    <meta name="description" content="Shell脚本篇004 脚本需求 ▚ 需求 ：写一个脚本反向破解由随机数生成的MD5值。 实现效果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell脚本篇004">
+<meta property="og:url" content="https://smallflames.github.io/2024/01/27/Shell%E8%84%9A%E6%9C%AC%E7%AF%87004/index.html">
 <meta property="og:site_name" content="南汐">
+<meta property="og:description" content="Shell脚本篇004 脚本需求 ▚ 需求 ：写一个脚本反向破解由随机数生成的MD5值。 实现效果">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240127191533426.png">
+<meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/nanxiblogfoot.png">
+<meta property="article:published_time" content="2024-01-27T11:07:53.000Z">
+<meta property="article:modified_time" content="2024-01-27T11:20:57.146Z">
 <meta property="article:author" content="Xia Zheng">
+<meta property="article:tag" content="运维之路">
+<meta property="article:tag" content="Shell编程">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240127191533426.png">
       
         <link rel="alternative" href="/atom.xml" title="南汐" type="application/atom+xml">
         
@@ -159,26 +169,28 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-rewrite重写和https跳转" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Shell脚本篇004" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/19/rewrite%E9%87%8D%E5%86%99%E5%92%8Chttps%E8%B7%B3%E8%BD%AC/">rewrite重写和https跳转</a>
+    <h1 class="article-title" itemprop="name">
+      Shell脚本篇004
     </h1>
   
 
         
-        <a href="/2023/12/19/rewrite%E9%87%8D%E5%86%99%E5%92%8Chttps%E8%B7%B3%E8%BD%AC/" class="archive-article-date">
-  	<time datetime="2023-12-19T10:38:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-19</time>
+        <a href="/2024/01/27/Shell%E8%84%9A%E6%9C%AC%E7%AF%87004/" class="archive-article-date">
+  	<time datetime="2024-01-27T11:07:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-27</time>
 </a>
         
 
 	
+        	    <span class="archive-article-date">
+         	     阅读量 <span id="busuanzi_value_page_pv"></span>
+       	     </span>
+          
 
       </header>
     
@@ -186,141 +198,53 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><center>rewrite重写和https跳转</center></h1>
-<h2 id="一、Nginx实现Rewrite重写">一、Nginx实现Rewrite重写</h2>
-<p>  Rewrite主要实现url地址重写，以及重定向，就是把传入web的请求重定向到其他url的过程。、</p>
-<h3 id="1、Rewrite使用场景">1、Rewrite使用场景</h3>
-<blockquote>
-<p>1、地址跳转，用户访问www.nanxi.com这个URL时，将其定向至一个新的域名 <a target="_blank" rel="noopener" href="http://m.nanxi.com">m.nanxi.com</a><br>
-2、协议跳转，用户通过http协议请求网站时，将其重新跳转至https协议方式<br>
-3、伪静态，将动态页面显示为静态页面方式的一种技术，便于搜索引擎的录入，同时减少动态URL地址对外暴露过多的参数，提升更高的安全性。<br>
-4、搜索引擎，SEO优化依赖于url路径，好记的url便于支持搜索引擎录入。</p>
-</blockquote>
-<h3 id="2、Rewrite配置示例">2、Rewrite配置示例</h3>
-<p>  rewrite指令根据表达式来重定向URL，或者修改字符串，可以应用于server，location，if环境下，每行rewrite指令最后跟一个flag标记，支持的flag标记有如下表格所示：</p>
-<table>
-<thead>
-<tr>
-<th>flag</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>last</td>
-<td>本条规则匹配完成后，停止本location匹配，重新以本条结果发请求</td>
-</tr>
-<tr>
-<td>break</td>
-<td>本条规则匹配完成后，停止本location匹配，直接返回本条请求内容</td>
-</tr>
-<tr>
-<td>redirect</td>
-<td>返回302临时重定向，地址栏会显示跳转后的地址，每一次访问都会访问源站</td>
-</tr>
-<tr>
-<td>permanent</td>
-<td>返回301永久重定向，地址栏会显示跳转后的地址，只有第一次访问时是源站</td>
-</tr>
-</tbody>
-</table>
-        
-          <a class="article-more-a" href="/2023/12/19/rewrite%E9%87%8D%E5%86%99%E5%92%8Chttps%E8%B7%B3%E8%BD%AC/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/19/rewrite%E9%87%8D%E5%86%99%E5%92%8Chttps%E8%B7%B3%E8%BD%AC/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Shell脚本篇001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/18/Shell%E8%84%9A%E6%9C%AC%E7%AF%87001/">Shell脚本篇001</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/18/Shell%E8%84%9A%E6%9C%AC%E7%AF%87001/" class="archive-article-date">
-  	<time datetime="2023-12-18T12:28:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-18</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Shell脚本篇001</center></h1>
+        <h1><center>Shell脚本篇004</center></h1>
+<table><tr><td bgcolor=#000000><font color="white">脚本需求</font></td></tr></table>
+<p><font color="#fc5531">▚ 需求 ：写一个脚本反向破解由随机数生成的MD5值。</font></p>
 <table><tr><td bgcolor=#000000><font color="white">实现效果</font></td></tr></table>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218203518420.png" alt="image-20231218203518420"></p>
-        
-          <a class="article-more-a" href="/2023/12/18/Shell%E8%84%9A%E6%9C%AC%E7%AF%87001/#more">more >></a>
-        
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240127191533426.png" alt="image-20240127191533426"></p>
+<span id="more"></span>
+<table><tr><td bgcolor=#000000><font color="white">实现脚本</font></td></tr></table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#Author nanxi</span></span><br><span class="line"><span class="comment">#Date 2024-1-27</span></span><br><span class="line"></span><br><span class="line">file=/tmp/.decipher.log</span><br><span class="line"><span class="function"><span class="title">prepare</span></span>()&#123;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="subst">$(echo 0 |md5sum)</span> 0&quot;</span> &gt;&gt;<span class="variable">$file</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> $(<span class="built_in">seq</span> 32767)</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">     <span class="built_in">echo</span> <span class="string">&quot;<span class="subst">$(echo $i |md5sum)</span> <span class="variable">$i</span>&quot;</span> &gt;&gt;<span class="variable">$file</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> [ -f <span class="variable">$file</span> ];<span class="keyword">then</span></span><br><span class="line">    <span class="keyword">if</span> [ $(<span class="built_in">wc</span> -l <span class="variable">$file</span> |awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span>) -ne 32768 ];<span class="keyword">then</span></span><br><span class="line">        &gt;<span class="variable">$file</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;首次使用本脚本可能需要1分种左右，请您耐心等待一下哦~&quot;</span></span><br><span class="line">        prepare</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">touch</span> <span class="variable">$file</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;首次使用本脚本可能需要1分种左右，请您耐心等待一下哦~&quot;</span></span><br><span class="line">    prepare</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;请输入您要破译的MD5值(n为退出): &quot;</span> md5</span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$md5</span> =~ ^[0-z]+$ ]];<span class="keyword">then</span></span><br><span class="line">     <span class="keyword">case</span> <span class="variable">$md5</span> <span class="keyword">in</span></span><br><span class="line">     no|n)</span><br><span class="line">        <span class="built_in">exit</span></span><br><span class="line">    ;;</span><br><span class="line">    *)</span><br><span class="line">        <span class="keyword">if</span> grep <span class="string">&quot;<span class="variable">$md5</span>&quot;</span> <span class="variable">$file</span> &gt;/dev/null;<span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span> 本次破译结果为: $(grep <span class="string">&quot;<span class="variable">$md5</span>&quot;</span> <span class="variable">$file</span> |awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">&quot;抱歉，本次破译失败，您可重新尝试其他值哦~&quot;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">esac</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;\e[1;31m警告: 您输入的参数值不合法！！！\e[0m&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/nanxiblogfoot.png" alt="nanxiblogfoot"></p>
+<blockquote>
+<p><em><strong>人生不就是这样,哪怕雨雪霏霏也要去追寻阳光。</strong></em></p>
+<p align="right">——人民日报</p>
+</blockquote>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zhifubao.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     
@@ -345,16 +269,24 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/18/Shell%E8%84%9A%E6%9C%AC%E7%AF%87001/">展开全文 >></a>
-        </p>
-      
 
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2024/01/26/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E5%9B%9B%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Shell编程知识补充（四）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -369,123 +301,19 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-nginx实现动静分离" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/18/nginx%E5%AE%9E%E7%8E%B0%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB/">nginx实现动静分离</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/18/nginx%E5%AE%9E%E7%8E%B0%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB/" class="archive-article-date">
-  	<time datetime="2023-12-18T09:43:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-18</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Nginx实现动静分离</center></h1>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231218180340246.png" alt="image-20231218180340246"></p>
-<table><tr><td bgcolor=#000000><font color="white">环境准备</font></td></tr></table>
-<table>
-<thead>
-<tr>
-<th>角色</th>
-<th>IP地址</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>负载均衡（lb）</td>
-<td>192.168.10.3</td>
-</tr>
-<tr>
-<td>web1（静态资源）</td>
-<td>192.168.10.200</td>
-</tr>
-<tr>
-<td>web2（动态资源）</td>
-<td>192.168.10.201</td>
-</tr>
-</tbody>
-</table>
-<table><tr><td bgcolor=#000000><font color="white">实现过程</font></td></tr></table>
-<p>1️⃣ web1配置静态资源；</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@web1 /etc/nginx/conf.d]<span class="comment">#vim nanxi.conf</span></span><br><span class="line">server &#123;</span><br><span class="line">        listen 80;</span><br><span class="line">        root /code;</span><br><span class="line">		charset utf-8,gbk;</span><br><span class="line">		</span><br><span class="line">        location / &#123;</span><br><span class="line">        index index.html;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">[root@web1 /code]<span class="comment">#echo &#x27;&lt;h1&gt;&lt;center&gt;南汐666520&lt;/center&gt;&lt;/h1&gt;&#x27; &gt;index.html</span></span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2023/12/18/nginx%E5%AE%9E%E7%8E%B0%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/18/nginx%E5%AE%9E%E7%8E%B0%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Shell脚本篇004</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
@@ -495,703 +323,37 @@
 
 
 
+<!--valine-->
 
-  
-    <article id="post-LNMP架构部署动态产品" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    new Valine({
+        el: '#vcomment',
+        notify: notify,
+        verify: verify,
+        app_id: "GclNK0L9IYMXHfLUV1HR86wL-gzGzoHsz",
+        app_key: "PrAu44aqW7VCqGD3OLIPulwg",
+        placeholder: "留言仅供交流讨论哦~",
+        avatar:"mp"
+    });
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/13/LNMP%E6%9E%B6%E6%9E%84%E9%83%A8%E7%BD%B2%E5%8A%A8%E6%80%81%E4%BA%A7%E5%93%81/">LNMP架构部署动态产品</a>
-    </h1>
-  
+</script>
 
-        
-        <a href="/2023/12/13/LNMP%E6%9E%B6%E6%9E%84%E9%83%A8%E7%BD%B2%E5%8A%A8%E6%80%81%E4%BA%A7%E5%93%81/" class="archive-article-date">
-  	<time datetime="2023-12-13T12:13:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-13</time>
-</a>
-        
 
-	
 
-      </header>
-    
 
 
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>LNMP架构部署动态产品</center></h1>
-<h2 id="一、LNMP架构概述">一、LNMP架构概述</h2>
-<p>LNMP是一套技术的组合，L = Linux、N = Nginx、M = MySQL、P = PHP，其工作原理如下：</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231213204833175.png" alt="image-20231213204833175"></p>
-<blockquote>
-<p>1.用户通过http协议发起请求，请求会先抵达LNMP架构中的Nginx<br>
-2.Nginx会根据用户的请求进行判断，这个判断是有Location进行完成<br>
-3.判断用户请求的是静态页面，Nginx直接进行处理<br>
-4.判断用户请求的是动态页面，Nginx会将该请求交给fastcgi协议下发<br>
-5.fastgi会将请求交给php-fpm管理进程, php-fpm管理进程接收到后会调用工作进程warrap工作<br>
-6.warrap进程会调用php程序进行解析,如果只是解析代码php直接返回<br>
-7.如果有查询数据库操作，则由php连接数据库(用户 密码 IP)发起查询的操作<br>
-8.最终数据由 mysql-&gt;php-&gt;php-fpm-&gt;fastcgi-&gt;nginx-&gt;http-&gt;user</p>
-</blockquote>
-<h2 id="二、Nginx-PHP演示">二、Nginx+PHP演示</h2>
-<table>
-<thead>
-<tr>
-<th>服务准备</th>
-<th>IP地址</th>
-<th>主机名</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Nginx、PHP</td>
-<td>192.168.10.200</td>
-<td>web1</td>
-</tr>
-</tbody>
-</table>
-<p>nginx前面我们已经讲述过了，三种方式均可，这里不再赘述，我们简要说一下PHP服务和数据库的安装。</p>
-        
-          <a class="article-more-a" href="/2023/12/13/LNMP%E6%9E%B6%E6%9E%84%E9%83%A8%E7%BD%B2%E5%8A%A8%E6%80%81%E4%BA%A7%E5%93%81/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/13/LNMP%E6%9E%B6%E6%9E%84%E9%83%A8%E7%BD%B2%E5%8A%A8%E6%80%81%E4%BA%A7%E5%93%81/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Nginx模块简述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/12/Nginx%E6%A8%A1%E5%9D%97%E7%AE%80%E8%BF%B0/">Nginx模块简述</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/12/Nginx%E6%A8%A1%E5%9D%97%E7%AE%80%E8%BF%B0/" class="archive-article-date">
-  	<time datetime="2023-12-12T12:16:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-12</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Nginx模块简述</center></h1>
-<h2 id="一、Nginx配置文件介绍">一、Nginx配置文件介绍</h2>
-<p>  Nginx服务的默认全局配置文件路径为：<code>/etc/nginx/nginx.conf</code>；路径因人而异，不同的人使用不同的安装方式（编译安装、epel仓库、官方仓库），那么nginx的模块位置信息也会不一样，我们也可以使用命令：<code>nginx -V</code>  查看nginx具体模块信息：</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231212203938019.png" alt="image-20231212203938019"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@nanxi ~]<span class="comment">#egrep -nv &#x27;^$|^#&#x27; /etc/nginx/nginx.conf</span></span><br><span class="line">2:user  www;         <span class="comment">### 用户</span></span><br><span class="line">3:worker_processes  auto;   <span class="comment">### 工作进程（建议与CPU数量一致或auto）</span></span><br><span class="line">5:error_log  /var/log/nginx/error.log notice;  <span class="comment">###错误日志路径</span></span><br><span class="line">6:pid        /var/run/nginx.pid;   <span class="comment">###  pid模块路径</span></span><br><span class="line">9:events &#123;                         <span class="comment">###  事件模块</span></span><br><span class="line">10:    worker_connections  1024;   <span class="comment">###  每个worker进程支持的最大连接数</span></span><br><span class="line">11:&#125;</span><br><span class="line">14:http &#123;                          <span class="comment">###  http网络模块</span></span><br><span class="line">15:    include       /etc/nginx/mime.types;       <span class="comment">###  包含资源类型文件</span></span><br><span class="line">16:    default_type  application/octet-stream;    <span class="comment">###  不在资源类型内的文件类型，会默认以下载方式传输给浏览器</span></span><br><span class="line">18:    log_format  main  <span class="string">&#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot;&#x27;</span></span><br><span class="line">19:    <span class="comment">##日志格式##        &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span></span><br><span class="line">20:                      <span class="string">&#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;</span>;</span><br><span class="line">22:    access_log  /var/log/nginx/access.log  main;    <span class="comment">###  网络访问日志</span></span><br><span class="line">24:    sendfile        on;                  <span class="comment">###  高效文件传输</span></span><br><span class="line">27:    keepalive_timeout  65;               <span class="comment">###  长连接超时时间</span></span><br><span class="line">31:    include /etc/nginx/conf.d/*.conf;    <span class="comment">###  引入所有的配置文件</span></span><br><span class="line">32:&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用Server模块配置网站, 每个Server&#123;&#125;代表一个网站(简称虚拟主机)；</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;            <span class="comment">#监听端口, 默认80</span></span><br><span class="line">    server_name  nanxi.com;     <span class="comment">#提供的域名 _表示以IP地址方式进行访问</span></span><br><span class="line">    <span class="comment">### access_log  access.log;     #该网站的访问日志</span></span><br><span class="line">    <span class="comment">### 自定义将当前的server网站的访问日志记录至对应的目录，使用main格式</span></span><br><span class="line">    access_log /var/log/nginx/nanxi.com.log main;</span><br><span class="line">    <span class="comment">#location模块控制网站访问路径；</span></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;   <span class="comment">#存放网站源代码的位置（nginx的默认欢迎页）</span></span><br><span class="line">        index  index.html index.htm;    <span class="comment">#默认返回网站的文件</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2023/12/12/Nginx%E6%A8%A1%E5%9D%97%E7%AE%80%E8%BF%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/12/Nginx%E6%A8%A1%E5%9D%97%E7%AE%80%E8%BF%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-多服务脚本一键部署" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/09/%E5%A4%9A%E6%9C%8D%E5%8A%A1%E8%84%9A%E6%9C%AC%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2/">多服务脚本一键部署</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/09/%E5%A4%9A%E6%9C%8D%E5%8A%A1%E8%84%9A%E6%9C%AC%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2/" class="archive-article-date">
-  	<time datetime="2023-12-09T13:48:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-09</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>多服务命令一键部署</center></h1>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/Snipaste_2023-12-08_21-04-18.png" alt="Snipaste_2023-12-08_21-04-18"></p>
-<p>  突发奇想，用南汐前面讲过的知识写一个脚本吧，实现一键部署多服务。南汐设想的服务架构如上图☝️ ，简单介绍一下，这个架构由七台服务器实现，最前端的一台服务器专注我们的反向代理和负载均衡，我们暴露给客户的只能是一个域名，后面的三台web服务器为用户提供访问，后面有两台NFS服务器，来存储我们前端生成的静态文件，其中一台做备份使用，他们之间的数据要求实时同步，避免单点故障影响业务，最后面是我们的全局备份服务器，备份web端的重要配置文件和NFS服务器的重要数据文件。最后我们要实现用脚本一键部署这个架构的同时并实现定时任务备份。最终实现后的效果如下🔻 ：</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/nanxi_nginx.gif" alt="nanxi_nginx"></p>
-        
-          <a class="article-more-a" href="/2023/12/09/%E5%A4%9A%E6%9C%8D%E5%8A%A1%E8%84%9A%E6%9C%AC%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/09/%E5%A4%9A%E6%9C%8D%E5%8A%A1%E8%84%9A%E6%9C%AC%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Nginx服务简述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/07/Nginx%E6%9C%8D%E5%8A%A1%E7%AE%80%E8%BF%B0/">Nginx服务简述</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/07/Nginx%E6%9C%8D%E5%8A%A1%E7%AE%80%E8%BF%B0/" class="archive-article-date">
-  	<time datetime="2023-12-07T12:05:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-07</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Nginx服务简述</center></h1>
-<h2 id="一、了解Nginx">一、了解Nginx</h2>
-<p>  Nginx (engine x) 是一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。Nginx支持热部署，启动简单，可以做到7×24小时不间断运行，其特点是占有内存少，并发能力强，能经受高负载的考验，有报告表明能支持高达 50,000 个并发连接数。中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。</p>
-<p>  我们为什么选择Nginx服务?<br>
-  ①  开源：直接获取源代码；②  高性能: 支持海量并发；③  可靠: 服务稳定；④  Nginx非常轻量，功能模块少(源代码仅保留http与核心模块代码,其余不够核心代码会作为插件来安装)；⑤  代码模块化 (易读，便于二次开发，对于开发人员非常友好)；⑥  Nginx适合当前主流架构趋势，微服务、云架构、中间层等，且技术成熟；⑦  统一技术栈，降低维护成本，降低技术更新成本；</p>
-<blockquote>
-<p>Nginx采用Epool网络模型，Apache采用Select模型</p>
-<p>  Select: 当用户发起一次请求，select模型就会进行一次遍历扫描，从而导致性能低下。Epool: 当用户发起请求，epool模型会直接进行处理，效率高效，并无连接限制。处理大量的连接的读写，Apache所采用的select网络I/O模型非常低效。</p>
-<p>  用一个比喻来解释Apache采用的select模型和Nginx采用的epoll模型进行之间的区别：假设你在大学读书，住的宿舍楼有很多间房间，你的朋友要来找你。select版宿管大妈就会带着你的朋友挨个房间去找，直到找到你为止。而epoll版宿管大妈会先记下每位同学的房间号，你的朋友来时，只需告诉你的朋友你住在哪个房间即可，不用亲自带着你的朋友满大楼找人。如果来了10000个人，都要找自己住这栋楼的同学时，select版和epoll版宿管大妈，谁的效率更高，不言自明。同理，在高并发服务器中，轮询I/O是最耗时间的操作之 一，select和epoll的性能谁的性能更高，同样十分明了。</p>
-</blockquote>
-<h2 id="二、Nginx应用场景">二、Nginx应用场景</h2>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/5e3ba1cc0392485e0c000002.png" alt="5e3ba1cc0392485e0c000002"></p>
-        
-          <a class="article-more-a" href="/2023/12/07/Nginx%E6%9C%8D%E5%8A%A1%E7%AE%80%E8%BF%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/07/Nginx%E6%9C%8D%E5%8A%A1%E7%AE%80%E8%BF%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-sersync文件实时同步" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/06/sersync%E6%96%87%E4%BB%B6%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/">sersync文件实时同步</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/06/sersync%E6%96%87%E4%BB%B6%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/" class="archive-article-date">
-  	<time datetime="2023-12-06T12:19:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-06</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>sersync文件实时同步</center></h1>
-<h2 id="一、sersync应用场景">一、sersync应用场景</h2>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231206214137354.png" alt="image-20231206214137354"></p>
-<p>  如上图所示，如果我们只有一台NFS服务器，当它发生故障时，对我们的web服务端会产生非常大的业务影响，这就时单台设备的瓶颈，我们称这一现象为单点故障，试想如果我们此时还有一台服务器专门为NFS服务器做数据备份，当我们的NFS服务器出现故障，我们可以及时的把NFS服务器的备份服务器迅速挂载至web端，快速恢复业务。但这有一个非常重要的要求，我们的备份服务器和备份源数据必须实时同步（实时同步是一种只要当前目录发生变化则会触发一个事件，事件触发后会将变化的目录同步至远程服务器。），否则就会造成用户访问的数据不连续，影响业务正常运行。此时我们就可以用到sersync的功能了。</p>
-<p>  sersync是国人基于<code>rsync+inotify-tools</code>开发的工具，不仅保留了优点同时还强化了实时监控，文件过滤，简化配置等功能，帮助用户提高运行效率，节省时间和网络资源。👉<a target="_blank" rel="noopener" href="https://github.com/wsgzao/sersync">sersync项目地址</a></p>
-        
-          <a class="article-more-a" href="/2023/12/06/sersync%E6%96%87%E4%BB%B6%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/06/sersync%E6%96%87%E4%BB%B6%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-NFS共享存储" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/05/NFS%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8/">NFS共享存储</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/05/NFS%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8/" class="archive-article-date">
-  	<time datetime="2023-12-05T10:40:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-05</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>NFS共享存储</center></h1>
-<h2 id="一、NFS基本概述">一、NFS基本概述</h2>
-<p>  NFS是Network File System的缩写及网络文件系统。<mark>NFS主要功能是通过局域网络让不同的主机系统之间可以共享文件或目录</mark>。NFS系统和Windows网络共享、网络驱动器类似，只不过windows用于局域网，NFS用于企业集群架构中，如果是大型网站会用到更复杂的分布式文件系统FastDFS、glusterfs、HDFS……</p>
-<p>  🔎    为什么要用共享存储呢？</p>
-<p>  ① 为了实现多台服务器之间数据共享；② 实现多台服务器之间数据一致</p>
-<p>  <strong>实例解释</strong>：A用户上传图片经过负载均衡，负载均衡将上传请求调度至Web1服务器上。B用户访问A用户上传的图片，此时B用户被负载均衡调度至Web2上，因为Web2上没有这张图片，所以B用户无法看到A用户传的图片，试想一下，如果微信的架构是这样的，那我们还会有朋友圈📸这个这样的功能吗？</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/5e339ca91352cb3909000000.png" alt="5e339ca91352cb3909000000"></p>
-<p>  <strong>实例解释</strong>：如果使用NFS服务，此时A用户上传图片无论被负载均衡调度至Web1还是Web2, 最终数据都被写入至共享存储，当B用户访问A用户上传图片时，无论负载均衡将其调度至Web1还是Web2，最终都会通过NFS共享存储访问到对应的文件。</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/5e339cc11352cb3909000001.png" alt="5e339cc11352cb3909000001"></p>
-        
-          <a class="article-more-a" href="/2023/12/05/NFS%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/05/NFS%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Rsync定时备份+邮件提醒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/05/Rsync%E5%AE%9A%E6%97%B6%E5%A4%87%E4%BB%BD+%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92/">Rsync定时备份+邮件提醒</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/05/Rsync%E5%AE%9A%E6%97%B6%E5%A4%87%E4%BB%BD+%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92/" class="archive-article-date">
-  	<time datetime="2023-12-05T06:27:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-05</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Rsync定时备份+邮件提醒</center></h1>
-<table><tr><td bgcolor=#000000><font color="white">客户端需求</font></td></tr></table>
-<p>1、客户端提前准备备份目录，目录定义规则如下：/backup/nfs_172.16.1.31_2023-12-05<br>
-2、客户端在本地打包备份(重要配置文件等)拷贝至：/backup/nfs_172.16.1.31_2023-12-05<br>
-3、客户端将备份的数据进行推送至备份服务器；<br>
-4、客户端每天凌晨1点定时执行该脚本；<br>
-5、客户端服务器本地保留最近7天的数据，避免浪费磁盘空间；</p>
-<table><tr><td bgcolor=#000000><font color="white">服务端需求</font></td></tr></table>
-<p>1、服务端部署rsync，用于接收客户端推送过来的备份数据；<br>
-2、服务端需要每天校验客户端推送过来的数据是否完整；<br>
-3、服务端需要校验数据并把每天的校验结果通知给管理员；<br>
-4、服务端仅保留6个月的备份数据，其余备份全部删除；</p>
-<p>👇   <a href="zzxe.eu.org">南汐</a>建议大家先尝试自我实现，再展开查看详细实现过程哦✊✊✊ ~</p>
-        
-          <a class="article-more-a" href="/2023/12/05/Rsync%E5%AE%9A%E6%97%B6%E5%A4%87%E4%BB%BD+%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/05/Rsync%E5%AE%9A%E6%97%B6%E5%A4%87%E4%BB%BD+%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
+  </section>
 
 
 
@@ -1202,12 +364,13 @@
 
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
-    </nav>
   
 
+  
 
+  
+
+  
 
 
 
@@ -1250,8 +413,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

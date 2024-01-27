@@ -6,7 +6,7 @@
   <link href="https://smallflames.github.io/atom.xml" rel="self"/>
   
   <link href="https://smallflames.github.io/"/>
-  <updated>2024-01-27T08:52:42.030Z</updated>
+  <updated>2024-01-27T11:20:57.146Z</updated>
   <id>https://smallflames.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Shell脚本篇004</title>
+    <link href="https://smallflames.github.io/2024/01/27/Shell%E8%84%9A%E6%9C%AC%E7%AF%87004/"/>
+    <id>https://smallflames.github.io/2024/01/27/Shell%E8%84%9A%E6%9C%AC%E7%AF%87004/</id>
+    <published>2024-01-27T11:07:53.000Z</published>
+    <updated>2024-01-27T11:20:57.146Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1><center>Shell脚本篇004</center></h1><table><tr><td bgcolor=#000000><font color="white">脚本需求</font></td></tr></table><p><font color="#fc5531">▚ 需求 ：写一个脚本反向破解由随机数生成的MD5值。</font></p><table><tr><td bgcolor=#000000><font color="white">实现效果</font></td></tr></table><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240127191533426.png" alt="image-20240127191533426"></p><span id="more"></span><table><tr><td bgcolor=#000000><font color="white">实现脚本</font></td></tr></table><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#Author nanxi</span></span><br><span class="line"><span class="comment">#Date 2024-1-27</span></span><br><span class="line"></span><br><span class="line">file=/tmp/.decipher.log</span><br><span class="line"><span class="function"><span class="title">prepare</span></span>()&#123;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="subst">$(echo 0 |md5sum)</span> 0&quot;</span> &gt;&gt;<span class="variable">$file</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> $(<span class="built_in">seq</span> 32767)</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">     <span class="built_in">echo</span> <span class="string">&quot;<span class="subst">$(echo $i |md5sum)</span> <span class="variable">$i</span>&quot;</span> &gt;&gt;<span class="variable">$file</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> [ -f <span class="variable">$file</span> ];<span class="keyword">then</span></span><br><span class="line">    <span class="keyword">if</span> [ $(<span class="built_in">wc</span> -l <span class="variable">$file</span> |awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span>) -ne 32768 ];<span class="keyword">then</span></span><br><span class="line">        &gt;<span class="variable">$file</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;首次使用本脚本可能需要1分种左右，请您耐心等待一下哦~&quot;</span></span><br><span class="line">        prepare</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">touch</span> <span class="variable">$file</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;首次使用本脚本可能需要1分种左右，请您耐心等待一下哦~&quot;</span></span><br><span class="line">    prepare</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;请输入您要破译的MD5值(n为退出): &quot;</span> md5</span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$md5</span> =~ ^[0-z]+$ ]];<span class="keyword">then</span></span><br><span class="line">     <span class="keyword">case</span> <span class="variable">$md5</span> <span class="keyword">in</span></span><br><span class="line">     no|n)</span><br><span class="line">        <span class="built_in">exit</span></span><br><span class="line">    ;;</span><br><span class="line">    *)</span><br><span class="line">        <span class="keyword">if</span> grep <span class="string">&quot;<span class="variable">$md5</span>&quot;</span> <span class="variable">$file</span> &gt;/dev/null;<span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span> 本次破译结果为: $(grep <span class="string">&quot;<span class="variable">$md5</span>&quot;</span> <span class="variable">$file</span> |awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">&quot;抱歉，本次破译失败，您可重新尝试其他值哦~&quot;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">esac</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;\e[1;31m警告: 您输入的参数值不合法！！！\e[0m&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/nanxiblogfoot.png" alt="nanxiblogfoot"></p><blockquote><p><em><strong>人生不就是这样,哪怕雨雪霏霏也要去追寻阳光。</strong></em></p><p align="right">——人民日报</p></blockquote><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    
+    
+    <summary type="html">&lt;h1&gt;&lt;center&gt;Shell脚本篇004&lt;/center&gt;&lt;/h1&gt;
+&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=#000000&gt;&lt;font color=&quot;white&quot;&gt;脚本需求&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;p&gt;&lt;font color=&quot;#fc5531&quot;&gt;▚ 需求 ：写一个脚本反向破解由随机数生成的MD5值。&lt;/font&gt;&lt;/p&gt;
+&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=#000000&gt;&lt;font color=&quot;white&quot;&gt;实现效果&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;p&gt;&lt;img src=&quot;https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240127191533426.png&quot; alt=&quot;image-20240127191533426&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="运维之路" scheme="https://smallflames.github.io/tags/%E8%BF%90%E7%BB%B4%E4%B9%8B%E8%B7%AF/"/>
+    
+    <category term="Shell编程" scheme="https://smallflames.github.io/tags/Shell%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>Shell编程知识补充（四）</title>
@@ -493,64 +518,6 @@
 &lt;p&gt;  高可用一般是指&lt;mark&gt;2台机器启动着完全相同的业务系统&lt;/mark&gt;，当有&lt;mark&gt;一台机器down机&lt;/mark&gt;了，&lt;mark&gt;另外一台服务器&lt;/mark&gt;就能快速的接管，这种&lt;mark&gt;快速接管&lt;/mark&gt;对于访问的用户是无感知的。高可用的实现方式通常有两种：&lt;strong&gt;硬件实现高可用（F5）、软件实现高可用（Keepalived）&lt;/strong&gt;，我们主要讲解通过Keepalived实现高可用。&lt;/p&gt;
 &lt;p&gt;  keepalived软件是基于VRRP协议实现的，主要用于解决单点故障问题。&lt;/p&gt;
 &lt;p&gt;  虚拟路由冗余协议(Virtual Router Redundancy Protocol，简称VRRP)是由IETF提出的解决局域网中配置静态网关出现单点失效现象的路由协议。利用VRRP，一组路由器（同一个VLAN中的接口）协同工作，但只要一个处于Master状态，处于该状态的路由器接口承担实际数据流量的转发任务。在一个VRRP组内的多个路由器接口共用一个虚拟IP地址，该地址被作为局域网内所有主机的缺省网关地址。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="运维之路" scheme="https://smallflames.github.io/tags/%E8%BF%90%E7%BB%B4%E4%B9%8B%E8%B7%AF/"/>
-    
-    <category term="服务架构" scheme="https://smallflames.github.io/tags/%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>rewrite重写和https跳转</title>
-    <link href="https://smallflames.github.io/2023/12/19/rewrite%E9%87%8D%E5%86%99%E5%92%8Chttps%E8%B7%B3%E8%BD%AC/"/>
-    <id>https://smallflames.github.io/2023/12/19/rewrite%E9%87%8D%E5%86%99%E5%92%8Chttps%E8%B7%B3%E8%BD%AC/</id>
-    <published>2023-12-19T10:38:58.000Z</published>
-    <updated>2023-12-20T13:43:52.899Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1><center>rewrite重写和https跳转</center></h1><h2 id="一、Nginx实现Rewrite重写">一、Nginx实现Rewrite重写</h2><p>  Rewrite主要实现url地址重写，以及重定向，就是把传入web的请求重定向到其他url的过程。、</p><h3 id="1、Rewrite使用场景">1、Rewrite使用场景</h3><blockquote><p>1、地址跳转，用户访问www.nanxi.com这个URL时，将其定向至一个新的域名 <a href="http://m.nanxi.com">m.nanxi.com</a><br>2、协议跳转，用户通过http协议请求网站时，将其重新跳转至https协议方式<br>3、伪静态，将动态页面显示为静态页面方式的一种技术，便于搜索引擎的录入，同时减少动态URL地址对外暴露过多的参数，提升更高的安全性。<br>4、搜索引擎，SEO优化依赖于url路径，好记的url便于支持搜索引擎录入。</p></blockquote><h3 id="2、Rewrite配置示例">2、Rewrite配置示例</h3><p>  rewrite指令根据表达式来重定向URL，或者修改字符串，可以应用于server，location，if环境下，每行rewrite指令最后跟一个flag标记，支持的flag标记有如下表格所示：</p><table><thead><tr><th>flag</th><th>作用</th></tr></thead><tbody><tr><td>last</td><td>本条规则匹配完成后，停止本location匹配，重新以本条结果发请求</td></tr><tr><td>break</td><td>本条规则匹配完成后，停止本location匹配，直接返回本条请求内容</td></tr><tr><td>redirect</td><td>返回302临时重定向，地址栏会显示跳转后的地址，每一次访问都会访问源站</td></tr><tr><td>permanent</td><td>返回301永久重定向，地址栏会显示跳转后的地址，只有第一次访问时是源站</td></tr></tbody></table><span id="more"></span><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219192227948.png" alt="image-20231219192227948"></p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219191614582.png" alt="image-20231219191614582"></p><p>  注意，直接访问nanxi.com时，会显示403，因为我们没有配置index.html文件。没有添加标记时如下：</p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219192709141.png" alt="image-20231219192709141"></p><p>  当我们在配置中的rewrite后面添加flag标记时显示效果如下：</p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219194001114.png" alt="image-20231219194001114"></p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219194441074.png" alt="image-20231219194441074"></p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219195930180.png" alt="image-20231219195930180"></p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219201249341.png" alt="image-20231219201249341"></p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219202036927.png" alt="image-20231219202036927"></p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219202451564.png" alt="image-20231219202451564"></p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219203608235.png" alt="image-20231219203608235"></p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219204910828.png" alt="image-20231219204910828"></p><div class='spoiler collapsed'>    <div class='spoiler-title'>        Nginx内置参数    </div>    <div class='spoiler-content'>        <p>$args                                   #这个变量等于请求行中的参数。<br>$content_length                #请求头中的Content-length字段。<br>$content_type                   #请求头中的Content-Type字段。<br>$document_root               #当前请求在root指令中指定的值。<br>$host                                  #请求主机头字段，否则为服务器名称。<br>$http_user_agent             #客户端agent信息<br>$http_cookie                     #客户端cookie信息<br>$limit_rate                         #这个变量可以限制连接速率。<br>$request_body_file          #客户端请求主体信息的临时文件名。<br>$request_method            #客户端请求的动作，通常为GET或POST。<br>$remote_addr                  #客户端的IP地址。<br>$remote_port                   #客户端的端口。<br>$remote_user                  #已经经过Auth Basic Module验证的用户名。<br>$request_filename          #当前请求的文件路径，由root或alias指令与URI请求生成。<br>$query_string                   #与$args相同。<br>$scheme                           #HTTP方法（如http，https）。<br>$server_protocol             #请求使用的协议，通常是HTTP/1.0或HTTP/1.1。<br>$server_addr                    #服务器地址，在完成一次系统调用后可以确定这个值。<br>$server_name                  #服务器名称。<br>$server_port                    #请求到达服务器的端口号。<br>$request_uri                    #包含请求参数的原始URI，不包含主机名，如：”/foo/bar.php?arg=baz”。<br>$uri                                    #不带请求参数的当前URI，$uri不包含主机名，如”/foo/bar.html”。<br>$document_uri               #与$uri相同。</p><p>$X-Forwarded-For:HTTP的请求端真实的IP，只有在通过了HTTP 代理或者负载均衡服务器时才会添加该项。标准格式如下：X-Forwarded-For: client1, proxy1, proxy2</p>    </div></div><h2 id="二、Ningx-HTTPS-实践">二、Ningx HTTPS 实践</h2><p>  为什么需要使用HTTPS，因为HTTP不安全，当我们使用http网站时，会遭到劫持和篡改，如果采用https协议，那么数据在传输过程中是加密的，所以黑客无法窃取或者篡改数据报文信息，同时也避免网站传输时信息泄露，我们现在使用的更多的是TLS加密协议。</p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219205244667.png" alt="image-20231219205244667"></p><h3 id="1、SSL加密过程">1、SSL加密过程</h3><p>  在数据进行加密与解密过程中，如何确定双方的身份，此时就需要有一个权威机构来验证双方身份，那么这个权威机构就是CA机构，CA机构颁发证书的过程如下：</p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219205556939.png" alt="image-20231219205556939"></p><p>  我们申请证书时需要先去登记机构进行身份登记，我是谁，我是什么单位，我是干嘛的，我想做什么，然后登记机构再通过CSR发给CA，CA中心通过后会生成一堆公钥和私钥，公钥会在CA证书链中保存，公钥和私钥证书我们拿到后，会将其部署在WEB服务器上，当浏览器访问我们的https站点时，它会去请求我们的证书，Nginx这样的web服务器会将我们证书的公钥发给浏览器，浏览器会去验证我们的证书是否合法。</p><blockquote><p><strong>详细流程</strong></p><p>1、浏览器发起往服务器的443端口发起请求，请求携带了浏览器支持的加密算法和哈希算法。<br>2、服务器收到请求，选择浏览器支持的加密算法和哈希算法。<br>3、服务器下将数字证书返回给浏览器，这里的数字证书可以是向某个可靠机构申请的，也可以是自制的。<br>4、浏览器进入数字证书认证环节，这一部分是浏览器内置的TLS完成的：首先浏览器会从内置的证书列表中索引，找到服务器下发证书对应的机构，如果没有找到，此时就会提示用户该证书是不是由权威机构颁发，是不可信任的。如果查到了对应的机构，则取出该机构颁发的公钥。用机构的证书公钥解密得到证书的内容和证书签名，内容包括网站的网址、网站的公钥、证书的有效期等。浏览器会先验证证书签名的合法性（验证过程类似上面Bob和Susan的通信）。签名通过后，浏览器验证证书记录的网址是否和当前网址是一致的，不一致会提示用户。如果网址一致会检查证书有效期，证书过期了也会提示用户。这些都通过认证时，浏览器就可以安全使用证书中的网站公钥了。浏览器会生成一个随机数R，并使用网站公钥对R进行加密。<br>5、浏览器将加密的R传送给服务器。<br>6、服务器用自己的私钥解密得到R。<br>7、服务器以R为密钥使用了对称加密算法加密网页内容并传输给浏览器。<br>8、浏览器以R为密钥使用之前约定好的解密算法获取网页内容。</p></blockquote><p>  <strong>使用HTTP协议模拟网站被篡改</strong></p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219211323573.png" alt="image-20231219211323573"></p><p>  此时我们打开另一台服务器，对192.168.10.200进行劫持，这台服务器等同于代理我们去访问（当然现实过程中我们是不知道的）192.168.10.200这个IP，然后返回给我们的可能是它修改过的内容！</p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219212959089.png" alt="image-20231219212959089"></p><h3 id="2、SSL证书类型介绍">2、SSL证书类型介绍</h3><table><thead><tr><th>对比</th><th>域名型 DV</th><th>企业型 OV</th><th>增强型 EV</th></tr></thead><tbody><tr><td>一般用途</td><td>个人站点和应用；<br /> 简单的加密需求</td><td>电子商务站点和应用；<br /> 中小型企业站点</td><td>大型金融平台；<br /> 大型企业和政府机构站点</td></tr><tr><td>审核内容</td><td>域名所有权验证</td><td>全面的企业身份验证； <br />域名所有权验证</td><td>最高等级的企业身份验证；<br /> 域名所有权验证</td></tr><tr><td>颁发时长</td><td>10分钟-24小时</td><td>3-5个工作日</td><td>5-7个工作日</td></tr><tr><td>单次申请年限</td><td>3个月</td><td>1-2年</td><td>1-2年</td></tr><tr><td>赔付保障金</td><td>——</td><td>125-175万美金</td><td>150-175万美金</td></tr></tbody></table><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219213804568.png" alt="image-20231219213804568"></p><blockquote><p>https不支持续费，证书到期需要重新申请并进行替换<br>https不支持三级域名解析，如 <a href="http://test.m.nanxi.com">test.m.nanxi.com</a><br>https显示绿色，说明整个网站的url都是https保护的<br>https显示黄色，因为网站代码中包含http的不安全链接<br>https显示红色，那么证书是假的或者证书过期。</p></blockquote><h3 id="3、Nginx-自签证实现HTTPS">3、Nginx 自签证实现HTTPS</h3><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219214520781.png" alt="image-20231219214520781"></p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219215115983.png" alt="image-20231219215115983"></p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219215327225.png" alt="image-20231219215327225"></p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231219214947233.png" alt="image-20231219214947233"></p><h3 id="4、Web集群实现HTTPS">4、Web集群实现HTTPS</h3><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231220213207285.png" alt="image-20231220213207285"></p><p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231220213359427.png" alt="image-20231220213359427"></p><p>注意⚠️ ： <mark>证书只配到负载均衡上即可，如果负载均衡配置了https协议，相应的web端也必须支持https协议，否则页面会出现无样式的现象，同样的，如果web设置支持https但是没有使用跳转https，会出现同样的无样式的情况，且访问极慢。</mark>（一旦设置支持https协议，那么所有的页面都会按照https的原理运行，默认的http协议将不再被运行！）</p><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-    
-    
-    <summary type="html">&lt;h1&gt;&lt;center&gt;rewrite重写和https跳转&lt;/center&gt;&lt;/h1&gt;
-&lt;h2 id=&quot;一、Nginx实现Rewrite重写&quot;&gt;一、Nginx实现Rewrite重写&lt;/h2&gt;
-&lt;p&gt;  Rewrite主要实现url地址重写，以及重定向，就是把传入web的请求重定向到其他url的过程。、&lt;/p&gt;
-&lt;h3 id=&quot;1、Rewrite使用场景&quot;&gt;1、Rewrite使用场景&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;1、地址跳转，用户访问www.nanxi.com这个URL时，将其定向至一个新的域名 &lt;a href=&quot;http://m.nanxi.com&quot;&gt;m.nanxi.com&lt;/a&gt;&lt;br&gt;
-2、协议跳转，用户通过http协议请求网站时，将其重新跳转至https协议方式&lt;br&gt;
-3、伪静态，将动态页面显示为静态页面方式的一种技术，便于搜索引擎的录入，同时减少动态URL地址对外暴露过多的参数，提升更高的安全性。&lt;br&gt;
-4、搜索引擎，SEO优化依赖于url路径，好记的url便于支持搜索引擎录入。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&quot;2、Rewrite配置示例&quot;&gt;2、Rewrite配置示例&lt;/h3&gt;
-&lt;p&gt;  rewrite指令根据表达式来重定向URL，或者修改字符串，可以应用于server，location，if环境下，每行rewrite指令最后跟一个flag标记，支持的flag标记有如下表格所示：&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;flag&lt;/th&gt;
-&lt;th&gt;作用&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;last&lt;/td&gt;
-&lt;td&gt;本条规则匹配完成后，停止本location匹配，重新以本条结果发请求&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;break&lt;/td&gt;
-&lt;td&gt;本条规则匹配完成后，停止本location匹配，直接返回本条请求内容&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;redirect&lt;/td&gt;
-&lt;td&gt;返回302临时重定向，地址栏会显示跳转后的地址，每一次访问都会访问源站&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;permanent&lt;/td&gt;
-&lt;td&gt;返回301永久重定向，地址栏会显示跳转后的地址，只有第一次访问时是源站&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;</summary>
     
     
     

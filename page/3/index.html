@@ -161,6 +161,199 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Nginx性能优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/12/22/Nginx%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">Nginx性能优化</a>
+    </h1>
+  
+
+        
+        <a href="/2023/12/22/Nginx%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="archive-article-date">
+  	<time datetime="2023-12-22T07:32:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-22</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Nginx性能优化</center></h1>
+<h2 id="一、性能优化概述">一、性能优化概述</h2>
+<p>  做事有做事的原则，解决问题有解决问题的方法，那我们在做性能优化工作之前也同样要有自己的逻辑，我们为什么要做优化，我们需要重点考虑哪些方面，和了解哪些方面呢？在南汐看来，一切优化工作的目的就是基于业务稳定安全的前提下尽可能的提高用户的访问体验。</p>
+<p>  1、首先我们需要了解当前系统的结构和瓶颈，当我们的脑袋里存在一个明确的业务框架逻辑时，那么我们对于就会有一个明确的方向。比如了解我们公司当前使用的是什么，运行的是什么业务，都有哪些服务，了解每个服务最大可支撑多少并发，能支持多少qps（每秒查询率）的访问请求，这组系统的最高瓶颈在哪里？<font color="gray"><em>（我们如何评定我们系统的瓶颈呢，例如使用top查看系统的CPU负载、内存使用率、总得运行进程等，也可以通过日志去分析请求的情况，也可以通过我们前面介绍到的stub_statius模块查看当前的连接情况，对线上的业务进行压力测试【低峰期】，去了解当前这套系统能承担多少的请求和并发，做好响应的评估。这个是我们做性能优化最先考虑的地方。）</em></font></p>
+<p>  2、了解业务模式。性能优化是为业务服务的，本质上就是提高业务能力。我们需要了解每个业务接口的类型，比如：电商网站中的抢购模式，这种情况下面，平时没什么流量，但到了抢购时间流量会突增。我们还需要了解系统层次化的结构，比如：我们使用nginx做的是代理、还是动静分离、还是后端直接服务用户，我们要对每一层做好相应的梳理，以便更好的服务业务。</p>
+<p>  3、性能与安全。通常会有这样一个情况，我们往往注重了性能，但是忽略了安全，往往过于注重安全，对性能又会产生影响。比如：我们在设计防火墙功能时，检测过于严密，这样就会给性能带来影响。那么如果对于性能完全追求，却不顾服务的安全，也会造成很大的隐患。我们需要评估好两者的关系，把握好两者的孰重孰轻。以及整体的相关性，权衡好对应的点。</p>
+<h2 id="二、压力测试工具">二、压力测试工具</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@web1 ~]<span class="comment">#yum -y install httpd-tools</span></span><br><span class="line">[root@web1 ~]<span class="comment">#ab -k -c100 -n1000 http://nanxi.com/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### -n 要执行的请求数  -c 请求的并发数  -k 是否开启长连接</span></span><br></pre></td></tr></table></figure>
+<p>  我们可以先以自己的静态网页为例（现在很多的网站基本都会设置屏蔽外界压测），来做一个小测试：</p>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231222163408848.png" alt="image-20231222163408848"></p>
+        
+          <a class="article-more-a" href="/2023/12/22/Nginx%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/12/22/Nginx%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Keepalived高可用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/12/20/Keepalived%E9%AB%98%E5%8F%AF%E7%94%A8/">Keepalived高可用</a>
+    </h1>
+  
+
+        
+        <a href="/2023/12/20/Keepalived%E9%AB%98%E5%8F%AF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2023-12-20T13:08:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-20</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Keepalived高可用</center></h1>
+<h2 id="一、Keepalived基本简述">一、Keepalived基本简述</h2>
+<p>  高可用一般是指<mark>2台机器启动着完全相同的业务系统</mark>，当有<mark>一台机器down机</mark>了，<mark>另外一台服务器</mark>就能快速的接管，这种<mark>快速接管</mark>对于访问的用户是无感知的。高可用的实现方式通常有两种：<strong>硬件实现高可用（F5）、软件实现高可用（Keepalived）</strong>，我们主要讲解通过Keepalived实现高可用。</p>
+<p>  keepalived软件是基于VRRP协议实现的，主要用于解决单点故障问题。</p>
+<p>  虚拟路由冗余协议(Virtual Router Redundancy Protocol，简称VRRP)是由IETF提出的解决局域网中配置静态网关出现单点失效现象的路由协议。利用VRRP，一组路由器（同一个VLAN中的接口）协同工作，但只要一个处于Master状态，处于该状态的路由器接口承担实际数据流量的转发任务。在一个VRRP组内的多个路由器接口共用一个虚拟IP地址，该地址被作为局域网内所有主机的缺省网关地址。</p>
+        
+          <a class="article-more-a" href="/2023/12/20/Keepalived%E9%AB%98%E5%8F%AF%E7%94%A8/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/12/20/Keepalived%E9%AB%98%E5%8F%AF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-rewrite重写和https跳转" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -968,206 +1161,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/12/06/sersync%E6%96%87%E4%BB%B6%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-NFS共享存储" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/05/NFS%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8/">NFS共享存储</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/05/NFS%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8/" class="archive-article-date">
-  	<time datetime="2023-12-05T10:40:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-05</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>NFS共享存储</center></h1>
-<h2 id="一、NFS基本概述">一、NFS基本概述</h2>
-<p>  NFS是Network File System的缩写及网络文件系统。<mark>NFS主要功能是通过局域网络让不同的主机系统之间可以共享文件或目录</mark>。NFS系统和Windows网络共享、网络驱动器类似，只不过windows用于局域网，NFS用于企业集群架构中，如果是大型网站会用到更复杂的分布式文件系统FastDFS、glusterfs、HDFS……</p>
-<p>  🔎    为什么要用共享存储呢？</p>
-<p>  ① 为了实现多台服务器之间数据共享；② 实现多台服务器之间数据一致</p>
-<p>  <strong>实例解释</strong>：A用户上传图片经过负载均衡，负载均衡将上传请求调度至Web1服务器上。B用户访问A用户上传的图片，此时B用户被负载均衡调度至Web2上，因为Web2上没有这张图片，所以B用户无法看到A用户传的图片，试想一下，如果微信的架构是这样的，那我们还会有朋友圈📸这个这样的功能吗？</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/5e339ca91352cb3909000000.png" alt="5e339ca91352cb3909000000"></p>
-<p>  <strong>实例解释</strong>：如果使用NFS服务，此时A用户上传图片无论被负载均衡调度至Web1还是Web2, 最终数据都被写入至共享存储，当B用户访问A用户上传图片时，无论负载均衡将其调度至Web1还是Web2，最终都会通过NFS共享存储访问到对应的文件。</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/5e339cc11352cb3909000001.png" alt="5e339cc11352cb3909000001"></p>
-        
-          <a class="article-more-a" href="/2023/12/05/NFS%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/05/NFS%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Rsync定时备份+邮件提醒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/05/Rsync%E5%AE%9A%E6%97%B6%E5%A4%87%E4%BB%BD+%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92/">Rsync定时备份+邮件提醒</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/05/Rsync%E5%AE%9A%E6%97%B6%E5%A4%87%E4%BB%BD+%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92/" class="archive-article-date">
-  	<time datetime="2023-12-05T06:27:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-05</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Rsync定时备份+邮件提醒</center></h1>
-<table><tr><td bgcolor=#000000><font color="white">客户端需求</font></td></tr></table>
-<p>1、客户端提前准备备份目录，目录定义规则如下：/backup/nfs_172.16.1.31_2023-12-05<br>
-2、客户端在本地打包备份(重要配置文件等)拷贝至：/backup/nfs_172.16.1.31_2023-12-05<br>
-3、客户端将备份的数据进行推送至备份服务器；<br>
-4、客户端每天凌晨1点定时执行该脚本；<br>
-5、客户端服务器本地保留最近7天的数据，避免浪费磁盘空间；</p>
-<table><tr><td bgcolor=#000000><font color="white">服务端需求</font></td></tr></table>
-<p>1、服务端部署rsync，用于接收客户端推送过来的备份数据；<br>
-2、服务端需要每天校验客户端推送过来的数据是否完整；<br>
-3、服务端需要校验数据并把每天的校验结果通知给管理员；<br>
-4、服务端仅保留6个月的备份数据，其余备份全部删除；</p>
-<p>👇   <a href="zzxe.eu.org">南汐</a>建议大家先尝试自我实现，再展开查看详细实现过程哦✊✊✊ ~</p>
-        
-          <a class="article-more-a" href="/2023/12/05/Rsync%E5%AE%9A%E6%97%B6%E5%A4%87%E4%BB%BD+%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/05/Rsync%E5%AE%9A%E6%97%B6%E5%A4%87%E4%BB%BD+%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92/">展开全文 >></a>
         </p>
       
 

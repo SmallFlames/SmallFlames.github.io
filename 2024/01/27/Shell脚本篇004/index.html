@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240127191533426.png">
 <meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/nanxiblogfoot.png">
 <meta property="article:published_time" content="2024-01-27T11:07:53.000Z">
-<meta property="article:modified_time" content="2024-01-27T11:20:57.146Z">
+<meta property="article:modified_time" content="2024-01-28T11:07:35.353Z">
 <meta property="article:author" content="Xia Zheng">
 <meta property="article:tag" content="运维之路">
 <meta property="article:tag" content="Shell编程">
@@ -200,13 +200,14 @@
       
         <h1><center>Shell脚本篇004</center></h1>
 <table><tr><td bgcolor=#000000><font color="white">脚本需求</font></td></tr></table>
-<p><font color="#fc5531">▚ 需求 ：写一个脚本反向破解由随机数生成的MD5值。</font></p>
+<font color="#fc5531">▚ 需求 ：写一个脚本反向破解由随机数生成的MD5值。</font>
 <table><tr><td bgcolor=#000000><font color="white">实现效果</font></td></tr></table>
 <p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240127191533426.png" alt="image-20240127191533426"></p>
 <span id="more"></span>
 <table><tr><td bgcolor=#000000><font color="white">实现脚本</font></td></tr></table>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#Author nanxi</span></span><br><span class="line"><span class="comment">#Date 2024-1-27</span></span><br><span class="line"></span><br><span class="line">file=/tmp/.decipher.log</span><br><span class="line"><span class="function"><span class="title">prepare</span></span>()&#123;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="subst">$(echo 0 |md5sum)</span> 0&quot;</span> &gt;&gt;<span class="variable">$file</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> $(<span class="built_in">seq</span> 32767)</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">     <span class="built_in">echo</span> <span class="string">&quot;<span class="subst">$(echo $i |md5sum)</span> <span class="variable">$i</span>&quot;</span> &gt;&gt;<span class="variable">$file</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> [ -f <span class="variable">$file</span> ];<span class="keyword">then</span></span><br><span class="line">    <span class="keyword">if</span> [ $(<span class="built_in">wc</span> -l <span class="variable">$file</span> |awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span>) -ne 32768 ];<span class="keyword">then</span></span><br><span class="line">        &gt;<span class="variable">$file</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;首次使用本脚本可能需要1分种左右，请您耐心等待一下哦~&quot;</span></span><br><span class="line">        prepare</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">touch</span> <span class="variable">$file</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;首次使用本脚本可能需要1分种左右，请您耐心等待一下哦~&quot;</span></span><br><span class="line">    prepare</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;请输入您要破译的MD5值(n为退出): &quot;</span> md5</span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$md5</span> =~ ^[0-z]+$ ]];<span class="keyword">then</span></span><br><span class="line">     <span class="keyword">case</span> <span class="variable">$md5</span> <span class="keyword">in</span></span><br><span class="line">     no|n)</span><br><span class="line">        <span class="built_in">exit</span></span><br><span class="line">    ;;</span><br><span class="line">    *)</span><br><span class="line">        <span class="keyword">if</span> grep <span class="string">&quot;<span class="variable">$md5</span>&quot;</span> <span class="variable">$file</span> &gt;/dev/null;<span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span> 本次破译结果为: $(grep <span class="string">&quot;<span class="variable">$md5</span>&quot;</span> <span class="variable">$file</span> |awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">&quot;抱歉，本次破译失败，您可重新尝试其他值哦~&quot;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">esac</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;\e[1;31m警告: 您输入的参数值不合法！！！\e[0m&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/nanxiblogfoot.png" alt="nanxiblogfoot"></p>
+<iframe frameborder="no" border="0" marginwidth="0" allow = "autoplay" marginheight="0" width=100% height=86  src="//music.163.com/outchain/player?type=2&id=1906301400&auto=1&height=66"></iframe>
 <blockquote>
 <p><em><strong>人生不就是这样,哪怕雨雪霏霏也要去追寻阳光。</strong></em></p>
 <p align="right">——人民日报</p>
@@ -278,6 +279,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2024/01/28/Shell%E8%84%9A%E6%9C%AC%E7%AF%87005/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Shell脚本篇005
+        
+      </div>
+    </a>
   
   
     <a href="/2024/01/26/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E5%9B%9B%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">

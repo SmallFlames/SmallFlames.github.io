@@ -161,6 +161,197 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Shell编程知识补充（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/01/22/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%80%EF%BC%89/">Shell编程知识补充（一）</a>
+    </h1>
+  
+
+        
+        <a href="/2024/01/22/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2024-01-22T08:46:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-22</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Shell编程基础知识补充</center></h1>
+<h1>一、执行脚本的方式</h1>
+<p>1️⃣  指定解释器执行 --------&gt;  <code>/bin/bash nanxi.sh</code>  &amp;  <code>sh nanxi.sh</code>  默认解释器即为/bin/bash</p>
+<p>2️⃣  使用路径执行（需要执行权限+x）----&gt; <code>./nanxi.sh</code>  &amp;   <code>/scripts/nanxi.sh</code>  两种方式均可</p>
+<p>3️⃣  命令调用执行   -------------------------&gt;  <code>source /scripts/nanxi.sh</code>   &amp;  <code>.  nanxi.sh</code></p>
+<div class="warning">
+<p><font color=red><strong>区别：方式1️⃣和方式2️⃣执行脚本调用的是子shell，而方式3️⃣执行脚本调用的是当前shell</strong></font></p>
+</div>
+<h1>二、环境变量的执行顺序</h1>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240122182252168.png" alt="image-20240122182252168"></p>
+        
+          <a class="article-more-a" href="/2024/01/22/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%80%EF%BC%89/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Shell编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/01/22/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%B8%80%EF%BC%89/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Ansible一键部署实例（三）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/01/21/Ansible%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%AE%9E%E4%BE%8B%EF%BC%88%E4%B8%89%EF%BC%89/">Ansible一键部署实例（三）</a>
+    </h1>
+  
+
+        
+        <a href="/2024/01/21/Ansible%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%AE%9E%E4%BE%8B%EF%BC%88%E4%B8%89%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2024-01-21T10:36:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-21</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Ansible一键部署实例（三）</center></h1>
+<table><tr><td bgcolor=#000000><font color="white">业务部署代码</font></td></tr></table>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># wordpress业务部署</span></span><br><span class="line">[<span class="string">root@ansible</span> <span class="string">~/roles/wordpress</span>]<span class="comment">#tree</span></span><br><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├──</span> <span class="string">files</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">wordpress.conf</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">wordpress.sql</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">wordpress.tar.gz</span></span><br><span class="line"><span class="string">├──</span> <span class="string">handlers</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">main.yml</span></span><br><span class="line"><span class="string">├──</span> <span class="string">tasks</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">main.yml</span></span><br><span class="line"><span class="string">├──</span> <span class="string">templates</span></span><br><span class="line"><span class="string">└──</span> <span class="string">vars</span></span><br><span class="line">    <span class="string">└──</span> <span class="string">main.yml</span></span><br><span class="line"></span><br><span class="line"><span class="number">5</span> <span class="string">directories,</span> <span class="number">6</span> <span class="string">files</span></span><br><span class="line">[<span class="string">root@ansible</span> <span class="string">~/roles/wordpress</span>]<span class="comment">#cat tasks/main.yml</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="comment"># tasks file for wordpress</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">remove</span> <span class="string">nginx</span> <span class="string">default.conf</span></span><br><span class="line">  <span class="attr">shell:</span> <span class="string">rm</span> <span class="string">-rf</span> <span class="string">/etc/nginx/conf.d/default.conf</span> <span class="string">warn=false</span></span><br><span class="line">  <span class="attr">when:</span> <span class="string">ansible_hostname</span> <span class="string">is</span> <span class="string">match</span> <span class="string">&quot;web&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">configure</span> <span class="string">wordpress</span> <span class="string">nginx</span> <span class="string">server</span></span><br><span class="line">  <span class="attr">copy:</span></span><br><span class="line">    <span class="attr">src:</span> <span class="string">wordpress.conf</span></span><br><span class="line">    <span class="attr">dest:</span> <span class="string">/etc/nginx/conf.d</span></span><br><span class="line">  <span class="attr">notify:</span> <span class="string">restart</span> <span class="string">web</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">when:</span> <span class="string">ansible_hostname</span> <span class="string">is</span> <span class="string">match</span> <span class="string">&quot;web&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">create</span> <span class="string">wordpress</span> <span class="string">code</span> <span class="string">dir</span></span><br><span class="line">  <span class="attr">file:</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/code/wordpress</span></span><br><span class="line">    <span class="attr">owner:</span> <span class="string">www</span></span><br><span class="line">    <span class="attr">group:</span> <span class="string">www</span></span><br><span class="line">    <span class="attr">state:</span> <span class="string">directory</span></span><br><span class="line">  <span class="attr">when:</span> <span class="string">ansible_hostname</span> <span class="string">is</span> <span class="string">match</span> <span class="string">&quot;web&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Extract</span> <span class="string">wordpress.tar.gz</span> <span class="string">into</span> <span class="string">web</span> <span class="string">/code</span></span><br><span class="line">  <span class="attr">unarchive:</span></span><br><span class="line">    <span class="attr">src:</span> <span class="string">wordpress.tar.gz</span></span><br><span class="line">    <span class="attr">dest:</span> <span class="string">/code/wordpress</span></span><br><span class="line">  <span class="attr">when:</span> <span class="string">ansible_hostname</span> <span class="string">is</span> <span class="string">match</span> <span class="string">&quot;web&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Modify</span> <span class="string">directory</span> <span class="string">permissions</span></span><br><span class="line">  <span class="attr">shell:</span> <span class="string">chown</span> <span class="string">-R</span> <span class="string">www.www</span> <span class="string">/code</span> <span class="string">warn=false</span></span><br><span class="line">  <span class="attr">when:</span> <span class="string">ansible_hostname</span> <span class="string">is</span> <span class="string">match</span> <span class="string">&quot;web&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">sent</span> <span class="string">wordpress.sql</span> <span class="string">to</span> <span class="string">db</span></span><br><span class="line">  <span class="attr">copy:</span></span><br><span class="line">    <span class="attr">src:</span> <span class="string">wordpress.sql</span></span><br><span class="line">    <span class="attr">dest:</span> <span class="string">/tmp</span></span><br><span class="line">  <span class="attr">when:</span> <span class="string">ansible_hostname</span> <span class="string">is</span> <span class="string">match</span> <span class="string">&quot;db&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">import</span> <span class="string">wordpress.sql</span></span><br><span class="line">  <span class="attr">mysql_db:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">all</span></span><br><span class="line">    <span class="attr">state:</span> <span class="string">import</span></span><br><span class="line">    <span class="attr">target:</span> <span class="string">/tmp/wordpress.sql</span></span><br><span class="line">  <span class="attr">register:</span> <span class="string">result</span></span><br><span class="line">  <span class="attr">when:</span> <span class="string">ansible_hostname</span> <span class="string">is</span> <span class="string">match</span> <span class="string">&quot;db&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">restart</span> <span class="string">nginx</span> <span class="string">service</span></span><br><span class="line">  <span class="attr">systemd:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">state:</span> <span class="string">restarted</span></span><br><span class="line">  <span class="attr">when:</span> <span class="string">ansible_hostname</span> <span class="string">is</span> <span class="string">match</span> <span class="string">&quot;web&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">restart</span> <span class="string">mariadb</span> <span class="string">service</span></span><br><span class="line">  <span class="attr">systemd:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">mariadb</span></span><br><span class="line">    <span class="attr">state:</span> <span class="string">restarted</span></span><br><span class="line">  <span class="attr">when:</span> <span class="string">ansible_hostname</span> <span class="string">is</span> <span class="string">match</span> <span class="string">&quot;db&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">mount</span> <span class="string">dir</span> <span class="string">to</span> <span class="string">nfs1</span></span><br><span class="line">  <span class="attr">mount:</span></span><br><span class="line">    <span class="attr">src:</span> <span class="number">172.16</span><span class="number">.1</span><span class="number">.31</span><span class="string">:/data/wordpress</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/code/wordpress/wp-content/uploads</span></span><br><span class="line">    <span class="attr">fstype:</span> <span class="string">nfs</span></span><br><span class="line">    <span class="attr">state:</span> <span class="string">mounted</span></span><br><span class="line">  <span class="attr">when:</span> <span class="string">ansible_hostname</span> <span class="string">is</span> <span class="string">match</span> <span class="string">&quot;web&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2024/01/21/Ansible%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%AE%9E%E4%BE%8B%EF%BC%88%E4%B8%89%EF%BC%89/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/01/21/Ansible%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%AE%9E%E4%BE%8B%EF%BC%88%E4%B8%89%EF%BC%89/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-Ansible一键部署实例（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -872,199 +1063,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/12/25/Tomcat%E5%85%A5%E9%97%A8%E7%AF%87/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Nginx性能优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/22/Nginx%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">Nginx性能优化</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/22/Nginx%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2023-12-22T07:32:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-22</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Nginx性能优化</center></h1>
-<h2 id="一、性能优化概述">一、性能优化概述</h2>
-<p>  做事有做事的原则，解决问题有解决问题的方法，那我们在做性能优化工作之前也同样要有自己的逻辑，我们为什么要做优化，我们需要重点考虑哪些方面，和了解哪些方面呢？在南汐看来，一切优化工作的目的就是基于业务稳定安全的前提下尽可能的提高用户的访问体验。</p>
-<p>  1、首先我们需要了解当前系统的结构和瓶颈，当我们的脑袋里存在一个明确的业务框架逻辑时，那么我们对于就会有一个明确的方向。比如了解我们公司当前使用的是什么，运行的是什么业务，都有哪些服务，了解每个服务最大可支撑多少并发，能支持多少qps（每秒查询率）的访问请求，这组系统的最高瓶颈在哪里？<font color="gray"><em>（我们如何评定我们系统的瓶颈呢，例如使用top查看系统的CPU负载、内存使用率、总得运行进程等，也可以通过日志去分析请求的情况，也可以通过我们前面介绍到的stub_statius模块查看当前的连接情况，对线上的业务进行压力测试【低峰期】，去了解当前这套系统能承担多少的请求和并发，做好响应的评估。这个是我们做性能优化最先考虑的地方。）</em></font></p>
-<p>  2、了解业务模式。性能优化是为业务服务的，本质上就是提高业务能力。我们需要了解每个业务接口的类型，比如：电商网站中的抢购模式，这种情况下面，平时没什么流量，但到了抢购时间流量会突增。我们还需要了解系统层次化的结构，比如：我们使用nginx做的是代理、还是动静分离、还是后端直接服务用户，我们要对每一层做好相应的梳理，以便更好的服务业务。</p>
-<p>  3、性能与安全。通常会有这样一个情况，我们往往注重了性能，但是忽略了安全，往往过于注重安全，对性能又会产生影响。比如：我们在设计防火墙功能时，检测过于严密，这样就会给性能带来影响。那么如果对于性能完全追求，却不顾服务的安全，也会造成很大的隐患。我们需要评估好两者的关系，把握好两者的孰重孰轻。以及整体的相关性，权衡好对应的点。</p>
-<h2 id="二、压力测试工具">二、压力测试工具</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@web1 ~]<span class="comment">#yum -y install httpd-tools</span></span><br><span class="line">[root@web1 ~]<span class="comment">#ab -k -c100 -n1000 http://nanxi.com/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### -n 要执行的请求数  -c 请求的并发数  -k 是否开启长连接</span></span><br></pre></td></tr></table></figure>
-<p>  我们可以先以自己的静态网页为例（现在很多的网站基本都会设置屏蔽外界压测），来做一个小测试：</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231222163408848.png" alt="image-20231222163408848"></p>
-        
-          <a class="article-more-a" href="/2023/12/22/Nginx%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/22/Nginx%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Keepalived高可用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/20/Keepalived%E9%AB%98%E5%8F%AF%E7%94%A8/">Keepalived高可用</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/20/Keepalived%E9%AB%98%E5%8F%AF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2023-12-20T13:08:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-20</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Keepalived高可用</center></h1>
-<h2 id="一、Keepalived基本简述">一、Keepalived基本简述</h2>
-<p>  高可用一般是指<mark>2台机器启动着完全相同的业务系统</mark>，当有<mark>一台机器down机</mark>了，<mark>另外一台服务器</mark>就能快速的接管，这种<mark>快速接管</mark>对于访问的用户是无感知的。高可用的实现方式通常有两种：<strong>硬件实现高可用（F5）、软件实现高可用（Keepalived）</strong>，我们主要讲解通过Keepalived实现高可用。</p>
-<p>  keepalived软件是基于VRRP协议实现的，主要用于解决单点故障问题。</p>
-<p>  虚拟路由冗余协议(Virtual Router Redundancy Protocol，简称VRRP)是由IETF提出的解决局域网中配置静态网关出现单点失效现象的路由协议。利用VRRP，一组路由器（同一个VLAN中的接口）协同工作，但只要一个处于Master状态，处于该状态的路由器接口承担实际数据流量的转发任务。在一个VRRP组内的多个路由器接口共用一个虚拟IP地址，该地址被作为局域网内所有主机的缺省网关地址。</p>
-        
-          <a class="article-more-a" href="/2023/12/20/Keepalived%E9%AB%98%E5%8F%AF%E7%94%A8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/20/Keepalived%E9%AB%98%E5%8F%AF%E7%94%A8/">展开全文 >></a>
         </p>
       
 

@@ -1,3 +1,4 @@
+https://smallflames.github.io/2024/01/29/Git%E5%8F%8Agitlab%E4%BD%BF%E7%94%A8%E7%AE%80%E8%BF%B0/
 https://smallflames.github.io/2024/01/24/Shell%E8%84%9A%E6%9C%AC%E7%AF%87003/
 https://smallflames.github.io/2024/01/25/%E5%8D%97%E6%B1%90%E7%9A%84%E4%BA%91%E7%AB%AF%E5%B0%8F%E9%93%BA/
 https://smallflames.github.io/2024/01/27/Shell%E8%84%9A%E6%9C%AC%E7%AF%87004/

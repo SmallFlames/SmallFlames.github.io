@@ -161,6 +161,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Tomcat入门篇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/12/25/Tomcat%E5%85%A5%E9%97%A8%E7%AF%87/">Tomcat入门篇</a>
+    </h1>
+  
+
+        
+        <a href="/2023/12/25/Tomcat%E5%85%A5%E9%97%A8%E7%AF%87/" class="archive-article-date">
+  	<time datetime="2023-12-25T12:37:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-25</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Tomcat入门篇</center></h1>
+<h2 id="一、Tomcat环境准备和安装">一、Tomcat环境准备和安装</h2>
+<p>  <mark>Tomcat是基于JAVA开发的WEB服务，主要用来解析JAVA代码</mark>。Nginx仅支持静态资源解析，而Tomcat支持解析Java开发的WEB应用，还支持解析静态资源（效率不高），<mark>Nginx适合做前端负载均衡，Tomcat适合做后端应用服务处理</mark>，通常情况企业会使用Nginx+Tomcat结合，Nginx处理静态资源，Tomcat处理动态资源。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### java环境安装</span></span><br><span class="line">yum -y install java  <span class="comment">### 或者我们可以直接去官网下载jdk工具包，通常选择1.8版本，百年老字号哈哈哈哈哈~ 南汐选择的是安装jdk</span></span><br><span class="line"><span class="comment">#这是官网的版本选择地址：https://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jdk.html</span></span><br><span class="line">[root@web1 ~]<span class="comment">#rpm -qa |grep jdk</span></span><br><span class="line">jdk1.8-1.8.0_341-fcs.x86_64</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 安装tomcat软件</span></span><br><span class="line"><span class="comment"># tomcat官网地址：https://tomcat.apache.org/  认准这只小公猫哦~</span></span><br><span class="line">[root@web1 ~]<span class="comment">#mkdir /soft</span></span><br><span class="line"><span class="comment"># 在新建的目录里下载tomcat服务，解压后可直接使用，无需安装，开箱即用</span></span><br><span class="line">[root@web1 /soft]<span class="comment">#wget https://dlcdn.apache.org/tomcat/lltomcat-9/v9.0.84/bin/apache-tomcat-9.0.84.tar.gz</span></span><br><span class="line">...</span><br><span class="line"><span class="comment"># 为tomcat创建软件链接，目的在于保留版本信息的同时方便使用，其次方便以后故障时的版本回退</span></span><br><span class="line">[root@web1 /soft]<span class="comment">#ln -s apache-tomcat-9.0.84/ tomcat</span></span><br><span class="line">[root@web1 /soft]<span class="comment">#ll</span></span><br><span class="line">total 0</span><br><span class="line">drwxr-xr-x 9 root root 220 Dec 25 16:13 apache-tomcat-9.0.84</span><br><span class="line">lrwxrwxrwx 1 root root  27 Dec 25 16:15 tomcat -&gt; /soft/apache-tomcat-9.0.84/</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2023/12/25/Tomcat%E5%85%A5%E9%97%A8%E7%AF%87/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/12/25/Tomcat%E5%85%A5%E9%97%A8%E7%AF%87/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-Nginx性能优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1067,100 +1161,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/12/07/Nginx%E6%9C%8D%E5%8A%A1%E7%AE%80%E8%BF%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-sersync文件实时同步" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/06/sersync%E6%96%87%E4%BB%B6%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/">sersync文件实时同步</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/06/sersync%E6%96%87%E4%BB%B6%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/" class="archive-article-date">
-  	<time datetime="2023-12-06T12:19:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-06</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>sersync文件实时同步</center></h1>
-<h2 id="一、sersync应用场景">一、sersync应用场景</h2>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231206214137354.png" alt="image-20231206214137354"></p>
-<p>  如上图所示，如果我们只有一台NFS服务器，当它发生故障时，对我们的web服务端会产生非常大的业务影响，这就时单台设备的瓶颈，我们称这一现象为单点故障，试想如果我们此时还有一台服务器专门为NFS服务器做数据备份，当我们的NFS服务器出现故障，我们可以及时的把NFS服务器的备份服务器迅速挂载至web端，快速恢复业务。但这有一个非常重要的要求，我们的备份服务器和备份源数据必须实时同步（实时同步是一种只要当前目录发生变化则会触发一个事件，事件触发后会将变化的目录同步至远程服务器。），否则就会造成用户访问的数据不连续，影响业务正常运行。此时我们就可以用到sersync的功能了。</p>
-<p>  sersync是国人基于<code>rsync+inotify-tools</code>开发的工具，不仅保留了优点同时还强化了实时监控，文件过滤，简化配置等功能，帮助用户提高运行效率，节省时间和网络资源。👉<a target="_blank" rel="noopener" href="https://github.com/wsgzao/sersync">sersync项目地址</a></p>
-        
-          <a class="article-more-a" href="/2023/12/06/sersync%E6%96%87%E4%BB%B6%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/06/sersync%E6%96%87%E4%BB%B6%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/">展开全文 >></a>
         </p>
       
 

@@ -161,6 +161,107 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux磁盘管理篇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/11/24/Linux%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%AF%87/">Linux磁盘管理篇</a>
+    </h1>
+  
+
+        
+        <a href="/2023/11/24/Linux%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%AF%87/" class="archive-article-date">
+  	<time datetime="2023-11-24T08:58:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-24</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Linux磁盘管理</center></h1>
+<h2 id="一、磁盘基础知识">一、磁盘基础知识</h2>
+<p>  “磁盘”和“硬盘”是两个常用的存储设备名词，容易混淆。磁盘是一个广泛的概念，用来描述一种存储数据的物理媒介。事实上，“硬盘”通常指的就是“磁盘硬盘”。磁盘是一个广泛的概念，用来描述一种存储数据的物理媒介。磁盘和硬盘并不是一个概念，但是两者又是相互交叉的。</p>
+<p>  磁盘，是计算机的外部存储器中类似磁带的装置，将圆形的磁性盘片装在一个方的密封盒子里，这样做的目的是为了防止磁盘表面划伤，导致数据丢失。磁盘有软磁盘，硬磁盘。硬磁盘就是机械硬盘。<br>
+  硬盘是电脑主要的存储媒介之一，由一个或者多个铝制或者玻璃制的碟片组成。碟片外覆盖有铁磁性材料。硬盘有固态硬盘（SSD 盘，新式硬盘）、机械硬盘（HDD 传统硬盘）、混合硬盘（HHD 一块基于传统机械硬盘诞生出来的新硬盘）。SSD采用闪存颗粒来存储，HDD采用磁性碟片来存储，混合硬盘(HHD: Hybrid Hard Disk)是把磁性硬盘和闪存集成到一起的一种硬盘。绝大多数硬盘都是固定硬盘，被永久性地密封固定在硬盘驱动器中。</p>
+<p>  一般的电脑有一个硬盘，正常情况下，一台电脑只有一块硬盘，用于存储数据安装操作系统和应用软件，但是目前有一种趋势采用的是固态硬盘加机械硬盘的结构，将操作系统和应用程序安装与固态硬盘内，将数据存储于机械硬盘，这样既能体现固态硬盘的速度，又能体现机械硬盘的容量。<em>（1块固态+1块机械  120G→C盘系统盘 机械1T→ 存储数据）</em></p>
+<h3 id="1、磁盘分类">1、磁盘分类</h3>
+<p>  ① 机械硬盘：机械硬盘是一种传统的存储设备，它的核心部分是一个不断旋转的磁盘，数据则以磁性方式记录在磁盘表面上。机械硬盘内部有盘片，读写机械运动，速度相对较慢，但价格较为便宜没有寿命限制。</p>
+<p>  ② 固态硬盘：固态硬盘(SSD)内部是板卡使用闪存芯片作为数据存储介质，相比机械硬盘具有更快的读写速度，更稳定的性能和更低的能耗。但是价格相对较高，有寿命限制。（笔记本通常用nvme，服务器一般nvme、pci-e都有）</p>
+<p>  ③ 光盘：光盘是一种通过激光读取数据的存储介质，可以分为CD、DVD、蓝光光盘等不同类型。光盘主要用于存储音视频、软件等数据，但容量相对较小。</p>
+<p>  ④ U盘：U盘是一种便携式存储设备，通过USB接口与电脑连接。U盘具有体积小、便携、数据传输速度快等优点，适合移动办公和数据传输。</p>
+<p>  ⑤ 外接硬盘：外接硬盘可以通过USB等接口与电脑连接，是一种可移动存储设备。它的容量相对较大，价格也比较实惠，适合备份重要数据和大文件的存储。</p>
+        
+          <a class="article-more-a" href="/2023/11/24/Linux%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%AF%87/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/11/24/Linux%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E7%AF%87/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-Linux定时任务详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1179,138 +1280,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/11/10/Linux%E6%96%87%E4%BB%B6%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF%E6%A6%82%E8%BF%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Linux软件安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/09/Linux%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/">Linux软件安装</a>
-    </h1>
-  
-
-        
-        <a href="/2023/11/09/Linux%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" class="archive-article-date">
-  	<time datetime="2023-11-09T06:56:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-09</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Linux软件安装</center></h1>
-<p>  见过了Windows的花花绿绿，最近的Linux系统还用的习惯吗？不同于Windows美丽的视觉界面和软件使用，纯粹的Linux系统是一个严谨的荒芜国度……这是因为你还未为你的Linux添加翅膀，学会了Linux的软件安装你也可以打造你的极客帝国。</p>
-<p>  在Linux中，我们以CentOS系统为例，软件管理方式通常有三种方式： rpm安装 、 yum安装 以及编译安装 。</p>
-<h2 id="一、yum">一、yum</h2>
-<h3 id="1-yum介绍">1.yum介绍</h3>
-<p>  Yum（全称为 Yellow dog Updater, Modified ）是一个在Fedora和RedHat以及CentOS中的Shell前端软件包管理器。基于rpm包管理，能够从指定的服务器(yum源）自动下载RPM包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，无须繁琐地一次次下载、安装。</p>
-<p>  yum配置文件所在的位置是：<code>/etc/yum.repos.d</code>，上一篇文章我们讲述了怎么更换yum源，并且将默认的源备份并更换为了阿里的yum源，这次我们将继续使用。</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231109154322194.png" alt="image-20231109154322194"></p>
-<h3 id="2-yum命令的用法">2.yum命令的用法</h3>
-<table>
-<thead>
-<tr>
-<th>命令&amp;语法</th>
-<th>释义&amp;解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>yum -y install [包名]</td>
-<td>安装软件（包）</td>
-</tr>
-<tr>
-<td>yum -y remove [包名]</td>
-<td>卸载软件（包）</td>
-</tr>
-<tr>
-<td>yum serch [关键词]</td>
-<td>搜索软件包名</td>
-</tr>
-<tr>
-<td>yum [-y] update [包的关键词]</td>
-<td>更新软件</td>
-</tr>
-<tr>
-<td>yum clean all</td>
-<td>清除所有缓存</td>
-</tr>
-<tr>
-<td>yum makecache</td>
-<td>重新生成缓存</td>
-</tr>
-</tbody>
-</table>
-        
-          <a class="article-more-a" href="/2023/11/09/Linux%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/09/Linux%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/">展开全文 >></a>
         </p>
       
 

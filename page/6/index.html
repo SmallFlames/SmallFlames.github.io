@@ -161,6 +161,138 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux软件安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/11/09/Linux%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/">Linux软件安装</a>
+    </h1>
+  
+
+        
+        <a href="/2023/11/09/Linux%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" class="archive-article-date">
+  	<time datetime="2023-11-09T06:56:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-09</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Linux软件安装</center></h1>
+<p>  见过了Windows的花花绿绿，最近的Linux系统还用的习惯吗？不同于Windows美丽的视觉界面和软件使用，纯粹的Linux系统是一个严谨的荒芜国度……这是因为你还未为你的Linux添加翅膀，学会了Linux的软件安装你也可以打造你的极客帝国。</p>
+<p>  在Linux中，我们以CentOS系统为例，软件管理方式通常有三种方式： rpm安装 、 yum安装 以及编译安装 。</p>
+<h2 id="一、yum">一、yum</h2>
+<h3 id="1-yum介绍">1.yum介绍</h3>
+<p>  Yum（全称为 Yellow dog Updater, Modified ）是一个在Fedora和RedHat以及CentOS中的Shell前端软件包管理器。基于rpm包管理，能够从指定的服务器(yum源）自动下载RPM包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，无须繁琐地一次次下载、安装。</p>
+<p>  yum配置文件所在的位置是：<code>/etc/yum.repos.d</code>，上一篇文章我们讲述了怎么更换yum源，并且将默认的源备份并更换为了阿里的yum源，这次我们将继续使用。</p>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231109154322194.png" alt="image-20231109154322194"></p>
+<h3 id="2-yum命令的用法">2.yum命令的用法</h3>
+<table>
+<thead>
+<tr>
+<th>命令&amp;语法</th>
+<th>释义&amp;解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yum -y install [包名]</td>
+<td>安装软件（包）</td>
+</tr>
+<tr>
+<td>yum -y remove [包名]</td>
+<td>卸载软件（包）</td>
+</tr>
+<tr>
+<td>yum serch [关键词]</td>
+<td>搜索软件包名</td>
+</tr>
+<tr>
+<td>yum [-y] update [包的关键词]</td>
+<td>更新软件</td>
+</tr>
+<tr>
+<td>yum clean all</td>
+<td>清除所有缓存</td>
+</tr>
+<tr>
+<td>yum makecache</td>
+<td>重新生成缓存</td>
+</tr>
+</tbody>
+</table>
+        
+          <a class="article-more-a" href="/2023/11/09/Linux%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/11/09/Linux%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-Linux常用命令补充（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1121,101 +1253,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/11/01/Linux%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E6%A6%82%E8%BF%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Linux连接原理解释" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/10/31/Linux%E8%BF%9E%E6%8E%A5%E5%8E%9F%E7%90%86%E8%A7%A3%E9%87%8A/">Linux连接原理解释</a>
-    </h1>
-  
-
-        
-        <a href="/2023/10/31/Linux%E8%BF%9E%E6%8E%A5%E5%8E%9F%E7%90%86%E8%A7%A3%E9%87%8A/" class="archive-article-date">
-  	<time datetime="2023-10-31T12:59:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-31</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Linux连接原理解释"><a href="#Linux连接原理解释" class="headerlink" title="Linux连接原理解释"></a><center>Linux连接原理解释</center></h1><h2 id="一、Xshell连接服务器"><a href="#一、Xshell连接服务器" class="headerlink" title="一、Xshell连接服务器"></a>一、Xshell连接服务器</h2><blockquote>
-<p>服务器之间的通信是通过IP地址进行的，两台机器之间想要通信则它们的IP地址必须是同一网段。IP地址的构成是由四组数字组成，分为网络位和主机位。按照IP地址的分类不同他们的网络位和主机位个数也不一样，A类地址有一个网络位三个主机位，B类地址有二个网络位两个主机位，C类地址有三个网络位一个主机位。如：192.168.10.1，前三位即为网络位，最后一位是主机位。</p>
-</blockquote>
-<p>1.原理解释：<br>&emsp;&emsp;我们在Windows电脑安装VMware时，会自动在本地创建一个虚拟网卡，名字叫VMware，在电脑上打开本地连接就能看到。如果看不到虚拟网卡则可能是系统兼容性问题，通常的处理办法是卸载清除并重装软件。Xshell连接服务器使用的是虚拟网卡的IP地址连接虚拟机。但是它们之间并不是直接通信，而是通过虚拟机里面的交换机（虚拟网络编辑器）进行IP地址识别交互，而<font color="red">根据通讯原则，它们的IP地址必须在同一网段内，且不能产生IP冲突</font>。</p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231031210512345.png" alt="image-20231031210512345"></p>
-<p>2.失误排查：<br>&emsp;&emsp;检查到IP地址之间的线路是否通畅，保障它们的IP地址必须在同一网段内，且不产生IP冲突。</p>
-        
-          <a class="article-more-a" href="/2023/10/31/Linux%E8%BF%9E%E6%8E%A5%E5%8E%9F%E7%90%86%E8%A7%A3%E9%87%8A/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/10/31/Linux%E8%BF%9E%E6%8E%A5%E5%8E%9F%E7%90%86%E8%A7%A3%E9%87%8A/">展开全文 >></a>
         </p>
       
 

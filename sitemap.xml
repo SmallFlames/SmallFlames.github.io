@@ -2,6 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://smallflames.github.io/2022/05/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%B5%8B%E8%AF%95/</loc>
+    
+    <lastmod>2024-04-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://smallflames.github.io/2024/03/05/Dockerfile%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F/</loc>
+    
+    <lastmod>2024-03-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://smallflames.github.io/2024/02/21/Ubantu%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E4%BB%93%E5%BA%93/</loc>
+    
+    <lastmod>2024-03-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://smallflames.github.io/2024/01/30/Jenkins_and_SonarQube/</loc>
+    
+    <lastmod>2024-01-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://smallflames.github.io/2024/01/29/Git%E5%8F%8Agitlab%E4%BD%BF%E7%94%A8%E7%AE%80%E8%BF%B0/</loc>
     
     <lastmod>2024-01-30</lastmod>
@@ -595,19 +631,10 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://smallflames.github.io/2023/01/18/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%B5%8B%E8%AF%95/</loc>
-    
-    <lastmod>2023-01-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   <url>
     <loc>https://smallflames.github.io/</loc>
-    <lastmod>2024-01-30</lastmod>
+    <lastmod>2024-04-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -615,63 +642,70 @@
   
   <url>
     <loc>https://smallflames.github.io/tags/%E6%97%A5%E5%B8%B8/</loc>
-    <lastmod>2024-01-30</lastmod>
+    <lastmod>2024-04-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/%E5%8D%9A%E5%AE%A2%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2024-01-30</lastmod>
+    <lastmod>2024-04-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/%E8%BF%90%E7%BB%B4%E4%B9%8B%E8%B7%AF/</loc>
-    <lastmod>2024-01-30</lastmod>
+    <lastmod>2024-04-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/Linux%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2024-01-30</lastmod>
+    <lastmod>2024-04-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/%E7%BD%91%E7%BB%9C%E5%85%A5%E9%97%A8/</loc>
-    <lastmod>2024-01-30</lastmod>
+    <lastmod>2024-04-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6/</loc>
-    <lastmod>2024-01-30</lastmod>
+    <lastmod>2024-04-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</loc>
-    <lastmod>2024-01-30</lastmod>
+    <lastmod>2024-04-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/Shell%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2024-01-30</lastmod>
+    <lastmod>2024-04-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://smallflames.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%BA%94%E7%94%A8/</loc>
-    <lastmod>2024-01-30</lastmod>
+    <lastmod>2024-04-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://smallflames.github.io/tags/Docker/</loc>
+    <lastmod>2024-04-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

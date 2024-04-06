@@ -36,7 +36,9 @@
                   
 
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
+<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
+</head>
 <body>
  <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -160,6 +162,411 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-Dockerfile制作镜像" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/03/05/Dockerfile%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F/">Dockerfile制作镜像</a>
+    </h1>
+  
+
+        
+        <a href="/2024/03/05/Dockerfile%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F/" class="archive-article-date">
+  	<time datetime="2024-03-05T13:42:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-05</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Dockerfile制作镜像</center></h1>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/docker-architecture.webp" alt="Docker Architecture diagram"></p>
+<h2 id="一、Dockerfile常用指令">一、Dockerfile常用指令</h2>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FROM</td>
+<td>指定基础镜像，必须放在首行。(注意，scratch是保留字，并不是镜像！如果使用了该关键字表示不依赖于任何镜像) &amp;&amp; 调用基础镜像触发器（ONBUILD）。</td>
+</tr>
+<tr>
+<td>ONBUILD</td>
+<td>基础镜像触发器。当镜像用作另一个构建的基础时触发。后面可以跟其他的镜像指令运行，所以当我们基于他人镜像构建新镜像时为安全考虑应当特别注意基础镜像是否有不安全的ONBUILD指令。</td>
+</tr>
+<tr>
+<td>MAINTAINER</td>
+<td>管理者（维护者）标识，用于声明作者的信息。（<mark>已弃用</mark>）</td>
+</tr>
+<tr>
+<td>LABEL</td>
+<td>为镜像打标签。基于KEY=VALUE方式打标签。</td>
+</tr>
+<tr>
+<td>USER</td>
+<td>指定容器的运行用户，若不指定，默认为root用户，一些服务可能会用到，比如ES服务…</td>
+</tr>
+<tr>
+<td>RUN</td>
+<td>在容器中运行指令。</td>
+</tr>
+<tr>
+<td>WORKDIR</td>
+<td>指定容器的工作目录，当用户连接到容器时，就默认在该目录，若不指定，则默认在&quot;/&quot;路径。</td>
+</tr>
+<tr>
+<td>VOLUME</td>
+<td>对容器的指定路径生成随机存储卷。</td>
+</tr>
+<tr>
+<td>COPY</td>
+<td>将宿主机的文件拷贝到容器中。如果容器目录不存在，则会自动创建。</td>
+</tr>
+<tr>
+<td>ADD</td>
+<td>与COPY作用不同的是，它可以自动解压tar包文件并删除源文件。</td>
+</tr>
+<tr>
+<td>ENV</td>
+<td>将变量传递给容器，容器运行时会有该变量。在容器启动或创建时可以使用-e,–env选项替换默认值。</td>
+</tr>
+<tr>
+<td>ARG</td>
+<td>在编译阶段生效的变量。容器运行时不会存在该变量！在编译的时候可以使用&quot;–build-arg&quot;选项替换默认值。</td>
+</tr>
+<tr>
+<td>EXPOSE</td>
+<td>暴露容器内端口，外部使用随机端口映射时，可以暴露此处定义的服务端口，通常建议暴露的端口和服务有关。用户启动容器时使用&quot;-P&quot;时会为容器暴露的端口自动做映射</td>
+</tr>
+<tr>
+<td>CMD</td>
+<td>容器启动时执行的指令，我们在制作容器时，通常会在此处阻塞终端。</td>
+</tr>
+<tr>
+<td>ENTRYPOINT</td>
+<td>同CMD，容器启动时执行的指令，但是此处可传入参数，启动指令可能因参数产生变化。</td>
+</tr>
+<tr>
+<td>HEALTHCHECK</td>
+<td>容器健康检查。</td>
+</tr>
+<tr>
+<td>SHELL</td>
+<td>调用系统命令的shell。这对Windows很有用，Linux无需使用，默认就是linux的shell。</td>
+</tr>
+</tbody>
+</table>
+<p>::: warnning</p>
+<p>  <strong>相似指令区分</strong><br>
+  1️⃣   <strong>COPY和ADD：</strong> COPY用于将宿主机文件拷贝至容器，或者在多阶段构建时用于将上一构建阶段的文件拷贝至本阶段构建。ADD指令同样可用于拷贝文件，但是该指令可以自动解压tar包，并删除源文件。</p>
+<p>  2️⃣   <strong>ARG和ENV：</strong>  ARG指令和ENV指令的作用域不同，ARG指令指定的便令仅在镜像构建时起作用，镜像构建完成生命周期即结束。ENV指令将环境变量 <code>&lt;key&gt;</code> 设置为值 <code>&lt;value&gt;</code>将在构建阶段的所有后续指令的环境中，并且也可以在许多指令中内联替换。</p>
+<p>  3️⃣   <strong>CMD和ENTRYPOINT：</strong>  CMD指令设置从镜像运行容器时固定要执行的命令。Dockerfile中只能有一条 <code>CMD</code> 指令。如果您列出多个 <code>CMD</code> ，则只有最后一个生效。如果用户为 <code>docker run</code> 指定参数，那么他们将覆盖 <code>CMD</code> 中指定的默认值。ENTRYPOINT指令设置从镜像运行容器时要执行的命令，但用户可以为该指令传递参数，若CMD指令和ENTRYPOINT指令同时使用则CMD指令将作为ENTRYPOINT指令的参数传递。</p>
+<p>:::</p>
+<h2 id="二、Dockerfile制作镜像">二、Dockerfile制作镜像</h2>
+<p>1️⃣   创建Dockerfile文件。 根据个人习惯而言，一般为了文件的可读性，我们需要先创建一个空目录，并在目录下创建Dockerfile文件，（约定俗成我们一般就以Dockerfile为名，编译时也会自动寻找这个文件，也可自定义文件名，但是我们在编译文件时需用  <code>-f</code>  指定需编译文件的绝对路径，自定义文件名语义混乱容易导致文件错落，不建议！）</p>
+<p>2️⃣   准备制作镜像的资源文件。（我们制作镜像需要的压缩包、源码文件、配置文件等等）</p>
+<p>3️⃣   编写Dockerfile文件。（以alpine为基础镜像打包制作游戏镜像为例）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@nanxi ~/nanxi]<span class="comment"># tree -L 1</span></span><br><span class="line">.</span><br><span class="line">├── build.sh</span><br><span class="line">├── default.conf</span><br><span class="line">├── Dockerfile</span><br><span class="line">└── game.tar.gz</span><br><span class="line"></span><br><span class="line">[root@nanxi ~]<span class="comment"># cat Dockerfile</span></span><br><span class="line">FROM alpine</span><br><span class="line"></span><br><span class="line">MAINTAINER nanxi alrex66608@163.com</span><br><span class="line"></span><br><span class="line">LABEL auther=<span class="string">&quot;nanxi&quot;</span> \</span><br><span class="line">      email=<span class="string">&quot;alrex66608@163.com&quot;</span> \</span><br><span class="line">      blog=https://zzxe.eu.org</span><br><span class="line"></span><br><span class="line">EXPOSE 80</span><br><span class="line"></span><br><span class="line">VOLUME /code/game</span><br><span class="line"></span><br><span class="line">RUN sed -i <span class="string">&#x27;s/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g&#x27;</span> /etc/apk/repositories &amp;&amp; \</span><br><span class="line">    apk update &amp;&amp; apk add nginx &amp;&amp; <span class="built_in">rm</span> -rf /var/cache/* &amp;&amp; <span class="built_in">mkdir</span> -p /code/game</span><br><span class="line"></span><br><span class="line">COPY default.conf /etc/nginx/http.d/default.conf</span><br><span class="line">ADD game.tar.gz /code/game</span><br><span class="line"></span><br><span class="line">CMD [<span class="string">&quot;nginx&quot;</span>,<span class="string">&quot;-g&quot;</span>,<span class="string">&quot;daemon off;&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p>4️⃣   编译Dockerfile文件生成镜像</p>
+<p>使用<code>docker build -t &lt;镜像名&gt;:&lt;版本号&gt; .</code> 编译文件生成镜像，或使用shell脚本调用docker命令进行编译</p>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240305223411353.png" alt="image-20240305223411353"></p>
+<p>5️⃣   启动一个容器并测试访问。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@nanxi ~/nanxi/01-nanxi-game]<span class="comment"># docker run -dP nanxi_game:v1.0</span></span><br><span class="line">ac6fb3594b726a9d7a75a74d8d6273f08aa823bcd9bd62ef0f64635cd9c37f58</span><br><span class="line"></span><br><span class="line">[root@nanxi ~/nanxi]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID   IMAGE             COMMAND                  CREATED             STATUS             PORTS                                     NAMES</span><br><span class="line">ac6fb3594b72   nanxi_game:v1.0   <span class="string">&quot;nginx -g &#x27;daemon of…&quot;</span>   About an hour ago   Up About an hour   0.0.0.0:32770-&gt;80/tcp, :::32770-&gt;80/tcp   intelligent_wu</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@nanxi ~/nanxi]<span class="comment"># docker inspect -f &#x27;正在运行容器: &#123;&#123;.Name&#125;&#125; | 容器IP地址为: &#123;&#123;.NetworkSettings.IPAddress&#125;&#125; | 容器进程号: &#123;&#123;.State.Pid&#125;&#125; | 挂载点: &#123;&#123;range .Mounts&#125;&#125;&#123;&#123;.Source&#125;&#125;&#123;&#123;end&#125;&#125;&#x27; $(docker ps -q)</span></span><br><span class="line">正在运行容器: /intelligent_wu | 容器IP地址为: 172.20.7.2 | 容器进程号: 111403 | 挂载点: /var/lib/docker/volumes/1f3cdca6af933cc8779ccbc4e84c64ff64866e352fb9001f6fa0a0df88b85f8</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240305223846010.png" alt="image-20240305223846010"></p>
+<h2 id="三、Dockerfile优化思路">三、Dockerfile优化思路</h2>
+<h3 id="1、从编译速度上说">1、从编译速度上说</h3>
+<p>①  指定的基础镜像建议是本地存在的或者是国内的镜像；②  将下载源修改为国内的软件源；③  尽量利用Dockerfile构建的镜像缓存技术（将不经常修改的指令往前放，如：FROM 、MAINTAINER、LABEL、EXPOSE、WORKDIR、VOLUME… 将经常修改的指令往后放，如：RUN、COPY、ADD、CMD、ENTRYPOINT…）④  使用&quot;.dockerignore&quot;，忽略我们不需要参与编译的文件（如不忽略，则编译前会当前文件夹所有文件传递给docker deamon进程，但我们真正编译时用不到这些与制作镜像不相关的文件。）</p>
+<h3 id="2、从镜像体积上说">2、从镜像体积上说</h3>
+<p>①  删除无用的缓存；②卸载无用的软件；③    使用较小的基础镜像，比如将centos基础环境改为Ubuntu或者alpine镜像。</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/03/05/Dockerfile%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Ubantu搭建内网仓库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/02/21/Ubantu%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E4%BB%93%E5%BA%93/">Ubantu搭建内网仓库</a>
+    </h1>
+  
+
+        
+        <a href="/2024/02/21/Ubantu%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E4%BB%93%E5%BA%93/" class="archive-article-date">
+  	<time datetime="2024-02-21T15:30:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-21</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Ubantu搭建内网仓库</center></h1>
+<blockquote>
+<p>✨ Ubuntu基于Debian发行版和GNOME桌面环境，与Debian的不同在于它每6个月会发布一个新版本。Ubuntu的目标在于为一般用户提供一个最新的、同时又相当稳定的主要由自由软件构建而成的操作系统。<br>
+🎉 Shell 是一个程序，提供一个与用户对话的环境。这个环境只有一个命令提示符，让用户从键盘输入命令，所以又称为命令行环境（command line interface，简写为 CLI）。</p>
+</blockquote>
+<h2 id="font-color-red-▚-u-Step-01-u-：搭建本地源仓库-font"><font color=red>▚ <u>Step 01</u> ：搭建本地源仓库</font></h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">apt clean </span><br><span class="line">apt -y install -d nginx  举例</span><br><span class="line"><span class="comment"># /var/cache/apt/archives # deb包的位置</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">mkdir</span> /root/ceshi</span><br><span class="line"><span class="built_in">mv</span> /var/cache/apt/archives/*.deb /root/ceshi</span><br><span class="line"></span><br><span class="line">apt -y install dpkg-dev  (生成源所需工具)</span><br><span class="line"><span class="built_in">cd</span> /root/ceshi</span><br><span class="line">apt-ftparchive packages . &gt; Packages  <span class="comment"># 安装包信息都读取到 Packages</span></span><br><span class="line">apt-ftparchive release . &gt; Release</span><br><span class="line"><span class="comment"># dpkg-scanpackages ./packages | gzip -9c &gt; Packages.gz</span></span><br><span class="line"><span class="comment"># gpg --clearsign -o InRelease Release  # 生成 Release 的明文签名文件</span></span><br><span class="line"><span class="comment"># gpg -ab -o Release.gpg Release        # 生成 Release 的文本分离签名文件</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240221115118994.png" alt="image-20240221115118994"></p>
+<h2 id="font-color-red-▚-u-Step-02-u-：创建内网源服务器-font"><font color=red>▚ <u>Step 02</u> ：创建内网源服务器</font></h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">apt -y install nginx</span><br><span class="line"><span class="comment"># 默认配置文件路径 /etc/nginx/sites-available/default</span></span><br><span class="line"><span class="comment"># 默认首页文件存放路径 /var/www/html</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">mkdir</span> /var/www/html/ceshi</span><br><span class="line"><span class="built_in">cp</span> -r /root/ceshi /var/www/html</span><br><span class="line">vim /etc/nginx/sites-available/default</span><br><span class="line">...</span><br><span class="line">location /ceshi &#123;</span><br><span class="line">    <span class="built_in">alias</span> /var/www/html/ceshi;</span><br><span class="line">    autoindex on;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">systemctl restart nginx</span><br><span class="line">systemctl <span class="built_in">enable</span> nginx</span><br><span class="line"></span><br><span class="line">ss -nlt | grep <span class="string">&quot;80&quot;</span></span><br><span class="line">可以先测试访问一下</span><br><span class="line">http://192.168.10.94/ceshi/</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240221115415513.png" alt="image-20240221115415513"></p>
+<h2 id="font-color-red-▚-u-Step-03-u-：配置并使用内网源-font"><font color=red>▚ <u>Step 03</u> ：配置并使用内网源</font></h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">使用apt源(在需要使用内网源的ubuntu上操作)</span><br><span class="line"><span class="built_in">mv</span> /etc/apt/sources.list /etc/apt/sources.list.bak</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb [trusted=yes] http://192.168.10.94/ceshi/   ./&quot;</span> &gt; /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line">[root@elk93 ~]<span class="comment"># apt update</span></span><br><span class="line">Ign:1 http://192.168.10.94/ceshi ./ InRelease</span><br><span class="line">Get:2 http://192.168.10.94/ceshi ./ Release [816 B]</span><br><span class="line">Ign:3 http://192.168.10.94/ceshi ./ Release.gpg</span><br><span class="line">Get:4 http://192.168.10.94/ceshi ./ Packages [8,056 B]</span><br><span class="line">Fetched 8,872 B <span class="keyword">in</span> 0s (66.5 kB/s)</span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree</span><br><span class="line">Reading state information... Done</span><br><span class="line">All packages are up to <span class="built_in">date</span>.</span><br><span class="line"></span><br><span class="line">[root@elk93 /etc/apt]<span class="comment"># apt install tree</span></span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree</span><br><span class="line">Reading state information... Done</span><br><span class="line"></span><br><span class="line">No apt package <span class="string">&quot;tree&quot;</span>, but there is a snap with that name.</span><br><span class="line">Try <span class="string">&quot;snap install tree&quot;</span></span><br><span class="line"></span><br><span class="line">E: Unable to locate package tree</span><br><span class="line"></span><br><span class="line">apt install -y &lt;packages&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240221111314481.png" alt="image-20240221111314481"></p>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/nanxiblogfoot.png" alt="nanxiblogfoot"></p>
+
+        <div id="aplayer-rlVuoxSA" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-rlVuoxSA"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "Whale (鲸)",
+              author: "Jannik",
+              url: "http://cdn.zzxe.eu.org/music/Whale%20%28%E9%B2%B8%29.m4a",
+              pic: "https://p2.music.126.net/97-CeOH6aysRsv1TYBA71Q==/109951164727131802.jpg",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+<blockquote>
+<p><em><strong>以希望为生的人，将绝食而死。</strong></em></p>
+<p align="right">——富兰克林（美国）</p>
+</blockquote>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/02/21/Ubantu%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E4%BB%93%E5%BA%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Jenkins_and_SonarQube" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/01/30/Jenkins_and_SonarQube/">Jenkins and SonarQube</a>
+    </h1>
+  
+
+        
+        <a href="/2024/01/30/Jenkins_and_SonarQube/" class="archive-article-date">
+  	<time datetime="2024-01-30T13:24:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-30</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Jenkins and SonarQube</center></h1>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件应用</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/01/30/Jenkins_and_SonarQube/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
   
     <article id="post-Git及gitlab使用简述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -832,292 +1239,6 @@
 
 
   
-    <article id="post-Shell脚本篇003" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/24/Shell%E8%84%9A%E6%9C%AC%E7%AF%87003/">Shell脚本篇003</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/24/Shell%E8%84%9A%E6%9C%AC%E7%AF%87003/" class="archive-article-date">
-  	<time datetime="2024-01-24T08:55:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-24</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Shell脚本篇003</center></h1>
-<table><tr><td bgcolor=#000000><font color="white">脚本需求</font></td></tr></table>
-<font color="#fc5531">▚ 需求 ：写一个网卡检测脚本，用来监测网卡状态是否正常，并以内容的方式输出至屏幕。</font>
-<p><font color="#7183ff">▚ 提示 ：网卡的状态正常与否，可以检测单位时间内网卡的进出流量来判断。</font></p>
-<table><tr><td bgcolor=#000000><font color="white">实现效果</font></td></tr></table>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240124165816497.png" alt="image-20240124165816497"></p>
-        
-          <a class="article-more-a" href="/2024/01/24/Shell%E8%84%9A%E6%9C%AC%E7%AF%87003/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Shell编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/24/Shell%E8%84%9A%E6%9C%AC%E7%AF%87003/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Shell脚本篇002" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/23/Shell%E8%84%9A%E6%9C%AC%E7%AF%87002/">Shell脚本篇002</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/23/Shell%E8%84%9A%E6%9C%AC%E7%AF%87002/" class="archive-article-date">
-  	<time datetime="2024-01-23T12:43:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-23</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Shell脚本篇002</center></h1>
-<table><tr><td bgcolor=#000000><font color="white">脚本需求</font></td></tr></table>
-<font color="#fc5531">▚ 需求 ：写一个巡检脚本，用来监测系统各项服务的状态情况，并以内容的方式输出至屏幕。</font>
-<table><tr><td bgcolor=#000000><font color="white">实现效果</font></td></tr></table>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240123215829275.png" alt="image-20240123215829275"></p>
-        
-          <a class="article-more-a" href="/2024/01/23/Shell%E8%84%9A%E6%9C%AC%E7%AF%87002/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Shell编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/23/Shell%E8%84%9A%E6%9C%AC%E7%AF%87002/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Shell编程知识补充（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/23/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%BA%8C%EF%BC%89/">Shell编程知识补充（二）</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/23/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%BA%8C%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2024-01-23T06:38:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-23</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Shell编程基础知识补充</center></h1>
-<blockquote>
-<p>✨ Shell 这个单词的原意是“外壳”，跟 kernel（内核）相对应，比喻内核外面的一层，即用户跟内核交互的对话界面。<br>
-🎉 Shell 是一个程序，提供一个与用户对话的环境。这个环境只有一个命令提示符，让用户从键盘输入命令，所以又称为命令行环境（command line interface，简写为 CLI）。<br>
-🎁 Shell 是一个命令解释器，解释用户输入的命令。其次，Shell 是一个工具箱，提供了各种小工具，供用户方便地使用操作系统的功能。</p>
-</blockquote>
-<h2 id="font-color-red-▚-u-01-u-拓展：echo趣味玩法-font"><font color=red>▚ <u>01</u> 拓展：echo趣味玩法</font></h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#   echo  命令概述</span></span><br><span class="line">默认将输入的字符串送往标准输出，输出的字符串间以空白字符隔开, 并在最后加上换行符；</span><br><span class="line"><span class="comment">#   echo  命令语法</span></span><br><span class="line"><span class="built_in">echo</span> 【选项参数】 【字符串】</span><br><span class="line">-n    <span class="comment">#  取消自动换行</span></span><br><span class="line">-e    <span class="comment">#  打开反斜杠ESC转义</span></span><br><span class="line">-E    <span class="comment">#  取消转义 (默认)</span></span><br><span class="line"></span><br><span class="line">关于反斜杠的转义，详细参数如下：</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2024/01/23/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%BA%8C%EF%BC%89/#more">more >></a>
-        
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Shell编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/23/Shell%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88%E4%BA%8C%EF%BC%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
@@ -1275,6 +1396,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">软件应用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
             
             <div class="clearfix"></div>

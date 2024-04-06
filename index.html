@@ -163,6 +163,133 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Ubantu搭建内网仓库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/02/01/Ubantu%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E4%BB%93%E5%BA%93/">Ubantu搭建内网仓库</a>
+    </h1>
+  
+
+        
+        <a href="/2024/02/01/Ubantu%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E4%BB%93%E5%BA%93/" class="archive-article-date">
+  	<time datetime="2024-02-01T15:30:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-01</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Ubantu搭建内网仓库</center></h1>
+<blockquote>
+<p>✨ Ubuntu基于Debian发行版和GNOME桌面环境，与Debian的不同在于它每6个月会发布一个新版本。Ubuntu的目标在于为一般用户提供一个最新的、同时又相当稳定的主要由自由软件构建而成的操作系统。<br>
+🎉 Shell 是一个程序，提供一个与用户对话的环境。这个环境只有一个命令提示符，让用户从键盘输入命令，所以又称为命令行环境（command line interface，简写为 CLI）。</p>
+</blockquote>
+<h2 id="font-color-red-▚-u-Step-01-u-：搭建本地源仓库-font"><font color=red>▚ <u>Step 01</u> ：搭建本地源仓库</font></h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">apt clean </span><br><span class="line">apt -y install -d nginx  举例</span><br><span class="line"><span class="comment"># /var/cache/apt/archives # deb包的位置</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">mkdir</span> /root/ceshi</span><br><span class="line"><span class="built_in">mv</span> /var/cache/apt/archives/*.deb /root/ceshi</span><br><span class="line"></span><br><span class="line">apt -y install dpkg-dev  (生成源所需工具)</span><br><span class="line"><span class="built_in">cd</span> /root/ceshi</span><br><span class="line">apt-ftparchive packages . &gt; Packages  <span class="comment"># 安装包信息都读取到 Packages</span></span><br><span class="line">apt-ftparchive release . &gt; Release</span><br><span class="line"><span class="comment"># dpkg-scanpackages ./packages | gzip -9c &gt; Packages.gz</span></span><br><span class="line"><span class="comment"># gpg --clearsign -o InRelease Release  # 生成 Release 的明文签名文件</span></span><br><span class="line"><span class="comment"># gpg -ab -o Release.gpg Release        # 生成 Release 的文本分离签名文件</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240221115118994.png" alt="image-20240221115118994"></p>
+<h2 id="font-color-red-▚-u-Step-02-u-：创建内网源服务器-font"><font color=red>▚ <u>Step 02</u> ：创建内网源服务器</font></h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">apt -y install nginx</span><br><span class="line"><span class="comment"># 默认配置文件路径 /etc/nginx/sites-available/default</span></span><br><span class="line"><span class="comment"># 默认首页文件存放路径 /var/www/html</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">mkdir</span> /var/www/html/ceshi</span><br><span class="line"><span class="built_in">cp</span> -r /root/ceshi /var/www/html</span><br><span class="line">vim /etc/nginx/sites-available/default</span><br><span class="line">...</span><br><span class="line">location /ceshi &#123;</span><br><span class="line">    <span class="built_in">alias</span> /var/www/html/ceshi;</span><br><span class="line">    autoindex on;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">systemctl restart nginx</span><br><span class="line">systemctl <span class="built_in">enable</span> nginx</span><br><span class="line"></span><br><span class="line">ss -nlt | grep <span class="string">&quot;80&quot;</span></span><br><span class="line">可以先测试访问一下</span><br><span class="line">http://192.168.10.94/ceshi/</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240221115415513.png" alt="image-20240221115415513"></p>
+<h2 id="font-color-red-▚-u-Step-03-u-：配置并使用内网源-font"><font color=red>▚ <u>Step 03</u> ：配置并使用内网源</font></h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">使用apt源(在需要使用内网源的ubuntu上操作)</span><br><span class="line"><span class="built_in">mv</span> /etc/apt/sources.list /etc/apt/sources.list.bak</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb [trusted=yes] http://192.168.10.94/ceshi/   ./&quot;</span> &gt; /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line">[root@elk93 ~]<span class="comment"># apt update</span></span><br><span class="line">Ign:1 http://192.168.10.94/ceshi ./ InRelease</span><br><span class="line">Get:2 http://192.168.10.94/ceshi ./ Release [816 B]</span><br><span class="line">Ign:3 http://192.168.10.94/ceshi ./ Release.gpg</span><br><span class="line">Get:4 http://192.168.10.94/ceshi ./ Packages [8,056 B]</span><br><span class="line">Fetched 8,872 B <span class="keyword">in</span> 0s (66.5 kB/s)</span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree</span><br><span class="line">Reading state information... Done</span><br><span class="line">All packages are up to <span class="built_in">date</span>.</span><br><span class="line"></span><br><span class="line">[root@elk93 /etc/apt]<span class="comment"># apt install tree</span></span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree</span><br><span class="line">Reading state information... Done</span><br><span class="line"></span><br><span class="line">No apt package <span class="string">&quot;tree&quot;</span>, but there is a snap with that name.</span><br><span class="line">Try <span class="string">&quot;snap install tree&quot;</span></span><br><span class="line"></span><br><span class="line">E: Unable to locate package tree</span><br><span class="line"></span><br><span class="line">apt install -y &lt;packages&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240221111314481.png" alt="image-20240221111314481"></p>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/nanxiblogfoot.png" alt="nanxiblogfoot"></p>
+
+        <div id="aplayer-hHcmSEKy" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-hHcmSEKy"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "Whale (鲸)",
+              author: "Jannik",
+              url: "http://cdn.zzxe.eu.org/music/Whale%20%28%E9%B2%B8%29.m4a",
+              pic: "https://p2.music.126.net/97-CeOH6aysRsv1TYBA71Q==/109951164727131802.jpg",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+<blockquote>
+<p><em><strong>以希望为生的人，将绝食而死。</strong></em></p>
+<p align="right">——富兰克林（美国）</p>
+</blockquote>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/02/01/Ubantu%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E4%BB%93%E5%BA%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-Dockerfile制作镜像" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -170,13 +297,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2024/03/05/Dockerfile%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F/">Dockerfile制作镜像</a>
+      <a class="article-title" href="/2024/02/01/Dockerfile%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F/">Dockerfile制作镜像</a>
     </h1>
   
 
         
-        <a href="/2024/03/05/Dockerfile%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F/" class="archive-article-date">
-  	<time datetime="2024-03-05T13:42:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-05</time>
+        <a href="/2024/02/01/Dockerfile%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F/" class="archive-article-date">
+  	<time datetime="2024-02-01T13:42:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-01</time>
 </a>
         
 
@@ -269,12 +396,12 @@
 </tr>
 </tbody>
 </table>
-<p>::: warnning</p>
+<div class="warning">
 <p>  <strong>相似指令区分</strong><br>
   1️⃣   <strong>COPY和ADD：</strong> COPY用于将宿主机文件拷贝至容器，或者在多阶段构建时用于将上一构建阶段的文件拷贝至本阶段构建。ADD指令同样可用于拷贝文件，但是该指令可以自动解压tar包，并删除源文件。</p>
 <p>  2️⃣   <strong>ARG和ENV：</strong>  ARG指令和ENV指令的作用域不同，ARG指令指定的便令仅在镜像构建时起作用，镜像构建完成生命周期即结束。ENV指令将环境变量 <code>&lt;key&gt;</code> 设置为值 <code>&lt;value&gt;</code>将在构建阶段的所有后续指令的环境中，并且也可以在许多指令中内联替换。</p>
 <p>  3️⃣   <strong>CMD和ENTRYPOINT：</strong>  CMD指令设置从镜像运行容器时固定要执行的命令。Dockerfile中只能有一条 <code>CMD</code> 指令。如果您列出多个 <code>CMD</code> ，则只有最后一个生效。如果用户为 <code>docker run</code> 指定参数，那么他们将覆盖 <code>CMD</code> 中指定的默认值。ENTRYPOINT指令设置从镜像运行容器时要执行的命令，但用户可以为该指令传递参数，若CMD指令和ENTRYPOINT指令同时使用则CMD指令将作为ENTRYPOINT指令的参数传递。</p>
-<p>:::</p>
+</div>
 <h2 id="二、Dockerfile制作镜像">二、Dockerfile制作镜像</h2>
 <p>1️⃣   创建Dockerfile文件。 根据个人习惯而言，一般为了文件的可读性，我们需要先创建一个空目录，并在目录下创建Dockerfile文件，（约定俗成我们一般就以Dockerfile为名，编译时也会自动寻找这个文件，也可自定义文件名，但是我们在编译文件时需用  <code>-f</code>  指定需编译文件的绝对路径，自定义文件名语义混乱容易导致文件错落，不建议！）</p>
 <p>2️⃣   准备制作镜像的资源文件。（我们制作镜像需要的压缩包、源码文件、配置文件等等）</p>
@@ -319,222 +446,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2024/03/05/Dockerfile%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Ubantu搭建内网仓库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/02/21/Ubantu%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E4%BB%93%E5%BA%93/">Ubantu搭建内网仓库</a>
-    </h1>
-  
-
-        
-        <a href="/2024/02/21/Ubantu%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E4%BB%93%E5%BA%93/" class="archive-article-date">
-  	<time datetime="2024-02-21T15:30:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-21</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Ubantu搭建内网仓库</center></h1>
-<blockquote>
-<p>✨ Ubuntu基于Debian发行版和GNOME桌面环境，与Debian的不同在于它每6个月会发布一个新版本。Ubuntu的目标在于为一般用户提供一个最新的、同时又相当稳定的主要由自由软件构建而成的操作系统。<br>
-🎉 Shell 是一个程序，提供一个与用户对话的环境。这个环境只有一个命令提示符，让用户从键盘输入命令，所以又称为命令行环境（command line interface，简写为 CLI）。</p>
-</blockquote>
-<h2 id="font-color-red-▚-u-Step-01-u-：搭建本地源仓库-font"><font color=red>▚ <u>Step 01</u> ：搭建本地源仓库</font></h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">apt clean </span><br><span class="line">apt -y install -d nginx  举例</span><br><span class="line"><span class="comment"># /var/cache/apt/archives # deb包的位置</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">mkdir</span> /root/ceshi</span><br><span class="line"><span class="built_in">mv</span> /var/cache/apt/archives/*.deb /root/ceshi</span><br><span class="line"></span><br><span class="line">apt -y install dpkg-dev  (生成源所需工具)</span><br><span class="line"><span class="built_in">cd</span> /root/ceshi</span><br><span class="line">apt-ftparchive packages . &gt; Packages  <span class="comment"># 安装包信息都读取到 Packages</span></span><br><span class="line">apt-ftparchive release . &gt; Release</span><br><span class="line"><span class="comment"># dpkg-scanpackages ./packages | gzip -9c &gt; Packages.gz</span></span><br><span class="line"><span class="comment"># gpg --clearsign -o InRelease Release  # 生成 Release 的明文签名文件</span></span><br><span class="line"><span class="comment"># gpg -ab -o Release.gpg Release        # 生成 Release 的文本分离签名文件</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240221115118994.png" alt="image-20240221115118994"></p>
-<h2 id="font-color-red-▚-u-Step-02-u-：创建内网源服务器-font"><font color=red>▚ <u>Step 02</u> ：创建内网源服务器</font></h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">apt -y install nginx</span><br><span class="line"><span class="comment"># 默认配置文件路径 /etc/nginx/sites-available/default</span></span><br><span class="line"><span class="comment"># 默认首页文件存放路径 /var/www/html</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">mkdir</span> /var/www/html/ceshi</span><br><span class="line"><span class="built_in">cp</span> -r /root/ceshi /var/www/html</span><br><span class="line">vim /etc/nginx/sites-available/default</span><br><span class="line">...</span><br><span class="line">location /ceshi &#123;</span><br><span class="line">    <span class="built_in">alias</span> /var/www/html/ceshi;</span><br><span class="line">    autoindex on;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">systemctl restart nginx</span><br><span class="line">systemctl <span class="built_in">enable</span> nginx</span><br><span class="line"></span><br><span class="line">ss -nlt | grep <span class="string">&quot;80&quot;</span></span><br><span class="line">可以先测试访问一下</span><br><span class="line">http://192.168.10.94/ceshi/</span><br></pre></td></tr></table></figure>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240221115415513.png" alt="image-20240221115415513"></p>
-<h2 id="font-color-red-▚-u-Step-03-u-：配置并使用内网源-font"><font color=red>▚ <u>Step 03</u> ：配置并使用内网源</font></h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">使用apt源(在需要使用内网源的ubuntu上操作)</span><br><span class="line"><span class="built_in">mv</span> /etc/apt/sources.list /etc/apt/sources.list.bak</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb [trusted=yes] http://192.168.10.94/ceshi/   ./&quot;</span> &gt; /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line">[root@elk93 ~]<span class="comment"># apt update</span></span><br><span class="line">Ign:1 http://192.168.10.94/ceshi ./ InRelease</span><br><span class="line">Get:2 http://192.168.10.94/ceshi ./ Release [816 B]</span><br><span class="line">Ign:3 http://192.168.10.94/ceshi ./ Release.gpg</span><br><span class="line">Get:4 http://192.168.10.94/ceshi ./ Packages [8,056 B]</span><br><span class="line">Fetched 8,872 B <span class="keyword">in</span> 0s (66.5 kB/s)</span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree</span><br><span class="line">Reading state information... Done</span><br><span class="line">All packages are up to <span class="built_in">date</span>.</span><br><span class="line"></span><br><span class="line">[root@elk93 /etc/apt]<span class="comment"># apt install tree</span></span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree</span><br><span class="line">Reading state information... Done</span><br><span class="line"></span><br><span class="line">No apt package <span class="string">&quot;tree&quot;</span>, but there is a snap with that name.</span><br><span class="line">Try <span class="string">&quot;snap install tree&quot;</span></span><br><span class="line"></span><br><span class="line">E: Unable to locate package tree</span><br><span class="line"></span><br><span class="line">apt install -y &lt;packages&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240221111314481.png" alt="image-20240221111314481"></p>
-<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/nanxiblogfoot.png" alt="nanxiblogfoot"></p>
-
-        <div id="aplayer-rlVuoxSA" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
-            <pre class="aplayer-lrc-content"></pre>
-        </div>
-        <script>
-          var ap = new APlayer({
-            element: document.getElementById("aplayer-rlVuoxSA"),
-            narrow: false,
-            autoplay: true,
-            showlrc: false,
-            music: {
-              title: "Whale (鲸)",
-              author: "Jannik",
-              url: "http://cdn.zzxe.eu.org/music/Whale%20%28%E9%B2%B8%29.m4a",
-              pic: "https://p2.music.126.net/97-CeOH6aysRsv1TYBA71Q==/109951164727131802.jpg",
-              lrc: ""
-            }
-          });
-          window.aplayers || (window.aplayers = []);
-          window.aplayers.push(ap);
-        </script>
-<blockquote>
-<p><em><strong>以希望为生的人，将绝食而死。</strong></em></p>
-<p align="right">——富兰克林（美国）</p>
-</blockquote>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/02/21/Ubantu%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E4%BB%93%E5%BA%93/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Jenkins_and_SonarQube" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/30/Jenkins_and_SonarQube/">Jenkins and SonarQube</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/30/Jenkins_and_SonarQube/" class="archive-article-date">
-  	<time datetime="2024-01-30T13:24:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-30</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>Jenkins and SonarQube</center></h1>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/30/Jenkins_and_SonarQube/">展开全文 >></a>
+          <a class="article-more-a" href="/2024/02/01/Dockerfile%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F/">展开全文 >></a>
         </p>
       
 
@@ -1206,6 +1118,101 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/01/25/%E5%8D%97%E6%B1%90%E7%9A%84%E4%BA%91%E7%AB%AF%E5%B0%8F%E9%93%BA/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Shell脚本篇003" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/01/24/Shell%E8%84%9A%E6%9C%AC%E7%AF%87003/">Shell脚本篇003</a>
+    </h1>
+  
+
+        
+        <a href="/2024/01/24/Shell%E8%84%9A%E6%9C%AC%E7%AF%87003/" class="archive-article-date">
+  	<time datetime="2024-01-24T08:55:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-24</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Shell脚本篇003</center></h1>
+<table><tr><td bgcolor=#000000><font color="white">脚本需求</font></td></tr></table>
+<font color="#fc5531">▚ 需求 ：写一个网卡检测脚本，用来监测网卡状态是否正常，并以内容的方式输出至屏幕。</font>
+<p><font color="#7183ff">▚ 提示 ：网卡的状态正常与否，可以检测单位时间内网卡的进出流量来判断。</font></p>
+<table><tr><td bgcolor=#000000><font color="white">实现效果</font></td></tr></table>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240124165816497.png" alt="image-20240124165816497"></p>
+        
+          <a class="article-more-a" href="/2024/01/24/Shell%E8%84%9A%E6%9C%AC%E7%AF%87003/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Shell编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/01/24/Shell%E8%84%9A%E6%9C%AC%E7%AF%87003/">展开全文 >></a>
         </p>
       
 

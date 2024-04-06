@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240221111314481.png">
 <meta property="og:image" content="https://gitee.com/XZ6606/image-bed/raw/master/img/nanxiblogfoot.png">
 <meta property="article:published_time" content="2024-02-01T15:30:55.000Z">
-<meta property="article:modified_time" content="2024-04-06T10:36:02.294Z">
+<meta property="article:modified_time" content="2024-04-06T10:49:15.415Z">
 <meta property="article:author" content="Xia Zheng">
 <meta property="article:tag" content="运维之路">
 <meta property="article:tag" content="Docker">
@@ -210,6 +210,7 @@
 <h2 id="font-color-red-▚-u-Step-01-u-：搭建本地源仓库-font"><font color=red>▚ <u>Step 01</u> ：搭建本地源仓库</font></h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">apt clean </span><br><span class="line">apt -y install -d nginx  举例</span><br><span class="line"><span class="comment"># /var/cache/apt/archives # deb包的位置</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">mkdir</span> /root/ceshi</span><br><span class="line"><span class="built_in">mv</span> /var/cache/apt/archives/*.deb /root/ceshi</span><br><span class="line"></span><br><span class="line">apt -y install dpkg-dev  (生成源所需工具)</span><br><span class="line"><span class="built_in">cd</span> /root/ceshi</span><br><span class="line">apt-ftparchive packages . &gt; Packages  <span class="comment"># 安装包信息都读取到 Packages</span></span><br><span class="line">apt-ftparchive release . &gt; Release</span><br><span class="line"><span class="comment"># dpkg-scanpackages ./packages | gzip -9c &gt; Packages.gz</span></span><br><span class="line"><span class="comment"># gpg --clearsign -o InRelease Release  # 生成 Release 的明文签名文件</span></span><br><span class="line"><span class="comment"># gpg -ab -o Release.gpg Release        # 生成 Release 的文本分离签名文件</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240221115118994.png" alt="image-20240221115118994"></p>
+<span id="more"></span>
 <h2 id="font-color-red-▚-u-Step-02-u-：创建内网源服务器-font"><font color=red>▚ <u>Step 02</u> ：创建内网源服务器</font></h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">apt -y install nginx</span><br><span class="line"><span class="comment"># 默认配置文件路径 /etc/nginx/sites-available/default</span></span><br><span class="line"><span class="comment"># 默认首页文件存放路径 /var/www/html</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">mkdir</span> /var/www/html/ceshi</span><br><span class="line"><span class="built_in">cp</span> -r /root/ceshi /var/www/html</span><br><span class="line">vim /etc/nginx/sites-available/default</span><br><span class="line">...</span><br><span class="line">location /ceshi &#123;</span><br><span class="line">    <span class="built_in">alias</span> /var/www/html/ceshi;</span><br><span class="line">    autoindex on;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">systemctl restart nginx</span><br><span class="line">systemctl <span class="built_in">enable</span> nginx</span><br><span class="line"></span><br><span class="line">ss -nlt | grep <span class="string">&quot;80&quot;</span></span><br><span class="line">可以先测试访问一下</span><br><span class="line">http://192.168.10.94/ceshi/</span><br></pre></td></tr></table></figure>
 <p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240221115415513.png" alt="image-20240221115415513"></p>
@@ -218,12 +219,12 @@
 <p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20240221111314481.png" alt="image-20240221111314481"></p>
 <p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/nanxiblogfoot.png" alt="nanxiblogfoot"></p>
 
-        <div id="aplayer-hHcmSEKy" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-FAtmhwQi" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-hHcmSEKy"),
+            element: document.getElementById("aplayer-FAtmhwQi"),
             narrow: false,
             autoplay: true,
             showlrc: false,

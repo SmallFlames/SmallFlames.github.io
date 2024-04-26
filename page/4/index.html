@@ -161,6 +161,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Nginx模块简述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/12/12/Nginx%E6%A8%A1%E5%9D%97%E7%AE%80%E8%BF%B0/">Nginx模块简述</a>
+    </h1>
+  
+
+        
+        <a href="/2023/12/12/Nginx%E6%A8%A1%E5%9D%97%E7%AE%80%E8%BF%B0/" class="archive-article-date">
+  	<time datetime="2023-12-12T12:16:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-12</time>
+</a>
+        
+
+	
+
+      </header>
+    
+
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><center>Nginx模块简述</center></h1>
+<h2 id="一、Nginx配置文件介绍">一、Nginx配置文件介绍</h2>
+<p>  Nginx服务的默认全局配置文件路径为：<code>/etc/nginx/nginx.conf</code>；路径因人而异，不同的人使用不同的安装方式（编译安装、epel仓库、官方仓库），那么nginx的模块位置信息也会不一样，我们也可以使用命令：<code>nginx -V</code>  查看nginx具体模块信息：</p>
+<p><img src="https://gitee.com/XZ6606/image-bed/raw/master/img/image-20231212203938019.png" alt="image-20231212203938019"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@nanxi ~]<span class="comment">#egrep -nv &#x27;^$|^#&#x27; /etc/nginx/nginx.conf</span></span><br><span class="line">2:user  www;         <span class="comment">### 用户</span></span><br><span class="line">3:worker_processes  auto;   <span class="comment">### 工作进程（建议与CPU数量一致或auto）</span></span><br><span class="line">5:error_log  /var/log/nginx/error.log notice;  <span class="comment">###错误日志路径</span></span><br><span class="line">6:pid        /var/run/nginx.pid;   <span class="comment">###  pid模块路径</span></span><br><span class="line">9:events &#123;                         <span class="comment">###  事件模块</span></span><br><span class="line">10:    worker_connections  1024;   <span class="comment">###  每个worker进程支持的最大连接数</span></span><br><span class="line">11:&#125;</span><br><span class="line">14:http &#123;                          <span class="comment">###  http网络模块</span></span><br><span class="line">15:    include       /etc/nginx/mime.types;       <span class="comment">###  包含资源类型文件</span></span><br><span class="line">16:    default_type  application/octet-stream;    <span class="comment">###  不在资源类型内的文件类型，会默认以下载方式传输给浏览器</span></span><br><span class="line">18:    log_format  main  <span class="string">&#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot;&#x27;</span></span><br><span class="line">19:    <span class="comment">##日志格式##        &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span></span><br><span class="line">20:                      <span class="string">&#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;</span>;</span><br><span class="line">22:    access_log  /var/log/nginx/access.log  main;    <span class="comment">###  网络访问日志</span></span><br><span class="line">24:    sendfile        on;                  <span class="comment">###  高效文件传输</span></span><br><span class="line">27:    keepalive_timeout  65;               <span class="comment">###  长连接超时时间</span></span><br><span class="line">31:    include /etc/nginx/conf.d/*.conf;    <span class="comment">###  引入所有的配置文件</span></span><br><span class="line">32:&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用Server模块配置网站, 每个Server&#123;&#125;代表一个网站(简称虚拟主机)；</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;            <span class="comment">#监听端口, 默认80</span></span><br><span class="line">    server_name  nanxi.com;     <span class="comment">#提供的域名 _表示以IP地址方式进行访问</span></span><br><span class="line">    <span class="comment">### access_log  access.log;     #该网站的访问日志</span></span><br><span class="line">    <span class="comment">### 自定义将当前的server网站的访问日志记录至对应的目录，使用main格式</span></span><br><span class="line">    access_log /var/log/nginx/nanxi.com.log main;</span><br><span class="line">    <span class="comment">#location模块控制网站访问路径；</span></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;   <span class="comment">#存放网站源代码的位置（nginx的默认欢迎页）</span></span><br><span class="line">        index  index.html index.htm;    <span class="comment">#默认返回网站的文件</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2023/12/12/Nginx%E6%A8%A1%E5%9D%97%E7%AE%80%E8%BF%B0/#more">more >></a>
+        
+      
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">运维之路</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">服务架构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/12/12/Nginx%E6%A8%A1%E5%9D%97%E7%AE%80%E8%BF%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+  
     <article id="post-多服务脚本一键部署" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1039,94 +1134,6 @@
 
 
   
-    <article id="post-全球审美大降级？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/26/%E5%85%A8%E7%90%83%E5%AE%A1%E7%BE%8E%E5%A4%A7%E9%99%8D%E7%BA%A7%EF%BC%9F/">全球审美大降级？</a>
-    </h1>
-  
-
-        
-        <a href="/2023/11/26/%E5%85%A8%E7%90%83%E5%AE%A1%E7%BE%8E%E5%A4%A7%E9%99%8D%E7%BA%A7%EF%BC%9F/" class="archive-article-date">
-  	<time datetime="2023-11-26T05:21:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-26</time>
-</a>
-        
-
-	
-
-      </header>
-    
-
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><center>全球审美降级?流水线公主？</center></h1>
-<p> <br>
-  在b站逛游，听到这样一个说法，叫做审美降级，up说了这样一句话——审美降级最先降低的不是审美，而是进入美的门槛，南汐表示非常认同🉑，推荐给大家👍。</p>
-<div  style="position:relative; padding-bottom:55%; width:100%; height:0"><iframe src="//player.bilibili.com/player.html?aid=281187484&bvid=BV1fc41167r3&cid=1338118279&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=100% height=355  style="position:absolute; height: 100%; width:100%"></iframe></div>
-<p>  视频引用自我们可爱的B站up主叉叉，如果觉得不错，可以左上角关注叉叉，请不要吝啬自己的三连哦~</p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
-      
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/26/%E5%85%A8%E7%90%83%E5%AE%A1%E7%BE%8E%E5%A4%A7%E9%99%8D%E7%BA%A7%EF%BC%9F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
@@ -1288,6 +1295,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
             
             <div class="clearfix"></div>
